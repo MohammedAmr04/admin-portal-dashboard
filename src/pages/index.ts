@@ -1,0 +1,6 @@
+export * from './DashboardPage'
+export * from './ForgetPasswordPage'
+export * from './LoginPage'
+export * from './OrganizationsPage'
+export * from './SignUpPage'
+export * from './UsersPage'
