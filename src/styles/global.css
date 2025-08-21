@@ -21,4 +21,10 @@
   --color-warning: var(--c-warning);
   --color-info: var(--c-info);
   --color-elevated: var(--c-elevated);
+  --color-overlay: var(--c-overlay);
+}
+
+a,
+a:hover {
+  color: inherit;
 }
