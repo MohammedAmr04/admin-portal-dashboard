@@ -5,7 +5,7 @@ const MAIN_THEME_TOKEN: ThemeConfig['token'] = {
   borderRadius: 8,
   borderRadiusLG: 8,
   borderRadiusOuter: 8,
-  // fontFamily: var(--antd-font),
+  fontFamily: 'Poppins, sans-serif',
   fontSize: 14,
   fontSizeXL: 16,
   controlHeight: 34,
