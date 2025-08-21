@@ -1,4 +1,12 @@
-import { Avatar, Button, Dropdown, Layout, Select, type MenuProps } from 'antd'
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  Layout,
+  Segmented,
+  Select,
+  type MenuProps,
+} from 'antd'
 import { SettingOutlined, UserOutlined } from '@ant-design/icons'
 import { Outlet } from 'react-router'
 import {
@@ -6,6 +14,7 @@ import {
   CaretLeftIcon,
   HeadsetIcon,
   MagnifyingGlassIcon,
+  MoonIcon,
   SunIcon,
 } from '@phosphor-icons/react'
 
@@ -17,6 +26,7 @@ const headerButtonsStyle = {
   height: 40,
   width: 40,
   fontSize: 18,
+  border: 'none',
 }
 
 const items: MenuProps['items'] = [
@@ -95,9 +105,28 @@ const MainLayout = () => {
               <Button style={headerButtonsStyle}>
                 <MagnifyingGlassIcon />
               </Button>
-              <Button style={headerButtonsStyle}>
-                <SunIcon />
-              </Button>
+              <Segmented
+                options={[
+                  {
+                    value: 'Light',
+                    icon: (
+                      <div className="flex items-center h-[40px]">
+                        <SunIcon size={16} />
+                      </div>
+                    ),
+                  },
+                  {
+                    value: 'Dark',
+                    icon: (
+                      <div className="flex items-center h-[40px]">
+                        <MoonIcon size={16} />
+                      </div>
+                    ),
+                  },
+                ]}
+                className="flex items-center"
+                defaultValue="Dark"
+              />
               <Select
                 options={[
                   {
