@@ -22,3 +22,37 @@
   --color-info: var(--c-info);
   --color-elevated: var(--c-elevated);
 }
+
+:where(.header-select).ant-select .ant-select-selector {
+  background: var(--c-background-dark) !important;
+}
+
+:where(.header-select-dropdown).ant-select-dropdown {
+  background: var(--c-background-dark) !important;
+}
+
+/* Control styling: Select (kept) */
+:where(.header-select).ant-select .ant-select-selector {
+  background: var(--c-background-dark) !important;
+}
+
+/* Control styling: Button used as Dropdown trigger */
+:where(.header-select).ant-btn {
+  background: var(--c-background-dark) !important;
+}
+
+/* Popup styling: Select (kept) */
+:where(.header-select-dropdown).ant-select-dropdown {
+  background: var(--c-background-dark) !important;
+}
+
+/* Popup styling: Dropdown */
+:where(.header-select-dropdown).ant-dropdown {
+  background: var(--c-background-dark) !important;
+}
+:where(.header-select-dropdown) .ant-dropdown-menu {
+  background: var(--c-background-dark) !important;
+}
+:where(.header-select-dropdown) .ant-dropdown-menu-item:hover {
+  background: var(--c-background) !important;
+}
