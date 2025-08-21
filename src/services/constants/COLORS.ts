@@ -15,6 +15,7 @@ export const MAIN_COLORS = {
     warning: '#FFB200',
     info: '#05B2DC',
     elevated: '#DFC4F7',
+    overlay: '#010101a5',
   },
   dark: {
     primary: '#8A2BE2',
@@ -32,5 +33,6 @@ export const MAIN_COLORS = {
     warning: '#FFB200',
     info: '#05B2DC',
     elevated: '#291A43',
+    overlay: '#010101a5',
   },
 }
