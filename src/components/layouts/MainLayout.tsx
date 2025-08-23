@@ -1,13 +1,30 @@
-import { Avatar, Button, Dropdown, Layout, Select, type MenuProps } from 'antd'
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  Layout,
+  Menu,
+  Segmented,
+  Select,
+  type MenuProps,
+} from 'antd'
 import { SettingOutlined, UserOutlined } from '@ant-design/icons'
 import { Outlet } from 'react-router'
 import {
   CaretDownIcon,
   CaretLeftIcon,
-  HeadsetIcon,
-  MagnifyingGlassIcon,
-  SunIcon,
+  CaretRightIcon,
 } from '@phosphor-icons/react'
+import {
+  Building,
+  Headphone,
+  Home,
+  Moon,
+  Profile2User,
+  SearchNormal1,
+  Sun1,
+} from 'iconsax-reactjs'
+import { useState } from 'react'
 
 const { Header, Sider, Content } = Layout
 
@@ -17,7 +34,30 @@ const headerButtonsStyle = {
   height: 40,
   width: 40,
   fontSize: 18,
+  border: 'none',
 }
+
+type MenuItem = Required<MenuProps>['items'][number]
+
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[]
+): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+  } as MenuItem
+}
+
+const siderItems: MenuItem[] = [
+  getItem('Dashboard', '1', <Home />),
+  getItem('Users', '2', <Profile2User />),
+  getItem('Organizations', '3', <Building />),
+]
 
 const items: MenuProps['items'] = [
   {
@@ -47,6 +87,8 @@ const items: MenuProps['items'] = [
 ]
 
 const MainLayout = () => {
+  const [collapsed, setCollapsed] = useState(false)
+
   return (
     <>
       <Layout style={{ minHeight: '100vh' }}>
@@ -67,12 +109,26 @@ const MainLayout = () => {
         </Sider>
         <Layout>
           <Header
-            style={{ background: 'transparent', padding: 16, height: 104 }}
+            style={{
+              background: 'transparent',
+              paddingBlock: 52,
+              paddingInline: 16,
+              borderBottom: '1px solid var(--c-border)',
+            }}
             className="flex justify-between items-center"
           >
             <div className="flex items-center gap-2">
               <Button style={headerButtonsStyle}>
-                <CaretLeftIcon size={16} />
+                <Button
+                  style={headerButtonsStyle}
+                  onClick={() => setCollapsed((prev) => !prev)}
+                >
+                  {collapsed ? (
+                    <CaretRightIcon size={16} />
+                  ) : (
+                    <CaretLeftIcon size={16} />
+                  )}
+                </Button>
               </Button>
               <Select
                 options={[
@@ -80,10 +136,11 @@ const MainLayout = () => {
                   { value: 'Fawry', label: <span>Fawry</span> },
                 ]}
                 defaultValue="Paymob"
-                style={{
-                  width: 132,
-                  height: 56,
-                }}
+                // style={{
+                //   width: 132,
+                //   height: 56,
+                // }}
+                size="large"
                 classNames={{
                   root: 'header-select',
                   popup: { root: 'header-select-dropdown' },
@@ -93,11 +150,30 @@ const MainLayout = () => {
             </div>
             <div className="flex items-center gap-2">
               <Button style={headerButtonsStyle}>
-                <MagnifyingGlassIcon />
+                <SearchNormal1 size={16} />
               </Button>
-              <Button style={headerButtonsStyle}>
-                <SunIcon />
-              </Button>
+              <Segmented
+                options={[
+                  {
+                    value: 'Light',
+                    icon: (
+                      <div className="flex items-center h-[40px]">
+                        <Sun1 size={16} />
+                      </div>
+                    ),
+                  },
+                  {
+                    value: 'Dark',
+                    icon: (
+                      <div className="flex items-center h-[40px]">
+                        <Moon size={16} />
+                      </div>
+                    ),
+                  },
+                ]}
+                className="flex items-center"
+                defaultValue="Dark"
+              />
               <Select
                 options={[
                   {
@@ -123,7 +199,7 @@ const MainLayout = () => {
                 }}
               />
               <Button style={headerButtonsStyle}>
-                <HeadsetIcon />
+                <Headphone size={16} />
               </Button>
               <Dropdown
                 menu={{ items }}
@@ -137,15 +213,23 @@ const MainLayout = () => {
               </Dropdown>
             </div>
           </Header>
-          <Layout>
+          <Layout className="px-4 py-6">
             <Sider
-              width={226}
-              style={{ backgroundColor: 'transparent', padding: 8 }}
+              style={{ backgroundColor: 'transparent', padding: 0 }}
               className="text-text"
+              collapsed={collapsed}
+              collapsedWidth={64}
+              breakpoint="lg"
+              onBreakpoint={(broken) => setCollapsed(broken)}
             >
-              Sider
+              <Menu
+                theme="dark"
+                defaultSelectedKeys={['1']}
+                items={siderItems}
+                style={{ backgroundColor: 'transparent' }}
+              />
             </Sider>
-            <Content style={{ padding: 8 }}>
+            <Content style={{ padding: 0 }}>
               <Outlet />
             </Content>
           </Layout>

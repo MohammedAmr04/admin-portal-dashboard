@@ -39,6 +39,7 @@ export const ANTD_THEME_DARK: ThemeConfig = {
     colorTextBase: MAIN_COLORS.dark.text + 'b6',
     colorBorder: MAIN_COLORS.dark.border,
     colorBgElevated: MAIN_COLORS.dark.elevated,
+    controlHeightLG: 56,
 
     ...MAIN_THEME_TOKEN,
   },
