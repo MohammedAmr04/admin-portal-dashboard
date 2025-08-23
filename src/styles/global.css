@@ -21,6 +21,7 @@
   --color-warning: var(--c-warning);
   --color-info: var(--c-info);
   --color-elevated: var(--c-elevated);
+  --color-overlay: var(--c-overlay);
 }
 
 :where(.header-select).ant-select .ant-select-selector {
@@ -55,4 +56,8 @@
 }
 :where(.header-select-dropdown) .ant-dropdown-menu-item:hover {
   background: var(--c-background) !important;
+}
+a,
+a:hover {
+  color: inherit;
 }

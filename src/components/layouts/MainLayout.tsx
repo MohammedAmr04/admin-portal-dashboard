@@ -90,10 +90,11 @@ const MainLayout = () => {
                   { value: 'Fawry', label: <span>Fawry</span> },
                 ]}
                 defaultValue="Paymob"
-                style={{
-                  width: 132,
-                  height: 56,
-                }}
+                // style={{
+                //   width: 132,
+                //   height: 56,
+                // }}
+                size="large"
                 classNames={{
                   root: 'header-select',
                   popup: { root: 'header-select-dropdown' },

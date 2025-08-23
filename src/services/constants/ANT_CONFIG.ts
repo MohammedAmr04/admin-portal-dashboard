@@ -26,6 +26,9 @@ export const ANTD_THEME: ThemeConfig = {
     Segmented: {
       trackBg: MAIN_COLORS.light.card,
     },
+    Form: {
+      labelFontSize: 18,
+    },
   },
 }
 export const ANTD_THEME_DARK: ThemeConfig = {
@@ -36,12 +39,16 @@ export const ANTD_THEME_DARK: ThemeConfig = {
     colorTextBase: MAIN_COLORS.dark.text + 'b6',
     colorBorder: MAIN_COLORS.dark.border,
     colorBgElevated: MAIN_COLORS.dark.elevated,
+    controlHeightLG: 56,
 
     ...MAIN_THEME_TOKEN,
   },
   components: {
     Segmented: {
       trackBg: MAIN_COLORS.dark.card,
+    },
+    Form: {
+      labelFontSize: 18,
     },
   },
 }
