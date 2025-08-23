@@ -6,8 +6,13 @@ const LoginForm = () => {
   const [form] = Form.useForm()
 
   return (
-    <div className="py-5 h-screen flex items-center bg-gradient-to-br from-primary/5 justify-center  bg-background-dark">
-      <div className="container  min-w-[350px] px-8 max-w-[400px] mx-auto">
+    <div className="py-5 h-screen flex items-center  justify-center relative bg-background">
+      <img
+        src="/login/artwork.png"
+        className="absolute z-0 w-full top-0 start-0"
+        alt="login art work"
+      />
+      <div className="container  min-w-[350px] relative z-10 px-8 max-w-[400px] mx-auto">
         <Typography.Title className="py-2.5 font-semibold" level={3}>
           Let's get you back <span className="text-primary">in.</span>
         </Typography.Title>

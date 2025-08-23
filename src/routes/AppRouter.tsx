@@ -37,10 +37,6 @@ export const router = createBrowserRouter([
   },
   {
     path: '/forget-password',
-    element: (
-      <AuthLayout>
-        <ForgetPasswordPage />
-      </AuthLayout>
-    ),
+    element: <ForgetPasswordPage />,
   },
 ])

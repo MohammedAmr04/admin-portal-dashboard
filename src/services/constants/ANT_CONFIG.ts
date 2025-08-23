@@ -36,6 +36,8 @@ export const ANTD_THEME_DARK: ThemeConfig = {
   token: {
     colorPrimary: MAIN_COLORS.dark.primary,
     colorBgBase: MAIN_COLORS.dark.background,
+    colorBgContainer: MAIN_COLORS.dark.card,
+
     colorTextBase: MAIN_COLORS.dark.text + 'b6',
     colorBorder: MAIN_COLORS.dark.border,
     colorBgElevated: MAIN_COLORS.dark.elevated,
