@@ -14,12 +14,16 @@ import {
   CaretDownIcon,
   CaretLeftIcon,
   CaretRightIcon,
-  HeadsetIcon,
-  MagnifyingGlassIcon,
-  MoonIcon,
-  SunIcon,
 } from '@phosphor-icons/react'
-import { Building, Home, Profile2User } from 'iconsax-reactjs'
+import {
+  Building,
+  Headphone,
+  Home,
+  Moon,
+  Profile2User,
+  SearchNormal1,
+  Sun1,
+} from 'iconsax-reactjs'
 import { useState } from 'react'
 
 const { Header, Sider, Content } = Layout
@@ -146,7 +150,7 @@ const MainLayout = () => {
             </div>
             <div className="flex items-center gap-2">
               <Button style={headerButtonsStyle}>
-                <MagnifyingGlassIcon />
+                <SearchNormal1 size={16} />
               </Button>
               <Segmented
                 options={[
@@ -154,7 +158,7 @@ const MainLayout = () => {
                     value: 'Light',
                     icon: (
                       <div className="flex items-center h-[40px]">
-                        <SunIcon size={16} />
+                        <Sun1 size={16} />
                       </div>
                     ),
                   },
@@ -162,7 +166,7 @@ const MainLayout = () => {
                     value: 'Dark',
                     icon: (
                       <div className="flex items-center h-[40px]">
-                        <MoonIcon size={16} />
+                        <Moon size={16} />
                       </div>
                     ),
                   },
@@ -195,7 +199,7 @@ const MainLayout = () => {
                 }}
               />
               <Button style={headerButtonsStyle}>
-                <HeadsetIcon />
+                <Headphone size={16} />
               </Button>
               <Dropdown
                 menu={{ items }}
