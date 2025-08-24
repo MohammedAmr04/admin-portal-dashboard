@@ -1,9 +1,11 @@
+/* ========== Tailwind Base ========== */
 @import 'tailwindcss';
 
 * {
   line-height: 1rem;
 }
 
+/* ========== Theme Colors ========== */
 @theme {
   --color-primary: var(--c-primary);
   --color-primary-dark: var(--c-primary-dark);
@@ -24,42 +26,164 @@
   --color-overlay: var(--c-overlay);
 }
 
+/* ========== Ant Design Overrides ========== */
+/* Select */
 :where(.header-select).ant-select .ant-select-selector {
   background: var(--c-background-dark) !important;
 }
 
-:where(.header-select-dropdown).ant-select-dropdown {
-  background: var(--c-background-dark) !important;
-}
-
-/* Control styling: Select (kept) */
-:where(.header-select).ant-select .ant-select-selector {
-  background: var(--c-background-dark) !important;
-}
-
-/* Control styling: Button used as Dropdown trigger */
+/* Button used as Dropdown trigger */
 :where(.header-select).ant-btn {
   background: var(--c-background-dark) !important;
 }
 
-/* Popup styling: Select (kept) */
-:where(.header-select-dropdown).ant-select-dropdown {
-  background: var(--c-background-dark) !important;
-}
-
-/* Popup styling: Dropdown */
-:where(.header-select-dropdown).ant-dropdown {
-  background: var(--c-background-dark) !important;
-}
+/* Popup: Select & Dropdown */
+:where(.header-select-dropdown).ant-select-dropdown,
+:where(.header-select-dropdown).ant-dropdown,
 :where(.header-select-dropdown) .ant-dropdown-menu {
   background: var(--c-background-dark) !important;
 }
+
 :where(.header-select-dropdown) .ant-dropdown-menu-item:hover {
   background: var(--c-background) !important;
 }
+
+/* ========== General Rules ========== */
 a,
 a:hover {
   color: inherit;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary-dark);
+}
+
+/* ========== Container System  ========== */
+:root {
+  --bs-breakpoint-sm: 576px;
+  --bs-breakpoint-md: 768px;
+  --bs-breakpoint-lg: 992px;
+  --bs-breakpoint-xl: 1200px;
+  --bs-breakpoint-xxl: 1400px;
+
+  --container-padding: 1rem;
+}
+
+.container-c,
+.container-c-sm,
+.container-c-md,
+.container-c-lg,
+.container-c-xl,
+.container-c-xxl,
+.container-c-fluid {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+/* Fluid = always full width */
+.container-c-fluid {
+  max-width: none;
+}
+
+/* Default container */
+.container-c {
+  max-width: 100%;
+}
+
+@media (min-width: 576px) {
+  .container-c {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-c {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container-c {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-c {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container-c {
+    max-width: 1320px;
+  }
+}
+
+/* Sized containers */
+.container-c-sm {
+  max-width: 100%;
+}
+
+@media (min-width: 576px) {
+  .container-c-sm {
+    max-width: 540px;
+  }
+}
+
+.container-c-md {
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .container-c-md {
+    max-width: 720px;
+  }
+}
+
+.container-c-lg {
+  max-width: 100%;
+}
+
+@media (min-width: 992px) {
+  .container-c-lg {
+    max-width: 960px;
+  }
+}
+
+.container-c-xl {
+  max-width: 100%;
+}
+
+@media (min-width: 1200px) {
+  .container-c-xl {
+    max-width: 1140px;
+  }
+}
+
+.container-c-xxl {
+  max-width: 100%;
+}
+
+@media (min-width: 1400px) {
+  .container-c-xxl {
+    max-width: 1320px;
+  }
+}
+
+/* Responsive padding tweaks */
+@media (max-width: 575.98px) {
+  :root {
+    --container-padding: .75rem;
+  }
+}
+
+@media (min-width: 992px) {
+  :root {
+    --container-padding: 1.25rem;
+  }
 }
 
 .ant-menu-item {
