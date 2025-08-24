@@ -185,3 +185,21 @@ a:hover {
     --container-padding: 1.25rem;
   }
 }
+
+.ant-menu-item {
+  border: 1px solid var(--c-border) !important;
+  /* height: 36px !important; */
+  height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  margin-inline: 0px !important;
+  margin-block-end: 6px !important;
+}
+
+.ant-menu-item:hover {
+  border: 1px solid var(--c-primary) !important;
+}
+
+.ant-menu-item-icon {
+  font-size: 24px !important;
+}
