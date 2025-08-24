@@ -13,8 +13,10 @@
   --color-background: var(--c-background);
   --color-background-dark: var(--c-background-dark);
   --color-text: var(--c-text);
+  --color-text-dark: var(--c-text-dark);
   --color-card: var(--c-card);
   --color-card-dark: var(--c-card-dark);
+  --color-background-card: var(--c-background-card);
   --color-border: var(--c-border);
   --color-input: var(--c-input);
   --color-danger: var(--c-danger);
@@ -46,6 +48,18 @@
 
 :where(.header-select-dropdown) .ant-dropdown-menu-item:hover {
   background: var(--c-background) !important;
+}
+
+.custom-table .ant-table-title {
+  padding: 0;
+}
+
+.ant-dropdown-menu {
+  background-color: var(--color-card) !important;
+}
+
+:where(.css-dev-only-do-not-override-19lrq2b).ant-table-wrapper .ant-table-thead>tr>th {
+  background-color: transparent;
 }
 
 /* ========== General Rules ========== */
