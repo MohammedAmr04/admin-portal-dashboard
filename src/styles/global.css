@@ -13,12 +13,14 @@
   --color-background: var(--c-background);
   --color-background-dark: var(--c-background-dark);
   --color-text: var(--c-text);
+  --color-text-dark: var(--c-text-dark);
   --color-card: var(--c-card);
   --color-card-dark: var(--c-card-dark);
+  --color-background-card: var(--c-background-card);
   --color-border: var(--c-border);
   --color-input: var(--c-input);
   --color-danger: var(--c-danger);
-  --color-danger-content: var(--c-danger-content);
+  --color-prospective: var(--c-prospective);
   --color-success: var(--c-success);
   --color-warning: var(--c-warning);
   --color-info: var(--c-info);
@@ -47,6 +49,13 @@
 :where(.header-select-dropdown) .ant-dropdown-menu-item:hover {
   background: var(--c-background) !important;
 }
+
+
+
+.ant-dropdown-menu {
+  background-color: var(--color-card) !important;
+}
+
 
 /* ========== General Rules ========== */
 a,
@@ -202,4 +211,76 @@ a:hover {
 
 .ant-menu-item-icon {
   font-size: 24px !important;
+}
+
+
+.table-organization .ant-table-thead>tr>th {
+  background-color: transparent;
+}
+
+.table-organization .ant-table-column-title {
+  flex: none !important;
+}
+
+.table-organization .ant-table-title {
+  padding: 0 !important;
+}
+
+.table-organization .ant-table-column-sorters {
+  justify-content: start;
+}
+
+.table-organization th:not([aria-label="Organization"]):not([aria-label="Owner"]) .ant-table-column-sorters {
+  justify-content: center;
+}
+
+.table-organization .even-row>td {
+  background-color: var(--c-background) !important;
+  padding: 16px 24px;
+}
+
+.table-organization .odd-row>td {
+  background-color: var(--c-card) !important;
+  padding: 16px 24px;
+}
+
+.table-organization .ant-checkbox-inner {
+  border-radius: 4px;
+  border: 2px color-mix(in srgb, var(--color-text) 30%, transparent) solid;
+  width: 15px;
+  height: 15px;
+}
+
+.table-organization .ant-table-cell.ant-table-selection-column {
+  padding-inline-end: 53px;
+  padding-inline-start: 19px;
+}
+
+.table-organization .ant-pagination.ant-table-pagination.ant-table-pagination-center {
+  align-items: center;
+}
+
+.table-organization .ant-pagination-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .05);
+}
+
+.table-organization .ant-pagination-item.ant-pagination-item-active {
+  border-color: transparent;
+  background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
+}
+
+.table-organization .ant-pagination.ant-table-pagination>li {
+  min-width: 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.table-organization .ant-pagination .ant-pagination-item-link {
+  border-radius: 50%;
+  padding: 0;
 }

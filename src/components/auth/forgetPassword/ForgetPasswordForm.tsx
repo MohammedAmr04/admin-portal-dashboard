@@ -6,8 +6,8 @@ const ForgetPasswordForm = () => {
   const [form] = Form.useForm()
   const navigate = useNavigate()
   return (
-    <div className=" md:p-8 p-5 col-span-1 h-screen flex relative  items-center  md:justify-center ">
-      <div className="flex-1 max-w-md mx-auto relative z-10 w-full ">
+    <div className=" md:p-8 p-5 col-span-1  h-screen flex relative  items-center  md:justify-center ">
+      <div className="flex-1 max-w-[400px] mx-auto relative z-10 w-full ">
         <div className="text-center pb-5 md:hidden">
           <h1 className="md:text-5xl text-3xl mb-2 !leading-16 text-text font-bold md:max-w-2xs ">
             Let's get you back <span className="text-primary">in.</span>
@@ -20,7 +20,7 @@ const ForgetPasswordForm = () => {
 
         <Button
           onClick={() => {
-            navigate(-1)
+            navigate('/')
           }}
           variant="text"
           color="default"
@@ -33,7 +33,13 @@ const ForgetPasswordForm = () => {
           Forget Password
         </Typography.Title>
         <Form layout="vertical" form={form}>
-          <Form.Item label="Email">
+          <Form.Item
+            rules={[
+              { required: true, message: 'Email is required' },
+              { type: 'email', message: 'Enter a valid email' },
+            ]}
+            label="Email"
+          >
             <Input type="email" size="large" placeholder="Enter Your Email" />
           </Form.Item>
 

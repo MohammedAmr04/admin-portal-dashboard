@@ -17,10 +17,28 @@ const LoginForm = () => {
           Let's get you back <span className="text-primary">in.</span>
         </Typography.Title>
         <Form layout="vertical" form={form}>
-          <Form.Item label="Email">
+          <Form.Item
+            rules={[
+              { required: true, message: 'Email is required' },
+              { type: 'email', message: 'Enter a valid email' },
+            ]}
+            label="Email"
+          >
             <Input type="email" size="large" placeholder="Enter Your Email" />
           </Form.Item>
-          <Form.Item label="Password">
+          <Form.Item
+            rules={[
+              { required: true, message: 'Password is required' },
+              { min: 8, message: 'Password must be at least 8 characters' },
+              {
+                pattern:
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+                message:
+                  'Password must contain uppercase, lowercase, number, and special character',
+              },
+            ]}
+            label="Password"
+          >
             <Input.Password size="large" placeholder="Enter Your Password" />
           </Form.Item>
           <p className="text-primary hover:text-primary-dark duration-300 font-normal text-lg ">
