@@ -6,15 +6,15 @@ import '@ant-design/v5-patch-for-react-19'
 import App from './App.tsx'
 import { ReactQueryProvider } from './services/context/ReactQueryProvider.tsx'
 import UiProvider from './services/context/UiProvider.tsx'
-import { SiderProvider } from './services/context/SiderContext.tsx'
+import { DrawerSiderProvider } from './services/context/DrawerSiderContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ReactQueryProvider>
       <UiProvider>
-        <SiderProvider>
+        <DrawerSiderProvider>
           <App />
-        </SiderProvider>
+        </DrawerSiderProvider>
       </UiProvider>
     </ReactQueryProvider>
   </StrictMode>
