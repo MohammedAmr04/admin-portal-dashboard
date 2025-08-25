@@ -33,16 +33,14 @@ const ForgetPasswordForm = () => {
           Forget Password
         </Typography.Title>
         <Form layout="vertical" form={form}>
-          <Form.Item label="Email">
-            <Input
-              rules={[
-                { required: true, message: 'Email is required' },
-                { type: 'email', message: 'Enter a valid email' },
-              ]}
-              type="email"
-              size="large"
-              placeholder="Enter Your Email"
-            />
+          <Form.Item
+            rules={[
+              { required: true, message: 'Email is required' },
+              { type: 'email', message: 'Enter a valid email' },
+            ]}
+            label="Email"
+          >
+            <Input type="email" size="large" placeholder="Enter Your Email" />
           </Form.Item>
 
           <Form.Item>
