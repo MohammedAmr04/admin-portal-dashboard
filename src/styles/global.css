@@ -20,7 +20,7 @@
   --color-border: var(--c-border);
   --color-input: var(--c-input);
   --color-danger: var(--c-danger);
-  --color-danger-content: var(--c-danger-content);
+  --color-prospective: var(--c-prospective);
   --color-success: var(--c-success);
   --color-warning: var(--c-warning);
   --color-info: var(--c-info);
@@ -50,17 +50,12 @@
   background: var(--c-background) !important;
 }
 
-.custom-table .ant-table-title {
-  padding: 0;
-}
+
 
 .ant-dropdown-menu {
   background-color: var(--color-card) !important;
 }
 
-:where(.css-dev-only-do-not-override-19lrq2b).ant-table-wrapper .ant-table-thead>tr>th {
-  background-color: transparent;
-}
 
 /* ========== General Rules ========== */
 a,
@@ -216,4 +211,42 @@ a:hover {
 
 .ant-menu-item-icon {
   font-size: 24px !important;
+}
+
+
+.table-organization .ant-table-thead>tr>th {
+  background-color: transparent;
+}
+
+.table-organization .ant-table-column-title {
+  flex: none !important;
+}
+
+.table-organization .ant-table-title {
+  padding: 0 !important;
+}
+
+.table-organization .ant-table-column-sorters {
+  justify-content: start;
+}
+
+.table-organization th:not([aria-label="Organization"]):not([aria-label="Owner"]) .ant-table-column-sorters {
+  justify-content: center;
+}
+
+.table-organization .even-row>td {
+  background-color: var(--c-background) !important;
+  padding: 16px 24px;
+}
+
+.table-organization .odd-row>td {
+  background-color: var(--c-card) !important;
+  padding: 16px 24px;
+}
+
+.table-organization .ant-checkbox-inner {
+  border-radius: 4px;
+  border: 2px color-mix(in srgb, var(--color-text) 30%, transparent) solid;
+  width: 15px;
+  height: 15px;
 }
