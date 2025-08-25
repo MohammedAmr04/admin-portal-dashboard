@@ -47,6 +47,10 @@ export const ANTD_THEME_DARK: ThemeConfig = {
     Segmented: {
       trackBg: MAIN_COLORS.dark.card,
     },
+    Menu: {
+      iconSize: 24,
+      collapsedIconSize: 24,
+    },
     Form: {
       labelFontSize: 18,
     },

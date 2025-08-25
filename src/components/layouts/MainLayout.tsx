@@ -16,7 +16,11 @@ import {
   CaretRightIcon,
 } from '@phosphor-icons/react'
 import {
+  ArrowDown2,
+  ArrowSquareLeft,
+  ArrowSquareRight,
   Building,
+  HamburgerMenu,
   Headphone,
   Home,
   Moon,
@@ -112,24 +116,27 @@ const MainLayout = () => {
             style={{
               background: 'transparent',
               paddingBlock: 52,
-              paddingInline: 16,
+              paddingInline: 8,
               borderBottom: '1px solid var(--c-border)',
             }}
-            className="flex justify-between items-center"
+            className="flex justify-between items-center p-8"
           >
-            <div className="flex items-center gap-2">
+            <div className="block lg:hidden">
               <Button style={headerButtonsStyle}>
-                <Button
-                  style={headerButtonsStyle}
-                  onClick={() => setCollapsed((prev) => !prev)}
-                >
-                  {collapsed ? (
-                    <CaretRightIcon size={16} />
-                  ) : (
-                    <CaretLeftIcon size={16} />
-                  )}
-                </Button>
+                <HamburgerMenu size="16" />
               </Button>
+            </div>
+            <div className="hidden lg:flex items-center gap-2 lg:gap-2">
+              <button
+                onClick={() => setCollapsed((prev) => !prev)}
+                className="cursor-pointer"
+              >
+                {collapsed ? (
+                  <ArrowSquareRight size="24" variant="Bulk" />
+                ) : (
+                  <ArrowSquareLeft size="24" variant="Bulk" />
+                )}
+              </button>
               <Select
                 options={[
                   { value: 'Paymob', label: <span>Paymob</span> },
@@ -145,70 +152,75 @@ const MainLayout = () => {
                   root: 'header-select',
                   popup: { root: 'header-select-dropdown' },
                 }}
-                suffixIcon={<CaretDownIcon />}
+                suffixIcon={<ArrowDown2 size={16} />}
               />
             </div>
             <div className="flex items-center gap-2">
               <Button style={headerButtonsStyle}>
                 <SearchNormal1 size={16} />
               </Button>
-              <Segmented
-                options={[
-                  {
-                    value: 'Light',
-                    icon: (
-                      <div className="flex items-center h-[40px]">
-                        <Sun1 size={16} />
-                      </div>
-                    ),
-                  },
-                  {
-                    value: 'Dark',
-                    icon: (
-                      <div className="flex items-center h-[40px]">
-                        <Moon size={16} />
-                      </div>
-                    ),
-                  },
-                ]}
-                className="flex items-center"
-                defaultValue="Dark"
-              />
-              <Select
-                options={[
-                  {
-                    value: 'en',
-                    label: (
-                      <img className="rounded-full w-5" src="./us-flag.png" />
-                    ),
-                  },
-                  {
-                    value: 'ar',
-                    label: (
-                      <img className="rounded-full w-5" src="./sa-flag.png" />
-                    ),
-                  },
-                ]}
-                defaultValue="en"
-                classNames={{
-                  root: 'header-select',
-                  popup: { root: 'header-select-dropdown' },
-                }}
-                style={{
-                  height: 40,
-                }}
-              />
+              <div className="hidden lg:flex items-center gap-2">
+                <Segmented
+                  options={[
+                    {
+                      value: 'Light',
+                      icon: (
+                        <div className="flex items-center h-[40px]">
+                          <Sun1 variant="Bulk" size={16} />
+                        </div>
+                      ),
+                    },
+                    {
+                      value: 'Dark',
+                      icon: (
+                        <div className="flex items-center h-[40px]">
+                          <Moon variant="Bulk" size={16} />
+                        </div>
+                      ),
+                    },
+                  ]}
+                  className="flex items-center"
+                  defaultValue="Dark"
+                />
+                <Select
+                  options={[
+                    {
+                      value: 'en',
+                      label: (
+                        <img className="rounded-full w-5" src="./us-flag.png" />
+                      ),
+                    },
+                    {
+                      value: 'ar',
+                      label: (
+                        <img className="rounded-full w-5" src="./sa-flag.png" />
+                      ),
+                    },
+                  ]}
+                  defaultValue="en"
+                  classNames={{
+                    root: 'header-select',
+                    popup: { root: 'header-select-dropdown' },
+                  }}
+                  style={{
+                    height: 40,
+                  }}
+                />
+              </div>
               <Button style={headerButtonsStyle}>
-                <Headphone size={16} />
+                <img src="./icons/support.svg" width="24"></img>
               </Button>
               <Dropdown
                 menu={{ items }}
                 overlayClassName="header-select-dropdown"
               >
-                <Button className="header-select" style={{ height: 40 }}>
+                <Button
+                  className="header-select gap-1 lg:gap-2"
+                  style={{ height: 40, gap: '2px', paddingInline: '4px' }}
+                >
                   <Avatar shape="square" size={28} icon={<UserOutlined />} />{' '}
-                  Ahmed
-                  <CaretDownIcon />
+                  <span className="hidden lg:block">Ahmed</span>
+                  <ArrowDown2 />
                 </Button>
               </Dropdown>
             </div>
