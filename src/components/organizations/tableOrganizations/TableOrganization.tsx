@@ -3,43 +3,44 @@ import type { ColumnsType } from 'antd/es/table'
 import { Edit, Refresh, SearchNormal, Trash } from 'iconsax-reactjs'
 import { useState } from 'react'
 import { DownOutlined, SlidersOutlined, MoreOutlined } from '@ant-design/icons'
-
-type Tstatus = 'Rejected' | 'Accepted' | 'In Negotiation' | 'Prospective'
+import StatusTag from '../tags/StatusTag'
+import ProductTag from '../tags/ProductTag'
 
 type OrgRow = {
   key: number
   org: string
   owner: string
   products: string[]
-  status: Tstatus
-
+  status:
+    | 'Rejected'
+    | 'In Negotiation'
+    | 'Under Review'
+    | 'Accepted'
+    | 'Prospective'
   date: string
 }
 
-const tagColor: Record<Tstatus, string> = {
-  Rejected: 'text-danger bg-danger/20',
-  Accepted: 'text-success bg-success/20',
-  'In Negotiation': 'text-warning bg-warning/20',
-  Prospective: 'text-success bg-success/20',
-}
-const data: OrgRow[] = [
-  {
-    key: 1,
-    org: 'CBRE',
-    owner: 'Morgan Bianchi',
-    products: ['DWM', 'CTI', 'DRP'],
-    status: 'Rejected',
-    date: 'Jan 24, 2020',
-  },
-  {
-    key: 2,
-    org: 'Google',
-    owner: 'Sasha Schmidt',
-    products: ['DWM', 'CTI', 'DRP'],
-    status: 'Accepted',
-    date: 'Jan 19, 2020',
-  },
-]
+// داتا 15 صف
+const data: OrgRow[] = Array.from({ length: 15 }, (_, i) => ({
+  key: i + 1,
+  org: ['CBRE', 'Google', 'Amazon', 'Microsoft', 'Tesla'][i % 5],
+  owner: [
+    'Morgan Bianchi',
+    'Sasha Schmidt',
+    'Ali Hassan',
+    'John Doe',
+    'Emma Watson',
+  ][i % 5],
+  products: [['DWM'], ['CTI'], ['DRP'], ['DWM', 'CTI'], ['CTI', 'DRP']][i % 5],
+  status: [
+    'Rejected',
+    'Accepted',
+    'Under Review',
+    'In Negotiation',
+    'Prospective',
+  ][i % 5] as OrgRow['status'],
+  date: `Jan ${10 + i}, 2020`,
+}))
 
 const columns: ColumnsType<OrgRow> = [
   {
@@ -57,14 +58,9 @@ const columns: ColumnsType<OrgRow> = [
     dataIndex: 'products',
     sorter: (a, b) => a.products.length - b.products.length,
     render: (products: string[]) => (
-      <div className="flex gap-1">
+      <div className="flex justify-center gap-1">
         {products.map((p) => (
-          <span
-            key={p}
-            className="px-2 py-1 rounded-md bg-purple-900 text-white text-xs"
-          >
-            {p}
-          </span>
+          <ProductTag key={p} product={p} />
         ))}
       </div>
     ),
@@ -74,18 +70,16 @@ const columns: ColumnsType<OrgRow> = [
     dataIndex: 'status',
     sorter: (a, b) => a.status.localeCompare(b.status),
     render: (status: OrgRow['status']) => {
-      const color = tagColor[status]
-      return (
-        <span className={`px-2 py-1 rounded-md text-xs ${color}`}>
-          {status}
-        </span>
-      )
+      return <StatusTag status={status} />
     },
   },
   {
     title: 'Creation Date',
     dataIndex: 'date',
     sorter: (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+    render: (date: string) => (
+      <div className="flex justify-center gap-1">{date}</div>
+    ),
   },
   {
     title: (
@@ -102,7 +96,7 @@ const columns: ColumnsType<OrgRow> = [
             items: [
               {
                 key: '1',
-                label: 'impersonate',
+                label: 'Impersonate',
                 icon: <img src="/organizations/view_icon.svg" alt="view" />,
               },
               { key: '2', label: 'Delete', icon: <Trash size={24} /> },
@@ -129,12 +123,12 @@ export default function TableOrganization() {
   }
 
   return (
-    <div className="bg-background-dark p-4 rounded-lg">
+    <div className="bg-background-dark py-4 rounded-lg">
       <Table<OrgRow>
         rowSelection={rowSelection}
         columns={columns}
         title={() => (
-          <div className="flex gap-3">
+          <div className="flex px-5 gap-3">
             <Input
               placeholder="Search"
               size="large"
@@ -152,7 +146,7 @@ export default function TableOrganization() {
             >
               <Button className="!bg-background-card flex gap-7" size="large">
                 <div className="flex gap-2">
-                  <SlidersOutlined size={20} />
+                  <SlidersOutlined size={24} />
                   <span className="text-base">Add filter</span>
                 </div>
                 <DownOutlined />
@@ -160,10 +154,10 @@ export default function TableOrganization() {
             </Dropdown>
           </div>
         )}
-        // showHeader={false}
         dataSource={data}
-        pagination={{ position: ['bottomCenter'] }}
-        className="custom-table !bg-transparent"
+        pagination={{ position: ['bottomCenter'], pageSize: 5 }}
+        className="table-organization !bg-transparent"
+        rowClassName={(_, index) => (index % 2 === 0 ? 'even-row' : 'odd-row')}
       />
     </div>
   )

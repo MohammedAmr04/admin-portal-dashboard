@@ -250,3 +250,37 @@ a:hover {
   width: 15px;
   height: 15px;
 }
+
+.table-organization .ant-table-cell.ant-table-selection-column {
+  padding-inline-end: 53px;
+  padding-inline-start: 19px;
+}
+
+.table-organization .ant-pagination.ant-table-pagination.ant-table-pagination-center {
+  align-items: center;
+}
+
+.table-organization .ant-pagination-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .05);
+}
+
+.table-organization .ant-pagination-item.ant-pagination-item-active {
+  border-color: transparent;
+  background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
+}
+
+.table-organization .ant-pagination.ant-table-pagination>li {
+  min-width: 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.table-organization .ant-pagination .ant-pagination-item-link {
+  border-radius: 50%;
+  padding: 0;
+}

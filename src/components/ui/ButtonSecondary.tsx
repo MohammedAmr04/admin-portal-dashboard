@@ -17,7 +17,7 @@ const ButtonSecondary = ({
       size="large"
       className="!bg-linear-to-r hover:!text-text from-[#281543] to-[#0E2248]"
     >
-      <div className="flex gap-1 items-center justify-center">
+      <div className="flex gap-1 !text-text items-center justify-center">
         <span>{leftIcon}</span>
         {children}
         <span>{rightIcon}</span>
