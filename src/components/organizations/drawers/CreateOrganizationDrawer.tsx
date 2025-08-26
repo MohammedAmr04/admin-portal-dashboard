@@ -2,7 +2,7 @@ import { Drawer, Steps, Button, Form } from 'antd'
 import { useState } from 'react'
 import { UserOutlined, BankOutlined, InboxOutlined } from '@ant-design/icons'
 
-import { CloseCircle, Export } from 'iconsax-reactjs'
+import { Box, Building, CloseCircle, Export, User } from 'iconsax-reactjs'
 import StepOwnerInfo from './steps/StepOwnerInfo'
 import StepOrganizationInfo from './steps/StepOrganizationsInfo'
 import StepPackageInfo from './steps/StepPackageInfo'
@@ -29,7 +29,7 @@ export default function CreateOrganizationDrawer({
   const steps = [
     {
       title: 'Owner Info',
-      icon: <UserOutlined />,
+      icon: <User size={24} />,
       fields: [
         'firstName',
         'lastName',
@@ -43,7 +43,7 @@ export default function CreateOrganizationDrawer({
     },
     {
       title: 'Organization Info',
-      icon: <BankOutlined />,
+      icon: <Building size={24} />,
       fields: [
         'companyName',
         'industry',
@@ -57,7 +57,7 @@ export default function CreateOrganizationDrawer({
     },
     {
       title: 'Package Info',
-      icon: <InboxOutlined />,
+      icon: <Box size={24} />,
       fields: ['package', 'startDate', 'endDate', 'categories', 'products'],
 
       content: <StepPackageInfo setData={setData} />,
@@ -100,27 +100,32 @@ export default function CreateOrganizationDrawer({
       closeIcon={false}
       open={open}
       styles={{
-        content: { paddingInline: '16px' },
+        content: {
+          paddingInline: '16px',
+          paddingBottom: '50px',
+          backgroundColor: '#12121f',
+        },
         header: { border: 'none', paddingInline: '0px' },
         body: {
           borderRadius: '12px',
-          backgroundColor: '#12121f',
           border: 'none',
+          overflow: 'visible',
         },
       }}
       width={543}
-      className="!bg-background-dark drawer"
+      className="   drawer"
     >
       <div className="px-4">
         <Steps current={current} className="mb-6 drawer-steps" items={steps} />
         <Form
+          requiredMark={false}
           layout="vertical"
           form={form}
           onFinish={(_) => console.log('Org values:', organizationData)}
         >
           {steps[current].content}
 
-          <div className="flex justify-end gap-2 mt-6">
+          <div className="flex justify-end gap-2 pb-6 mt-6">
             {current > 0 && (
               <ButtonSecondary>
                 <div onClick={prev}>Previous</div>
