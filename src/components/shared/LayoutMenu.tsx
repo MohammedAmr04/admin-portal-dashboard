@@ -1,34 +1,36 @@
 import { Menu, type MenuProps } from 'antd'
 import { Building, Home, Profile2User } from 'iconsax-reactjs'
+import { useLocation, useNavigate } from 'react-router'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[]
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  } as MenuItem
-}
-
 const siderItems: MenuItem[] = [
-  getItem('Dashboard', '1', <Home />),
-  getItem('Users', '2', <Profile2User />),
-  getItem('Organizations', '3', <Building />),
+  { key: '/dashboard', label: 'Dashboard', icon: <Home /> },
+  { key: '/users', label: 'Users', icon: <Profile2User /> },
+  { key: '/organizations', label: 'Organizations', icon: <Building /> },
 ]
+
 const LayoutMenu = () => {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const path = location.pathname
+  const selected =
+    path === '/' || path.startsWith('/dashboard')
+      ? ['/dashboard']
+      : path.startsWith('/users')
+        ? ['/users']
+        : path.startsWith('/organizations')
+          ? ['/organizations']
+          : []
+
   return (
     <Menu
       theme="dark"
-      defaultSelectedKeys={['1']}
       style={{ backgroundColor: 'transparent' }}
       items={siderItems}
+      selectedKeys={selected}
+      onClick={({ key }) => navigate(key as string)}
     />
   )
 }

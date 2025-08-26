@@ -287,3 +287,36 @@ a:hover {
   border-radius: 50%;
   padding: 0;
 }
+
+.drawer-steps .ant-steps-item-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  width: 110px;
+}
+
+.drawer-steps .ant-steps-item-icon {
+  margin: 0;
+  border-radius: 12px !important;
+  padding: 15px 16px;
+  background-color: var(--c-background-dark);
+
+  border: 1px solid color-mix(in srgb, var(--color-primary) 15%, transparent) !important;
+}
+
+.drawer-steps .ant-steps-item-title {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 160%;
+  font-weight: bold;
+}
+
+.drawer-steps .ant-steps-item-title::after {
+  width: 0;
+}
+
+.drawer .package .anticon {
+  color: var(--color-primary);
+}

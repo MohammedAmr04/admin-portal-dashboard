@@ -9,7 +9,7 @@ const MAIN_THEME_TOKEN: ThemeConfig['token'] = {
   fontSize: 14,
   fontSizeXL: 16,
   controlHeight: 34,
-  controlHeightLG: 51,
+  controlHeightLG: 48,
 }
 
 export const ANTD_THEME: ThemeConfig = {
@@ -46,6 +46,10 @@ export const ANTD_THEME_DARK: ThemeConfig = {
     ...MAIN_THEME_TOKEN,
   },
   components: {
+    Input: {
+      borderRadiusLG: 12,
+    },
+    InputNumber: {},
     Segmented: {
       trackBg: MAIN_COLORS.dark.card,
     },
