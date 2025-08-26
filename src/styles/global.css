@@ -50,12 +50,9 @@
   background: var(--c-background) !important;
 }
 
-
-
 .ant-dropdown-menu {
   background-color: var(--color-card) !important;
 }
-
 
 /* ========== General Rules ========== */
 a,
@@ -185,7 +182,7 @@ a:hover {
 /* Responsive padding tweaks */
 @media (max-width: 575.98px) {
   :root {
-    --container-padding: .75rem;
+    --container-padding: 0.75rem;
   }
 }
 
@@ -213,8 +210,11 @@ a:hover {
   font-size: 24px !important;
 }
 
+.ant-drawer-header {
+  border-bottom: 0.5px solid var(--c-border) !important;
+}
 
-.table-organization .ant-table-thead>tr>th {
+.table-organization .ant-table-thead > tr > th {
   background-color: transparent;
 }
 
@@ -230,16 +230,18 @@ a:hover {
   justify-content: start;
 }
 
-.table-organization th:not([aria-label="Organization"]):not([aria-label="Owner"]) .ant-table-column-sorters {
+.table-organization
+  th:not([aria-label='Organization']):not([aria-label='Owner'])
+  .ant-table-column-sorters {
   justify-content: center;
 }
 
-.table-organization .even-row>td {
+.table-organization .even-row > td {
   background-color: var(--c-background) !important;
   padding: 16px 24px;
 }
 
-.table-organization .odd-row>td {
+.table-organization .odd-row > td {
   background-color: var(--c-card) !important;
   padding: 16px 24px;
 }
@@ -256,7 +258,8 @@ a:hover {
   padding-inline-start: 19px;
 }
 
-.table-organization .ant-pagination.ant-table-pagination.ant-table-pagination-center {
+.table-organization
+  .ant-pagination.ant-table-pagination.ant-table-pagination-center {
   align-items: center;
 }
 
@@ -265,7 +268,7 @@ a:hover {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .table-organization .ant-pagination-item.ant-pagination-item-active {
@@ -273,7 +276,7 @@ a:hover {
   background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
 }
 
-.table-organization .ant-pagination.ant-table-pagination>li {
+.table-organization .ant-pagination.ant-table-pagination > li {
   min-width: 24px;
   width: 24px;
   height: 24px;
@@ -314,7 +317,6 @@ a:hover {
   width: 0;
 }
 
-
 .drawer .package .anticon {
-  color: var(--color-primary)
+  color: var(--color-primary);
 }
