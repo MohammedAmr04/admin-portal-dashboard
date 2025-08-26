@@ -1,11 +1,11 @@
 import AuthLayout from '@/components/layouts/AuthLayout'
 import MainLayout from '@/components/layouts/MainLayout'
-import DashboardPage from '@/pages/DashboardPage'
-import OrganizationsPage from '@/pages/OrganizationsPage'
-import UsersPage from '@/pages/UsersPage'
-import LoginPage from './../pages/LoginPage'
-import SignUpPage from '@/pages/SignUpPage'
-import ForgetPasswordPage from '@/pages/ForgetPasswordPage'
+import DashboardPage from '@/pages/dashboard/DashboardPage'
+import OrganizationsPage from '@/pages/organizations/OrganizationsPage'
+import UsersPage from '@/pages/users/UsersPage'
+import LoginPage from '../pages/auth/LoginPage'
+import SignUpPage from '@/pages/auth/SignUpPage'
+import ForgetPasswordPage from '@/pages/auth/ForgetPasswordPage'
 import { createBrowserRouter } from 'react-router'
 
 export const router = createBrowserRouter([

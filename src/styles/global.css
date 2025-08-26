@@ -1,9 +1,11 @@
+/* ========== Tailwind Base ========== */
 @import 'tailwindcss';
 
 * {
   line-height: 1rem;
 }
 
+/* ========== Theme Colors ========== */
 @theme {
   --color-primary: var(--c-primary);
   --color-primary-dark: var(--c-primary-dark);
@@ -11,12 +13,14 @@
   --color-background: var(--c-background);
   --color-background-dark: var(--c-background-dark);
   --color-text: var(--c-text);
+  --color-text-dark: var(--c-text-dark);
   --color-card: var(--c-card);
   --color-card-dark: var(--c-card-dark);
+  --color-background-card: var(--c-background-card);
   --color-border: var(--c-border);
   --color-input: var(--c-input);
   --color-danger: var(--c-danger);
-  --color-danger-content: var(--c-danger-content);
+  --color-prospective: var(--c-prospective);
   --color-success: var(--c-success);
   --color-warning: var(--c-warning);
   --color-info: var(--c-info);
@@ -24,42 +28,168 @@
   --color-overlay: var(--c-overlay);
 }
 
+/* ========== Ant Design Overrides ========== */
+/* Select */
 :where(.header-select).ant-select .ant-select-selector {
   background: var(--c-background-dark) !important;
 }
 
-:where(.header-select-dropdown).ant-select-dropdown {
-  background: var(--c-background-dark) !important;
-}
-
-/* Control styling: Select (kept) */
-:where(.header-select).ant-select .ant-select-selector {
-  background: var(--c-background-dark) !important;
-}
-
-/* Control styling: Button used as Dropdown trigger */
+/* Button used as Dropdown trigger */
 :where(.header-select).ant-btn {
   background: var(--c-background-dark) !important;
 }
 
-/* Popup styling: Select (kept) */
-:where(.header-select-dropdown).ant-select-dropdown {
-  background: var(--c-background-dark) !important;
-}
-
-/* Popup styling: Dropdown */
-:where(.header-select-dropdown).ant-dropdown {
-  background: var(--c-background-dark) !important;
-}
+/* Popup: Select & Dropdown */
+:where(.header-select-dropdown).ant-select-dropdown,
+:where(.header-select-dropdown).ant-dropdown,
 :where(.header-select-dropdown) .ant-dropdown-menu {
   background: var(--c-background-dark) !important;
 }
+
 :where(.header-select-dropdown) .ant-dropdown-menu-item:hover {
   background: var(--c-background) !important;
 }
+
+.ant-dropdown-menu {
+  background-color: var(--color-card) !important;
+}
+
+/* ========== General Rules ========== */
 a,
 a:hover {
   color: inherit;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary-dark);
+}
+
+/* ========== Container System  ========== */
+:root {
+  --bs-breakpoint-sm: 576px;
+  --bs-breakpoint-md: 768px;
+  --bs-breakpoint-lg: 992px;
+  --bs-breakpoint-xl: 1200px;
+  --bs-breakpoint-xxl: 1400px;
+
+  --container-padding: 1rem;
+}
+
+.container-c,
+.container-c-sm,
+.container-c-md,
+.container-c-lg,
+.container-c-xl,
+.container-c-xxl,
+.container-c-fluid {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+/* Fluid = always full width */
+.container-c-fluid {
+  max-width: none;
+}
+
+/* Default container */
+.container-c {
+  max-width: 100%;
+}
+
+@media (min-width: 576px) {
+  .container-c {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-c {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container-c {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-c {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container-c {
+    max-width: 1320px;
+  }
+}
+
+/* Sized containers */
+.container-c-sm {
+  max-width: 100%;
+}
+
+@media (min-width: 576px) {
+  .container-c-sm {
+    max-width: 540px;
+  }
+}
+
+.container-c-md {
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .container-c-md {
+    max-width: 720px;
+  }
+}
+
+.container-c-lg {
+  max-width: 100%;
+}
+
+@media (min-width: 992px) {
+  .container-c-lg {
+    max-width: 960px;
+  }
+}
+
+.container-c-xl {
+  max-width: 100%;
+}
+
+@media (min-width: 1200px) {
+  .container-c-xl {
+    max-width: 1140px;
+  }
+}
+
+.container-c-xxl {
+  max-width: 100%;
+}
+
+@media (min-width: 1400px) {
+  .container-c-xxl {
+    max-width: 1320px;
+  }
+}
+
+/* Responsive padding tweaks */
+@media (max-width: 575.98px) {
+  :root {
+    --container-padding: 0.75rem;
+  }
+}
+
+@media (min-width: 992px) {
+  :root {
+    --container-padding: 1.25rem;
+  }
 }
 
 .ant-menu-item {
@@ -82,4 +212,78 @@ a:hover {
 
 .ant-drawer-header {
   border-bottom: 0.5px solid var(--c-border) !important;
+}
+
+.table-organization .ant-table-thead > tr > th {
+  background-color: transparent;
+}
+
+.table-organization .ant-table-column-title {
+  flex: none !important;
+}
+
+.table-organization .ant-table-title {
+  padding: 0 !important;
+}
+
+.table-organization .ant-table-column-sorters {
+  justify-content: start;
+}
+
+.table-organization
+  th:not([aria-label='Organization']):not([aria-label='Owner'])
+  .ant-table-column-sorters {
+  justify-content: center;
+}
+
+.table-organization .even-row > td {
+  background-color: var(--c-background) !important;
+  padding: 16px 24px;
+}
+
+.table-organization .odd-row > td {
+  background-color: var(--c-card) !important;
+  padding: 16px 24px;
+}
+
+.table-organization .ant-checkbox-inner {
+  border-radius: 4px;
+  border: 2px color-mix(in srgb, var(--color-text) 30%, transparent) solid;
+  width: 15px;
+  height: 15px;
+}
+
+.table-organization .ant-table-cell.ant-table-selection-column {
+  padding-inline-end: 53px;
+  padding-inline-start: 19px;
+}
+
+.table-organization
+  .ant-pagination.ant-table-pagination.ant-table-pagination-center {
+  align-items: center;
+}
+
+.table-organization .ant-pagination-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.table-organization .ant-pagination-item.ant-pagination-item-active {
+  border-color: transparent;
+  background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
+}
+
+.table-organization .ant-pagination.ant-table-pagination > li {
+  min-width: 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.table-organization .ant-pagination .ant-pagination-item-link {
+  border-radius: 50%;
+  padding: 0;
 }
