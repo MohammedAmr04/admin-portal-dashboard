@@ -1,12 +1,11 @@
 import { Drawer, Steps, Button, Form } from 'antd'
 import { useState } from 'react'
-import { UserOutlined, BankOutlined, InboxOutlined } from '@ant-design/icons'
 
 import { Box, Building, CloseCircle, Export, User } from 'iconsax-reactjs'
 import StepOwnerInfo from './steps/StepOwnerInfo'
 import StepOrganizationInfo from './steps/StepOrganizationsInfo'
 import StepPackageInfo from './steps/StepPackageInfo'
-import ButtonSecondary from '@/components/ui/ButtonSecondary'
+import ButtonSecondary from '@/components/ui/buttons/ButtonSecondary'
 
 interface PropsCreateOrganiationDrawer {
   open: boolean
@@ -18,7 +17,6 @@ export default function CreateOrganizationDrawer({
 }: PropsCreateOrganiationDrawer) {
   const [current, setCurrent] = useState(0)
   const [organizationData, setOrganizationData] = useState({})
-
   const [form] = Form.useForm()
   const setData = (fieldName: string, value: string) => {
     setOrganizationData((prev) => ({
