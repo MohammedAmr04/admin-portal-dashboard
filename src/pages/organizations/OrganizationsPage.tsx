@@ -1,4 +1,4 @@
-import { use, useState, type Key } from 'react'
+import { useState, type Key } from 'react'
 import TableOrganization from '@/components/organizations/tableOrganizations/TableOrganization'
 import { AddSquare, DocumentText, Export, TickCircle } from 'iconsax-reactjs'
 import ButtonSecondary from '@/components/ui/buttons/ButtonSecondary'

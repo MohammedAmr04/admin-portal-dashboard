@@ -20,10 +20,10 @@ export default function InviteOwnerDrawer({
   const [confirm, setConfirm] = useState<boolean>(false)
   const [success, setSuccess] = useState<boolean>(false)
   const handleSubmit = async () => {
-    handleOpenConfirm()
     try {
       const values = await form.validateFields()
       setLoading(true)
+      handleOpenConfirm()
 
       // simulate API call
       setTimeout(() => {

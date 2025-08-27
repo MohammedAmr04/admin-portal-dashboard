@@ -147,7 +147,7 @@ export default function CreateOrganizationDrawer({
                 onClick={() => form.submit()}
                 className="!bg-primary px-6"
               >
-                Submit
+                Create Organization{' '}
               </Button>
             )}
           </div>
