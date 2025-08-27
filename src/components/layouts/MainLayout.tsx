@@ -21,7 +21,7 @@ const MainLayout = () => {
           <LayoutHeader />
           <Layout className="px-4 py-6">
             {isLg ? <LayoutRoutesSider /> : null}
-            <Content style={{ padding: 0 }}>
+            <Content style={{ padding: 16 }}>
               <Outlet />
             </Content>
           </Layout>

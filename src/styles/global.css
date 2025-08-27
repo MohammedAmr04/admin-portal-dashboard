@@ -320,3 +320,7 @@ a:hover {
 .drawer .package .anticon {
   color: var(--color-primary);
 }
+
+.table-user-pagination {
+  background-color: transparent !important;
+}

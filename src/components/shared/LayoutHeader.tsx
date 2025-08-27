@@ -56,11 +56,11 @@ const LayoutHeader = () => {
     <Header
       style={{
         background: 'transparent',
-        paddingBlock: 52,
+        // paddingBlock: 52,
         paddingInline: 8,
         borderBottom: '1px solid var(--c-border)',
       }}
-      className="flex justify-between items-center p-8"
+      className="flex justify-between items-center p-8 !h-auto !py-4 !lg:py-6"
     >
       <div className="block lg:hidden">
         <Button style={headerButtonsStyle} onClick={toggleDrawer}>
