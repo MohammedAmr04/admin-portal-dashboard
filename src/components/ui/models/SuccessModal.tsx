@@ -31,7 +31,7 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
         <div className="bg-[#9147FF]/10 rounded-xl p-4 w-15 h-15 flex items-center justify-center mb-6">
           {icon}
         </div>
-        <p className="text-text max-w-sm w-full text-nowrap text-2xl font-semibold  text-center">
+        <p className="text-text max-w-sm w-full leading-[160%] text-2xl font-semibold  text-center">
           {title}
         </p>
       </div>

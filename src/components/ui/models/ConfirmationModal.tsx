@@ -18,6 +18,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
 }) => {
   return (
     <Modal
+      key={title}
       open={visible}
       onCancel={onCancel}
       styles={{ footer: { textAlign: 'center' } }}
@@ -25,7 +26,11 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         content: '!bg-background-dark rounded-lg',
       }}
       footer={[
-        <Button onClick={onCancel} className="!bg-text w-29  !text-[#1C122E]">
+        <Button
+          key={'cancel'}
+          onClick={onCancel}
+          className="!bg-text w-29  !text-[#1C122E]"
+        >
           Cancel
         </Button>,
         <Button

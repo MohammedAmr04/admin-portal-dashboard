@@ -23,23 +23,26 @@ const HeaderOrganizations = () => {
   }
   return (
     <>
-      <h1 className="text-text">Organizations</h1>
-      <div className="flex pt-9 mb-6 justify-end gap-2.5 items-center">
-        <ButtonSecondary leftIcon={<Export size={24} variant="Bulk" />}>
-          Export
-        </ButtonSecondary>
-        <ButtonSecondary onClick={handleOpenInvite}>
-          Invite Owner
-        </ButtonSecondary>
-        <Button
-          type="primary"
-          size="large"
-          onClick={handleOpenOrg}
-          icon={<AddSquare size="24" variant="Bulk" />}
-        >
-          create new organization
-        </Button>
-      </div>
+      <header className="flex pt-9 mb-6 justify-between gap-2.5 items-center">
+        <h1 className="text-text text-xl">Organizations</h1>
+        <div className="flex gap-2.5 items-center">
+          {' '}
+          <ButtonSecondary leftIcon={<Export size={24} variant="Bulk" />}>
+            Export
+          </ButtonSecondary>
+          <ButtonSecondary onClick={handleOpenInvite}>
+            Invite Owner
+          </ButtonSecondary>
+          <Button
+            type="primary"
+            size="large"
+            onClick={handleOpenOrg}
+            icon={<AddSquare size="24" variant="Bulk" />}
+          >
+            create new organization
+          </Button>
+        </div>
+      </header>
       <CreateOrganizationDrawer open={openOrgDrawer} onClose={handleCloseOrg} />
       <InviteOwnerDrawer open={openInvite} onClose={handleCloseInvite} />
     </>

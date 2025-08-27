@@ -1,13 +1,7 @@
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import SuccessModal from '@/components/ui/models/SuccessModal'
 import { Drawer, Button, Form, Input, Select, Checkbox } from 'antd'
-import {
-  Check,
-  CloseCircle,
-  Export,
-  TickCircle,
-  TickSquare,
-} from 'iconsax-reactjs'
+import { CloseCircle, Export, TickCircle, TickSquare } from 'iconsax-reactjs'
 import { useState } from 'react'
 
 interface PropsInviteOwnerDrawer {

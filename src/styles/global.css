@@ -241,13 +241,17 @@ a:hover {
 }
 
 .table-organization .even-row>td {
-  background-color: var(--c-background) !important;
+  background-color: var(--c-background);
   padding: 16px 24px;
 }
 
 .table-organization .odd-row>td {
-  background-color: var(--c-card) !important;
+  background-color: var(--c-card);
   padding: 16px 24px;
+}
+
+.table-organization .ant-table-row-selected {
+  background-color: #211536 !important;
 }
 
 .table-organization .ant-checkbox-inner {

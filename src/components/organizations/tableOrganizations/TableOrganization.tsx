@@ -110,13 +110,16 @@ const columns: ColumnsType<OrgRow> = [
     ),
   },
 ]
-
-export default function TableOrganization() {
+type Props = {
+  setData: React.Dispatch<React.SetStateAction<React.Key[]>>
+}
+export default function TableOrganization({ setData }: Props) {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
   const rowSelection = {
     selectedRowKeys,
     onChange: (keys: React.Key[]) => {
+      setData(keys)
       setSelectedRowKeys(keys)
       console.log('Selected rows:', keys)
     },
