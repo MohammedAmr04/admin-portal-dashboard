@@ -60,9 +60,18 @@ a:hover {
   color: inherit;
 }
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-primary-dark);
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 /* ========== Container System  ========== */
@@ -210,11 +219,8 @@ a:hover {
   font-size: 24px !important;
 }
 
-.ant-drawer-header {
-  border-bottom: 0.5px solid var(--c-border) !important;
-}
 
-.table-organization .ant-table-thead > tr > th {
+.table-organization .ant-table-thead>tr>th {
   background-color: transparent;
 }
 
@@ -230,20 +236,22 @@ a:hover {
   justify-content: start;
 }
 
-.table-organization
-  th:not([aria-label='Organization']):not([aria-label='Owner'])
-  .ant-table-column-sorters {
+.table-organization th:not([aria-label='Organization']):not([aria-label='Owner']) .ant-table-column-sorters {
   justify-content: center;
 }
 
-.table-organization .even-row > td {
-  background-color: var(--c-background) !important;
+.table-organization .even-row>td {
+  background-color: var(--c-background);
   padding: 16px 24px;
 }
 
-.table-organization .odd-row > td {
-  background-color: var(--c-card) !important;
+.table-organization .odd-row>td {
+  background-color: var(--c-card);
   padding: 16px 24px;
+}
+
+.table-organization .ant-table-row-selected {
+  background-color: #211536 !important;
 }
 
 .table-organization .ant-checkbox-inner {
@@ -258,8 +266,7 @@ a:hover {
   padding-inline-start: 19px;
 }
 
-.table-organization
-  .ant-pagination.ant-table-pagination.ant-table-pagination-center {
+.table-organization .ant-pagination.ant-table-pagination.ant-table-pagination-center {
   align-items: center;
 }
 
@@ -276,7 +283,7 @@ a:hover {
   background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
 }
 
-.table-organization .ant-pagination.ant-table-pagination > li {
+.table-organization .ant-pagination.ant-table-pagination>li {
   min-width: 24px;
   width: 24px;
   height: 24px;
@@ -294,16 +301,29 @@ a:hover {
   justify-content: center;
   align-items: center;
   padding: 12px;
-  width: 110px;
 }
 
-.drawer-steps .ant-steps-item-icon {
+.drawer-steps.ant-steps {
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.drawer-steps .ant-steps-item {
+  flex: none;
+  padding: 0 !important;
+}
+
+/* :where(.css-dev-only-do-not-override-aosh97).ant-drawer .ant-drawer-body {
+  overflow: visible;
+} */
+
+.drawer-steps .ant-steps-item-container .ant-steps-item-icon {
   margin: 0;
   border-radius: 12px !important;
   padding: 15px 16px;
-  background-color: var(--c-background-dark);
-
-  border: 1px solid color-mix(in srgb, var(--color-primary) 15%, transparent) !important;
+  background-color: var(--color-card) !important;
+  border: 1px solid transparent !important;
 }
 
 .drawer-steps .ant-steps-item-title {
@@ -317,6 +337,21 @@ a:hover {
   width: 0;
 }
 
+.drawer-steps .ant-steps-item-title {
+  padding: 0 !important;
+}
+
+.drawer-steps .ant-steps-item-process .ant-steps-item-icon {
+  background-color: var(--color-card) !important;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 15%, transparent) !important;
+}
+
 .drawer .package .anticon {
   color: var(--color-primary);
+}
+
+.drawer.drawer-invite form .ant-form-item-label label {
+  font-weight: 600;
+  font-size: 14px;
+  color: rgba(255, 255, 255, .5)
 }
