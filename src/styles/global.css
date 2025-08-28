@@ -350,6 +350,10 @@ a:hover {
   color: var(--color-primary);
 }
 
+.table-user-pagination {
+  background-color: transparent !important;
+}
+
 .drawer.drawer-invite form .ant-form-item-label label {
   font-weight: 600;
   font-size: 14px;
