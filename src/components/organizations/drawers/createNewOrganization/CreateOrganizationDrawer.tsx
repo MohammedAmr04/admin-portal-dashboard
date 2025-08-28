@@ -1,5 +1,6 @@
 import { Drawer, Steps, Button, Form } from 'antd'
 import { useState } from 'react'
+import type { Dayjs } from 'dayjs'
 
 import { Box, Building, CloseCircle, Export, User } from 'iconsax-reactjs'
 import StepOwnerInfo from './steps/StepOwnerInfo'
@@ -11,20 +12,59 @@ interface PropsCreateOrganiationDrawer {
   open: boolean
   onClose: () => void
 }
+
+export interface OrganizationData {
+  // owner
+  firstName?: string
+  lastName?: string
+  email?: string
+  phone?: string
+  country?: string
+  password?: string
+  confirmPassword?: string
+
+  // organization
+  companyName?: string
+  industry?: string
+  domainUrl?: string
+  domainsNumber?: number
+  employeesSize?: string
+  purpose?: string
+
+  // package
+  package?: string
+  startDate?: Dayjs | null
+  endDate?: Dayjs | null
+  categories?: string[]
+  products?: string[]
+}
+
+interface StepConfig {
+  title: string
+  icon: React.ReactNode
+  fields: (keyof OrganizationData)[]
+  content: React.ReactNode
+}
+
 export default function CreateOrganizationDrawer({
   open,
   onClose,
 }: PropsCreateOrganiationDrawer) {
-  const [current, setCurrent] = useState(0)
-  const [organizationData, setOrganizationData] = useState({})
+  const [current, setCurrent] = useState<number>(0)
+  const [organizationData, setOrganizationData] = useState<OrganizationData>({})
   const [form] = Form.useForm()
-  const setData = (fieldName: string, value: string) => {
+
+  const setData = <K extends keyof OrganizationData>(
+    fieldName: K,
+    value: OrganizationData[K]
+  ) => {
     setOrganizationData((prev) => ({
       ...prev,
       [fieldName]: value,
     }))
   }
-  const steps = [
+
+  const steps: StepConfig[] = [
     {
       title: 'Owner Info',
       icon: <User size={24} />,
@@ -33,10 +73,10 @@ export default function CreateOrganizationDrawer({
         'lastName',
         'email',
         'phone',
+        'country',
         'password',
         'confirmPassword',
       ],
-
       content: <StepOwnerInfo setData={setData} />,
     },
     {
@@ -50,22 +90,19 @@ export default function CreateOrganizationDrawer({
         'employeesSize',
         'purpose',
       ],
-
       content: <StepOrganizationInfo setData={setData} />,
     },
     {
       title: 'Package Info',
       icon: <Box size={24} />,
       fields: ['package', 'startDate', 'endDate', 'categories', 'products'],
-
       content: <StepPackageInfo setData={setData} />,
     },
   ]
 
   const next = async () => {
     try {
-      // validate only current step fields
-      const stepFields = steps[current].fields
+      const stepFields = steps[current].fields as string[]
       await form.validateFields(stepFields)
       setCurrent(current + 1)
     } catch (error) {
@@ -111,7 +148,7 @@ export default function CreateOrganizationDrawer({
         },
       }}
       width={543}
-      className="   drawer"
+      className="drawer"
     >
       <div className="px-4">
         <Steps current={current} className="mb-6 drawer-steps" items={steps} />
@@ -147,7 +184,7 @@ export default function CreateOrganizationDrawer({
                 onClick={() => form.submit()}
                 className="!bg-primary px-6"
               >
-                Create Organization{' '}
+                Create Organization
               </Button>
             )}
           </div>
