@@ -1,12 +1,12 @@
 import { useState, type Key } from 'react'
 import TableOrganization from '@/components/organizations/tableOrganizations/TableOrganization'
 import { AddSquare, DocumentText, Export, TickCircle } from 'iconsax-reactjs'
-import ButtonSecondary from '@/components/ui/buttons/ButtonSecondary'
 import { Button } from 'antd'
 import CreateOrganizationDrawer from '@/components/organizations/drawers/createNewOrganization/CreateOrganizationDrawer'
 import InviteOwnerDrawer from '@/components/organizations/drawers/inviteOwner/InviteOwnerDrawer'
 import SuccessModal from '@/components/ui/models/SuccessModal'
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
+import ButtonSecondary from '@/components/ui/buttons/ButtonSecondary'
 
 const OrganizationsPage = () => {
   const [rowsExported, setRowsExported] = useState<Key[]>([])
