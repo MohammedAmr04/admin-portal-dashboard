@@ -1,35 +1,50 @@
-import ButtonSecondary from '@/components/ui/ButtonSecondary'
+import ButtonSecondary from '@/components/ui/buttons/ButtonSecondary'
 import { Button } from 'antd'
 import { AddSquare, Export } from 'iconsax-reactjs'
-import CreateOrganizationDrawer from '../drawers/CreateOrganizationDrawer'
+import CreateOrganizationDrawer from '../drawers/createNewOrganization/CreateOrganizationDrawer'
 import { useState } from 'react'
+import InviteOwnerDrawer from '../drawers/inviteOwner/InviteOwnerDrawer'
 
 const HeaderOrganizations = () => {
-  const [open, setOpen] = useState<boolean>(false)
-  function handleCreateNewOrganization() {
-    setOpen(true)
+  const [openInvite, setOpenInvite] = useState<boolean>(false)
+  const [openOrgDrawer, setOpenOrgDrawer] = useState<boolean>(false)
+
+  function handleOpenOrg() {
+    setOpenOrgDrawer(true)
   }
-  function handleClose() {
-    setOpen(false)
+  function handleCloseOrg() {
+    setOpenOrgDrawer(false)
+  }
+  function handleOpenInvite() {
+    setOpenInvite(true)
+  }
+  function handleCloseInvite() {
+    setOpenInvite(false)
   }
   return (
     <>
-      <h1 className="text-text">Organizations</h1>
-      <div className="flex pt-9 mb-6 justify-end gap-2.5 items-center">
-        <ButtonSecondary leftIcon={<Export size={24} variant="Bulk" />}>
-          Export
-        </ButtonSecondary>
-        <ButtonSecondary>Invite Owner</ButtonSecondary>
-        <Button
-          type="primary"
-          size="large"
-          onClick={handleCreateNewOrganization}
-          icon={<AddSquare size="24" variant="Bulk" />}
-        >
-          create new organization
-        </Button>
-      </div>
-      <CreateOrganizationDrawer open={open} onClose={handleClose} />
+      <header className="flex pt-9 mb-6 justify-between gap-2.5 items-center">
+        <h1 className="text-text text-xl">Organizations</h1>
+        <div className="flex gap-2.5 items-center">
+          {' '}
+          <ButtonSecondary leftIcon={<Export size={24} variant="Bulk" />}>
+            Export
+          </ButtonSecondary>
+          <ButtonSecondary onClick={handleOpenInvite}>
+            Invite Owner
+          </ButtonSecondary>
+          <Button
+            type="primary"
+            size="large"
+            onClick={handleOpenOrg}
+            icon={<AddSquare size="24" variant="Bulk" />}
+          >
+            create new organization
+          </Button>
+        </div>
+      </header>
+      <CreateOrganizationDrawer open={openOrgDrawer} onClose={handleCloseOrg} />
+      <InviteOwnerDrawer open={openInvite} onClose={handleCloseInvite} />
     </>
   )
 }

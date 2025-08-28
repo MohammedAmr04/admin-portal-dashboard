@@ -90,7 +90,7 @@ const columns: ColumnsType<OrgRow> = [
     key: 'actions',
     render: () => (
       <div className="flex items-center justify-center gap-2">
-        <Button type="text" icon={<Edit size="20" />} />
+        <Button type="text" icon={<Edit variant="Linear" size="20" />} />
         <Dropdown
           menu={{
             items: [
@@ -110,13 +110,16 @@ const columns: ColumnsType<OrgRow> = [
     ),
   },
 ]
-
-export default function TableOrganization() {
+type Props = {
+  setData: React.Dispatch<React.SetStateAction<React.Key[]>>
+}
+export default function TableOrganization({ setData }: Props) {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
   const rowSelection = {
     selectedRowKeys,
     onChange: (keys: React.Key[]) => {
+      setData(keys)
       setSelectedRowKeys(keys)
       console.log('Selected rows:', keys)
     },
