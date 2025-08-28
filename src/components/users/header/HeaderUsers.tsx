@@ -1,12 +1,23 @@
 import ButtonSecondary from '@/components/ui/ButtonSecondary'
-import { Breadcrumb, Button } from 'antd'
+import { Breadcrumb, Button, Modal } from 'antd'
 import { AddSquare, ArrowRight2, Export } from 'iconsax-reactjs'
+import { useState } from 'react'
 
 const HeaderOrganizations = ({
   handleDrawer,
 }: {
   handleDrawer: (drawer: string) => void
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleOk = () => {
+    setIsModalOpen(false)
+  }
+
+  const handleCancel = () => {
+    setIsModalOpen(false)
+  }
+
   return (
     <>
       <Breadcrumb
@@ -23,7 +34,10 @@ const HeaderOrganizations = ({
       <div className="flex justify-between items-center">
         <h1 className="text-text text-xl font-medium">Users</h1>
         <div className="flex my-6 justify-end gap-2.5 items-center">
-          <ButtonSecondary leftIcon={<Export size={24} variant="Bulk" />}>
+          <ButtonSecondary
+            leftIcon={<Export size={24} variant="Bulk" />}
+            onClick={() => setIsModalOpen(true)}
+          >
             Export<span className="hidden lg:inline">Users</span>
           </ButtonSecondary>
           <Button
@@ -37,6 +51,18 @@ const HeaderOrganizations = ({
           </Button>
         </div>
       </div>
+      <Modal
+        closable
+        footer={null}
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <div className="p-8 space-y-6 flex flex-col items-center">
+          <p className="text-2xl font-semibold">User Added Successfully!</p>
+          <p>Thanks for your update.</p>
+        </div>
+      </Modal>
     </>
   )
 }

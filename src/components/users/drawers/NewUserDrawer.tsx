@@ -1,9 +1,14 @@
-import { Drawer, Steps, Button, Form } from 'antd'
+import {
+  Drawer,
+  Button,
+  Form,
+  type FormProps,
+  Input,
+  Select,
+  Modal,
+} from 'antd'
+import { CloseCircle, Export, TickCircle } from 'iconsax-reactjs'
 import { useState } from 'react'
-import { UserOutlined, BankOutlined, InboxOutlined } from '@ant-design/icons'
-
-import { CloseCircle, Export } from 'iconsax-reactjs'
-import ButtonSecondary from '@/components/ui/ButtonSecondary'
 
 interface PropsCreateOrganiationDrawer {
   open: boolean
@@ -14,6 +19,33 @@ export default function NewUserDrawer({
   onClose,
 }: PropsCreateOrganiationDrawer) {
   const [form] = Form.useForm()
+
+  type FieldType = {
+    firstName?: string
+    lastName?: string
+    email?: string
+  }
+
+  const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
+    console.log('Success:', values)
+    setIsModalOpen(true)
+  }
+
+  const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (
+    errorInfo
+  ) => {
+    console.log('Failed:', errorInfo)
+  }
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleOk = () => {
+    setIsModalOpen(false)
+  }
+
+  const handleCancel = () => {
+    setIsModalOpen(false)
+  }
 
   return (
     <Drawer
@@ -47,7 +79,101 @@ export default function NewUserDrawer({
       width={543}
       className="!bg-background-dark drawer"
     >
-      <div className="px-4"></div>
+      <Form
+        name="basic"
+        layout="vertical"
+        requiredMark={false}
+        style={{ maxWidth: 600 }}
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <div className="flex gap-2">
+          <Form.Item<FieldType>
+            label="First Name"
+            name="firstName"
+            rules={[
+              {
+                required: true,
+                message: "Please input the user's first name!",
+              },
+            ]}
+            className="flex-1"
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item<FieldType>
+            label="Last Name"
+            name="lastName"
+            rules={[
+              { required: true, message: "Please input the user's last name!" },
+            ]}
+            className="flex-1"
+          >
+            <Input />
+          </Form.Item>
+        </div>
+
+        <Form.Item<FieldType>
+          label="Email"
+          name="email"
+          rules={[
+            { type: 'email', message: 'Please input a valid email!' },
+            { required: true, message: "Please input the user's email!" },
+          ]}
+          className="flex-1"
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item label="Role">
+          <Select>
+            <Select.Option value="admin">Admin</Select.Option>
+            <Select.Option value="manager">Manager</Select.Option>
+          </Select>
+        </Form.Item>
+
+        <Form.Item label="Organization">
+          <Select>
+            <Select.Option value="admin">Microsoft</Select.Option>
+            <Select.Option value="manager">IBM</Select.Option>
+          </Select>
+        </Form.Item>
+
+        <div className="flex justify-end gap-2">
+          <Form.Item label={null}>
+            <Button
+              type="default"
+              onClick={() => {
+                form.resetFields()
+                onClose()
+              }}
+            >
+              Cancel
+            </Button>
+          </Form.Item>
+          <Form.Item label={null}>
+            <Button type="primary" htmlType="submit">
+              Confirm
+            </Button>
+          </Form.Item>
+        </div>
+      </Form>
+      <Modal
+        closable={{ 'aria-label': 'Custom Close Button' }}
+        footer={null}
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <div className="p-8 space-y-6 flex flex-col items-center">
+          <TickCircle size="32" className="text-primary" variant="Bold" />
+          <p className="text-2xl font-semibold">User Added Successfully!</p>
+          <p>Thanks for your update.</p>
+        </div>
+      </Modal>
     </Drawer>
   )
 }
