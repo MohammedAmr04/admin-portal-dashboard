@@ -27,11 +27,11 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
       }}
       className=" rounded-lg"
     >
-      <div className="flex flex-col items-center justify-center px-9 py-15 ">
+      <div className="flex flex-col items-center justify-center py-15 ">
         <div className="bg-[#9147FF]/10 rounded-xl p-4 w-15 h-15 flex items-center justify-center mb-6">
           {icon}
         </div>
-        <p className="text-text max-w-sm w-full leading-[160%] text-2xl font-semibold  text-center">
+        <p className="text-text max-w-sm   w-full !leading-[160%] text-2xl align-middle font-semibold  text-center">
           {title}
         </p>
       </div>

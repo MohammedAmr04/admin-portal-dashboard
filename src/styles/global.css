@@ -251,7 +251,7 @@ a:hover {
 }
 
 .table-organization .ant-table-row-selected {
-  background-color: #211536 !important;
+  background-color: color-mix(in srgb, var(--color-primary) 15%, transparent) !important;
 }
 
 .table-organization .ant-checkbox-inner {
@@ -276,6 +276,10 @@ a:hover {
   align-items: center;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.table-organization .ant-pagination-options {
+  display: none;
 }
 
 .table-organization .ant-pagination-item.ant-pagination-item-active {

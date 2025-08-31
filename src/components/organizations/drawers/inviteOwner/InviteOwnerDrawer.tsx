@@ -16,41 +16,36 @@ export default function InviteOwnerDrawer({
   onClose,
 }: PropsInviteOwnerDrawer) {
   const [form] = Form.useForm()
-  const [loading, setLoading] = useState(false)
-  const [confirm, setConfirm] = useState<boolean>(false)
-  const [success, setSuccess] = useState<boolean>(false)
-  const handleSubmit = async () => {
-    handleOpenConfirm()
-    try {
-      const values = await form.validateFields()
-      setLoading(true)
+  const [status, setStatus] = useState<
+    'idle' | 'confirm' | 'loading' | 'success'
+  >('idle')
 
-      // simulate API call
-      setTimeout(() => {
-        console.log('Form Submitted:', values)
-        setLoading(false)
-        form.resetFields()
-        onClose()
-      }, 1200)
+  const handleSubmit = async () => {
+    try {
+      await form.validateFields()
+      setStatus('confirm') // بعد الفاليديشن افتح الـ Confirmation
     } catch (error) {
       console.log('Validation Failed:', error)
     }
   }
-  function handleOpenConfirm() {
-    setConfirm(true)
-  }
-  function handleCloseConfirm() {
-    setConfirm(false)
-  }
-  function handleOpenSuccess() {
-    setSuccess(true)
+
+  const handleConfirm = async () => {
+    setStatus('loading')
+
+    // simulate API call
     setTimeout(() => {
-      handleCloseSuccess()
-    }, 3000)
+      console.log('Form Submitted:', form.getFieldsValue())
+      form.resetFields()
+      setStatus('success')
+
+      // auto close after success
+      setTimeout(() => {
+        setStatus('idle')
+        onClose()
+      }, 2000)
+    }, 1200)
   }
-  function handleCloseSuccess() {
-    setSuccess(false)
-  }
+
   return (
     <>
       <Drawer
@@ -58,7 +53,7 @@ export default function InviteOwnerDrawer({
         closable={false}
         title={
           <div className="flex items-center border-b border-text/5 py-3.5 justify-between w-full">
-            <span className="text-text text-lg font-medium">Invite owner </span>
+            <span className="text-text text-lg font-medium">Invite owner</span>
             <span className="flex">
               <Export size={24} variant="Linear" />
               <CloseCircle
@@ -93,102 +88,95 @@ export default function InviteOwnerDrawer({
         width={543}
         className="drawer drawer-invite"
       >
-        <div className="">
-          <Form requiredMark={false} layout="vertical" form={form}>
-            {/* Email */}
-            <Form.Item
-              label="Email"
-              name="email"
-              rules={[
-                { required: true, message: 'Please enter an email address' },
-                { type: 'email', message: 'Invalid email format' },
-              ]}
-            >
-              <Input size="large" placeholder="Ex.User@Domain.Com" />
-            </Form.Item>
+        <Form requiredMark={false} layout="vertical" form={form}>
+          {/* Email */}
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[
+              { required: true, message: 'Please enter an email address' },
+              { type: 'email', message: 'Invalid email format' },
+            ]}
+          >
+            <Input size="large" placeholder="Ex.User@Domain.Com" />
+          </Form.Item>
 
-            {/* Number of Domains */}
-            <Form.Item
-              label="Number of Domains"
-              name="domains"
-              rules={[
-                { required: true, message: 'Please enter number of domains' },
-                {
-                  pattern: /^[0-9]+$/,
-                  message: 'Domains must be a number',
-                },
-                {
-                  validator: (_, value) =>
-                    value && value > 0
-                      ? Promise.resolve()
-                      : Promise.reject('Must be greater than 0'),
-                },
-              ]}
-            >
-              <Input type="number" size="large" placeholder="e.g. 22" />
-            </Form.Item>
+          {/* Number of Domains */}
+          <Form.Item
+            label="Number of Domains"
+            name="domains"
+            rules={[
+              { required: true, message: 'Please enter number of domains' },
+              { pattern: /^[0-9]+$/, message: 'Domains must be a number' },
+              {
+                validator: (_, value) =>
+                  value && value > 0
+                    ? Promise.resolve()
+                    : Promise.reject('Must be greater than 0'),
+              },
+            ]}
+          >
+            <Input type="number" size="large" placeholder="e.g. 22" />
+          </Form.Item>
 
-            {/* Select Package */}
-            <Form.Item
-              label="Select Package"
-              name="package"
-              rules={[{ required: true, message: 'Please select a package' }]}
-            >
-              <Select size="large" placeholder="Choose a package">
-                <Option value="basic">Basic Package</Option>
-                <Option value="standard">Standard Package</Option>
-                <Option value="premium">Premium Package</Option>
-              </Select>
-            </Form.Item>
+          {/* Select Package */}
+          <Form.Item
+            label="Select Package"
+            name="package"
+            rules={[{ required: true, message: 'Please select a package' }]}
+          >
+            <Select size="large" placeholder="Choose a package">
+              <Option value="basic">Basic Package</Option>
+              <Option value="standard">Standard Package</Option>
+              <Option value="premium">Premium Package</Option>
+            </Select>
+          </Form.Item>
 
-            {/* Assigned Products */}
-            <Form.Item
-              label="Assigned Products"
-              name="products"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please select at least one product',
-                },
-              ]}
-            >
-              <Checkbox.Group className="flex flex-col gap-2 text-text">
-                <Checkbox value="productA">Product A</Checkbox>
-                <Checkbox value="productB">Product B</Checkbox>
-                <Checkbox value="productC">Product C</Checkbox>
-                <Checkbox value="productD">Product D</Checkbox>
-                <Checkbox value="productE">Product E</Checkbox>
-              </Checkbox.Group>
-            </Form.Item>
+          {/* Assigned Products */}
+          <Form.Item
+            label="Assigned Products"
+            name="products"
+            rules={[
+              { required: true, message: 'Please select at least one product' },
+            ]}
+          >
+            <Checkbox.Group className="flex flex-col gap-2 text-text">
+              <Checkbox value="productA">Product A</Checkbox>
+              <Checkbox value="productB">Product B</Checkbox>
+              <Checkbox value="productC">Product C</Checkbox>
+              <Checkbox value="productD">Product D</Checkbox>
+              <Checkbox value="productE">Product E</Checkbox>
+            </Checkbox.Group>
+          </Form.Item>
 
-            {/* Actions */}
-            <div className="flex justify-end gap-2 pb-6 mt-6">
-              <Button
-                type="primary"
-                size="large"
-                loading={loading}
-                className="!bg-primary px-6"
-                onClick={handleSubmit}
-              >
-                Invite
-              </Button>
-            </div>
-          </Form>
-        </div>
+          {/* Actions */}
+          <div className="flex justify-end gap-2 pb-6 mt-6">
+            <Button
+              type="primary"
+              size="large"
+              loading={status === 'loading'}
+              className="!bg-primary px-6"
+              onClick={handleSubmit}
+            >
+              Invite
+            </Button>
+          </div>
+        </Form>
       </Drawer>
+
+      {/* Confirmation */}
       <ConfirmationModal
         title="Are you sure you want to invite this owner?"
-        visible={confirm}
+        visible={status === 'confirm'}
         icon={<TickSquare size={36} className="!text-success" variant="Bulk" />}
-        onConfirm={() => {
-          setConfirm(false)
-          handleOpenSuccess()
-        }}
-        onCancel={handleCloseConfirm}
+        onConfirm={handleConfirm}
+        onCancel={() => setStatus('idle')}
       />
+
+      {/* Success */}
       <SuccessModal
         title="Invitation sent successfully."
-        visible={success}
+        visible={status === 'success'}
         icon={
           <TickCircle size={32} variant="Bulk" className="!text-[#9147FF]" />
         }

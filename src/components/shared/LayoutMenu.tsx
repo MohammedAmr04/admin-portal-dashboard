@@ -6,8 +6,12 @@ type MenuItem = Required<MenuProps>['items'][number]
 
 const siderItems: MenuItem[] = [
   { key: '/dashboard', label: 'Dashboard', icon: <Home /> },
-  { key: '/users', label: 'Users', icon: <Profile2User /> },
-  { key: '/organizations', label: 'Organizations', icon: <Building /> },
+  { key: '/dashboard/users', label: 'Users', icon: <Profile2User /> },
+  {
+    key: '/dashboard/organizations',
+    label: 'Organizations',
+    icon: <Building />,
+  },
 ]
 
 const LayoutMenu = () => {
