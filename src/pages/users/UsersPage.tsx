@@ -6,15 +6,20 @@ import { useState } from 'react'
 
 const UsersPage = () => {
   const [drawer, setDrawer] = useState('')
+  const [userID, setUserID] = useState<number | undefined>(undefined)
 
   const handleDrawer = (drawer: string) => {
     setDrawer(drawer)
   }
 
+  const handleUser = (userID: number) => {
+    setUserID(userID)
+  }
+
   return (
     <>
       <HeaderUsers handleDrawer={handleDrawer} />
-      <TableUsers handleDrawer={handleDrawer} />
+      <TableUsers handleDrawer={handleDrawer} handleUser={handleUser} />
       <NewUserDrawer
         open={drawer === 'newUser'}
         onClose={() => setDrawer('')}
@@ -22,6 +27,7 @@ const UsersPage = () => {
       <EditUserDrawer
         open={drawer === 'editUser'}
         onClose={() => setDrawer('')}
+        userID={userID}
       />
     </>
   )

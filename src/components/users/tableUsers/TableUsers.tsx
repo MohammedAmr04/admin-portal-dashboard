@@ -3,94 +3,14 @@ import type { ColumnsType } from 'antd/es/table'
 import { Edit, SearchNormal, Trash } from 'iconsax-reactjs'
 import { useState } from 'react'
 import { DownOutlined, SlidersOutlined, MoreOutlined } from '@ant-design/icons'
-
-type UserRow = {
-  id: number
-  name: string
-  email: string
-  role: 'Admin' | 'Manager'
-  status: 'Active' | 'Inactive'
-}
-
-export const usersData: UserRow[] = [
-  {
-    id: 1,
-    name: 'Olivia Martin',
-    email: 'olivia.martin@example.com',
-    role: 'Admin',
-    status: 'Active',
-  },
-  {
-    id: 2,
-    name: 'Noah Johnson',
-    email: 'noah.johnson@example.com',
-    role: 'Manager',
-    status: 'Inactive',
-  },
-  {
-    id: 3,
-    name: 'Ava Thompson',
-    email: 'ava.thompson@example.com',
-    role: 'Admin',
-    status: 'Active',
-  },
-  {
-    id: 4,
-    name: 'Liam Davis',
-    email: 'liam.davis@example.com',
-    role: 'Manager',
-    status: 'Active',
-  },
-  {
-    id: 5,
-    name: 'Emma Wilson',
-    email: 'emma.wilson@example.com',
-    role: 'Admin',
-    status: 'Inactive',
-  },
-  {
-    id: 6,
-    name: 'Mason Brown',
-    email: 'mason.brown@example.com',
-    role: 'Manager',
-    status: 'Active',
-  },
-  {
-    id: 7,
-    name: 'Sophia Clark',
-    email: 'sophia.clark@example.com',
-    role: 'Admin',
-    status: 'Active',
-  },
-  {
-    id: 8,
-    name: 'James Lewis',
-    email: 'james.lewis@example.com',
-    role: 'Manager',
-    status: 'Inactive',
-  },
-  {
-    id: 9,
-    name: 'Isabella Young',
-    email: 'isabella.young@example.com',
-    role: 'Admin',
-    status: 'Active',
-  },
-  {
-    id: 10,
-    name: 'Ethan Hall',
-    email: 'ethan.hall@example.com',
-    role: 'Manager',
-    status: 'Active',
-  },
-]
-
-// columns are defined inside the component to access state
+import { usersData, type UserRow } from '../../../services/mockData/users'
 
 export default function TableUsers({
   handleDrawer,
+  handleUser,
 }: {
   handleDrawer: (drawer: string) => void
+  handleUser: (userID: number) => void
 }) {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
@@ -102,7 +22,6 @@ export default function TableUsers({
     },
   }
 
-  // local data state to handle status toggling
   const [data, setData] = useState<UserRow[]>(usersData)
 
   const columns: ColumnsType<UserRow> = [
@@ -157,12 +76,15 @@ export default function TableUsers({
       title: 'Actions',
       key: 'actions',
       fixed: 'right',
-      render: () => (
+      render: (_: unknown, record: UserRow) => (
         <div className="flex items-center justify-center gap-2">
           <Button
             type="text"
             icon={<Edit size="20" />}
-            onClick={() => handleDrawer('editUser')}
+            onClick={() => {
+              handleDrawer('editUser')
+              handleUser(record.id)
+            }}
           />
           <Dropdown
             menu={{
