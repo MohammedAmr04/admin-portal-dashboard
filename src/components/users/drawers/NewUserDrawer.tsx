@@ -7,7 +7,7 @@ import {
   Select,
   Modal,
 } from 'antd'
-import { CloseCircle, Export, TickCircle } from 'iconsax-reactjs'
+import { ArrowDown2, CloseCircle, Export, TickCircle } from 'iconsax-reactjs'
 import { useState } from 'react'
 
 interface PropsCreateOrganiationDrawer {
@@ -129,14 +129,14 @@ export default function NewUserDrawer({
         </Form.Item>
 
         <Form.Item label="Role">
-          <Select>
+          <Select suffixIcon={<ArrowDown2></ArrowDown2>}>
             <Select.Option value="admin">Admin</Select.Option>
             <Select.Option value="manager">Manager</Select.Option>
           </Select>
         </Form.Item>
 
         <Form.Item label="Organization">
-          <Select>
+          <Select suffixIcon={<ArrowDown2></ArrowDown2>}>
             <Select.Option value="admin">Microsoft</Select.Option>
             <Select.Option value="manager">IBM</Select.Option>
           </Select>
