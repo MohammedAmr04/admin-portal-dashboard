@@ -1,7 +1,7 @@
 import { Table, Input, Dropdown, Button } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { Edit, Refresh, SearchNormal, Trash } from 'iconsax-reactjs'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DownOutlined, SlidersOutlined, MoreOutlined } from '@ant-design/icons'
 import StatusTag from '../tags/StatusTag'
 import ProductTag from '../tags/ProductTag'
@@ -20,8 +20,7 @@ type OrgRow = {
   date: string
 }
 
-// داتا 15 صف
-const data: OrgRow[] = Array.from({ length: 15 }, (_, i) => ({
+const data: OrgRow[] = Array.from({ length: 100 }, (_, i) => ({
   key: i + 1,
   org: ['CBRE', 'Google', 'Amazon', 'Microsoft', 'Tesla'][i % 5],
   owner: [
@@ -90,7 +89,7 @@ const columns: ColumnsType<OrgRow> = [
     key: 'actions',
     render: () => (
       <div className="flex items-center justify-center gap-2">
-        <Button type="text" icon={<Edit size="20" />} />
+        <Button type="text" icon={<Edit variant="Linear" size="20" />} />
         <Dropdown
           menu={{
             items: [
@@ -110,18 +109,25 @@ const columns: ColumnsType<OrgRow> = [
     ),
   },
 ]
-
-export default function TableOrganization() {
+type Props = {
+  setData: React.Dispatch<React.SetStateAction<React.Key[]>>
+  onFinish: boolean
+}
+export default function TableOrganization({ setData, onFinish }: Props) {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
 
   const rowSelection = {
     selectedRowKeys,
     onChange: (keys: React.Key[]) => {
+      setData(keys)
       setSelectedRowKeys(keys)
-      console.log('Selected rows:', keys)
     },
   }
-
+  useEffect(() => {
+    if (onFinish) {
+      setSelectedRowKeys([])
+    }
+  }, [onFinish])
   return (
     <div className="bg-background-dark py-4 rounded-lg">
       <Table<OrgRow>

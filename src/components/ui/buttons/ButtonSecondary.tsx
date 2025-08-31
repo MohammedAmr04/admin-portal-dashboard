@@ -1,7 +1,7 @@
-import { Button } from 'antd'
+import { Button, type ButtonProps } from 'antd'
 import type { ReactNode } from 'react'
 
-interface PropsButtonSecondary {
+interface PropsButtonSecondary extends ButtonProps {
   leftIcon?: ReactNode
   rightIcon?: ReactNode
   children: ReactNode
@@ -13,17 +13,19 @@ const ButtonSecondary = ({
   leftIcon,
   rightIcon,
   onClick,
+  className,
+  ...rest
 }: PropsButtonSecondary) => {
   return (
     <Button
       size="large"
-      className="!bg-linear-to-r hover:!text-text from-[#281543] to-[#0E2248]"
-      onClick={onClick}
+      className={`!bg-linear-to-r hover:!text-text from-[#281543] to-[#0E2248] ${className || ''}`}
+      {...rest}
     >
       <div className="flex gap-1 !text-text items-center justify-center">
-        <span>{leftIcon}</span>
+        {leftIcon && <span>{leftIcon}</span>}
         {children}
-        <span>{rightIcon}</span>
+        {rightIcon && <span>{rightIcon}</span>}
       </div>
     </Button>
   )
