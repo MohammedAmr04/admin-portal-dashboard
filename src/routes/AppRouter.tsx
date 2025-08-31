@@ -1,8 +1,8 @@
 import AuthLayout from '@/components/layouts/AuthLayout'
 import MainLayout from '@/components/layouts/MainLayout'
 import DashboardPage from '@/pages/dashboard/DashboardPage'
-import OrganizationsPage from '@/pages/organizations/OrganizationsPage'
-import UsersPage from '@/pages/users/UsersPage'
+import OrganizationsPage from '@/pages/dashboard/organizations/OrganizationsPage'
+import UsersPage from '@/pages/dashboard/users/UsersPage'
 import LoginPage from '../pages/auth/LoginPage'
 import SignUpPage from '@/pages/auth/SignUpPage'
 import ForgetPasswordPage from '@/pages/auth/ForgetPasswordPage'
@@ -15,8 +15,8 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <DashboardPage /> },
       { path: 'dashboard', element: <DashboardPage /> },
-      { path: 'users', element: <UsersPage /> },
-      { path: 'organizations', element: <OrganizationsPage /> },
+      { path: 'dashboard/users', element: <UsersPage /> },
+      { path: 'dashboard/organizations', element: <OrganizationsPage /> },
     ],
   },
   {
