@@ -5,12 +5,14 @@ interface PropsButtonSecondary extends ButtonProps {
   leftIcon?: ReactNode
   rightIcon?: ReactNode
   children: ReactNode
+  onClick?: () => void
 }
 
 const ButtonSecondary = ({
   children,
   leftIcon,
   rightIcon,
+  onClick,
   className,
   ...rest
 }: PropsButtonSecondary) => {
