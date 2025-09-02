@@ -23,6 +23,7 @@ const HeaderOrganizations = () => {
   }
   return (
     <>
+  
       <header className="flex pt-9 mb-6 justify-between gap-2.5 items-center">
         <h1 className="text-text text-xl">Organizations</h1>
         <div className="flex gap-2.5 items-center">
@@ -39,7 +40,8 @@ const HeaderOrganizations = () => {
             onClick={handleOpenOrg}
             icon={<AddSquare size="24" variant="Bulk" />}
           >
-            create new organization
+            <span className="hidden lg:inline">Create</span>New
+            <span className="hidden lg:inline">Organization</span>
           </Button>
         </div>
       </header>

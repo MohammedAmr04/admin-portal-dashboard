@@ -1,12 +1,13 @@
 import { useState, type Key } from 'react'
 import TableOrganization from '@/components/organizations/tableOrganizations/TableOrganization'
-import { AddSquare, DocumentText, Export, TickCircle } from 'iconsax-reactjs'
-import { Button } from 'antd'
+import { AddSquare, ArrowRight2, DocumentText, Export, TickCircle } from 'iconsax-reactjs'
+import { Breadcrumb, Button } from 'antd'
 import CreateOrganizationDrawer from '@/components/organizations/drawers/createNewOrganization/CreateOrganizationDrawer'
 import InviteOwnerDrawer from '@/components/organizations/drawers/inviteOwner/InviteOwnerDrawer'
 import SuccessModal from '@/components/ui/models/SuccessModal'
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import ButtonSecondary from '@/components/ui/buttons/ButtonSecondary'
+import { Link } from 'react-router'
 
 const OrganizationsPage = () => {
   const [rowsExported, setRowsExported] = useState<Key[]>([])
@@ -33,9 +34,20 @@ const OrganizationsPage = () => {
 
   return (
     <main className="org">
-      <header className="flex flex-col md:flex-row pt-9 mb-6 justify-between gap-2.5 items-center">
-        <h1 className="text-text text-xl">Organizations</h1>
-        <div className="flex flex-col flex-wrap md:flex-row gap-2.5 items-center">
+          <Breadcrumb
+        items={[
+          {
+            title: <Link to="/">Dashboard</Link>,
+          },
+          {
+            title: 'Organizations',
+          },
+        ]}
+        separator={<ArrowRight2 size={16} />}
+      />
+      <header className="flex flex-col  md:flex-row pt-9 mb-6 md:items-center md:justify-between gap-2.5 ">
+        <h1 className="text-text text-xl flex-1 mb-3">Organizations</h1>
+        <div className="flex flex-wrap gap-2.5 items-center">
           <ButtonSecondary
             onClick={() => rowsExported.length && toggleModal('export', true)}
             leftIcon={<Export size={24} variant="Bulk" />}
@@ -51,7 +63,8 @@ const OrganizationsPage = () => {
             onClick={() => toggleModal('org', true)}
             icon={<AddSquare size="24" variant="Bulk" />}
           >
-            create new organization
+            <span className="hidden lg:inline">Create</span>New
+            <span className="hidden lg:inline">Organization</span>
           </Button>
         </div>
       </header>

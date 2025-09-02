@@ -1,4 +1,4 @@
-import ButtonSecondary from '@/components/ui/buttons/ButtonSecondary'
+import ButtonSecondary from '@/components/ui/buttons/buttons/ButtonSecondary'
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import SuccessModal from '@/components/ui/models/SuccessModal'
 import { Breadcrumb, Button, message, Modal } from 'antd'
