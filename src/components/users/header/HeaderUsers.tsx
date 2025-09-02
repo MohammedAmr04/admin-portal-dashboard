@@ -1,7 +1,7 @@
-import ButtonSecondary from '@/components/ui/buttons/buttons/ButtonSecondary'
+import ButtonSecondary from '@/components/ui/buttons/ButtonSecondary'
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import SuccessModal from '@/components/ui/models/SuccessModal'
-import { Breadcrumb, Button, message, Modal } from 'antd'
+import { Breadcrumb, Button, message } from 'antd'
 import { AddSquare, ArrowRight2, Export, TickCircle } from 'iconsax-reactjs'
 import { useState } from 'react'
 
