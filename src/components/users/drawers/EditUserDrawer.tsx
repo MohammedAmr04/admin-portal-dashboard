@@ -6,7 +6,6 @@ import {
   Drawer,
   Form,
   Input,
-  Modal,
   Select,
   Switch,
   theme,
@@ -56,7 +55,6 @@ export default function EditUserDrawer({
   }, [userID])
   const [data, setData] = useState(user)
 
-  // Sync AntD form fields when `data` changes so inputs show current user values
   useEffect(() => {
     if (data) {
       form.setFieldsValue({
