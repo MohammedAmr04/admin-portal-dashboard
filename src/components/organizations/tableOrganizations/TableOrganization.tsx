@@ -81,8 +81,10 @@ const columns: ColumnsType<OrgRow> = [
     ),
   },
   {
+    fixed: 'right',
+
     title: (
-      <div className="flex justify-center  ">
+      <div className="flex justify-center ">
         <Refresh size="32" className="!text-primary" />
       </div>
     ),
@@ -162,7 +164,7 @@ export default function TableOrganization({ setData, onFinish }: Props) {
         )}
         dataSource={data}
         pagination={{ position: ['bottomCenter'], pageSize: 5 }}
-        className="table-organization !bg-transparent"
+        className="table-organization !bg-transparent overflow-x-scroll lg:overflow-x-auto"
         rowClassName={(_, index) => (index % 2 === 0 ? 'even-row' : 'odd-row')}
       />
     </div>

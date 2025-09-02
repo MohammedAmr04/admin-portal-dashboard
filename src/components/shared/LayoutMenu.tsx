@@ -33,6 +33,7 @@ const LayoutMenu = () => {
       theme="dark"
       style={{ backgroundColor: 'transparent' }}
       items={siderItems}
+      
       selectedKeys={selected}
       onClick={({ key }) => navigate(key as string)}
     />

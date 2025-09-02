@@ -1,4 +1,4 @@
-import ButtonSecondary from '@/components/ui/ButtonSecondary'
+import ButtonSecondary from '@/components/ui/buttons/ButtonSecondary'
 import { Breadcrumb, Button, Modal } from 'antd'
 import { AddSquare, ArrowRight2, Export } from 'iconsax-reactjs'
 import { useState } from 'react'
