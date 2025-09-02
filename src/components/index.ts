@@ -1,5 +1,5 @@
 export * from './auth'
 export * from './layouts'
 export * from './organizations'
-export * from './shared'
+export * from './mainLayout'
 export * from './ui'

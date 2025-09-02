@@ -20,6 +20,7 @@ const OrganizationsPage = () => {
   })
 
   const toggleModal = (key: keyof typeof modals, value: boolean) => {
+    console.log(modals)
     setModals((prev) => ({ ...prev, [key]: value }))
   }
 

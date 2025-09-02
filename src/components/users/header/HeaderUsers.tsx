@@ -1,22 +1,19 @@
 import ButtonSecondary from '@/components/ui/buttons/ButtonSecondary'
-import { Breadcrumb, Button, Modal } from 'antd'
-import { AddSquare, ArrowRight2, Export } from 'iconsax-reactjs'
+import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
+import SuccessModal from '@/components/ui/models/SuccessModal'
+import { Breadcrumb, Button, message, Modal } from 'antd'
+import { AddSquare, ArrowRight2, Export, TickCircle } from 'iconsax-reactjs'
 import { useState } from 'react'
 
-const HeaderOrganizations = ({
+const HeaderUsers = ({
   handleDrawer,
+  selectedUsers,
 }: {
   handleDrawer: (drawer: string) => void
+  selectedUsers: number[]
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const handleOk = () => {
-    setIsModalOpen(false)
-  }
-
-  const handleCancel = () => {
-    setIsModalOpen(false)
-  }
+  const [isExportModalOpen, setIsExportModalOpen] = useState(false)
+  const [exportConfirmed, setExportConfirmed] = useState(false)
 
   return (
     <>
@@ -36,7 +33,13 @@ const HeaderOrganizations = ({
         <div className="flex my-6 justify-end gap-2.5 items-center">
           <ButtonSecondary
             leftIcon={<Export size={24} variant="Bulk" />}
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => {
+              if (selectedUsers.length > 0) {
+                setIsExportModalOpen(true)
+              } else {
+                message.warning('No users were selected to be exported!')
+              }
+            }}
           >
             Export<span className="hidden lg:inline">Users</span>
           </ButtonSecondary>
@@ -51,20 +54,30 @@ const HeaderOrganizations = ({
           </Button>
         </div>
       </div>
-      <Modal
-        closable
-        footer={null}
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <div className="p-8 space-y-6 flex flex-col items-center">
-          <p className="text-2xl font-semibold">User Added Successfully!</p>
-          <p>Thanks for your update.</p>
-        </div>
-      </Modal>
+      {selectedUsers.length > 0 && isExportModalOpen && (
+        <ConfirmationModal
+          visible={isExportModalOpen}
+          title="Are you sure that you want to export these users?"
+          icon={
+            <TickCircle size={36} variant="Bulk" className="!text-success" />
+          }
+          onCancel={() => setIsExportModalOpen(false)}
+          onConfirm={() => {
+            setIsExportModalOpen(false)
+            setExportConfirmed(true)
+          }}
+        />
+      )}
+      <SuccessModal
+        visible={exportConfirmed}
+        title="Users exported successfully!"
+        icon={<TickCircle size={36} variant="Bulk" className="!text-success" />}
+        onClose={() => {
+          setExportConfirmed(false)
+        }}
+      />
     </>
   )
 }
 
-export default HeaderOrganizations
+export default HeaderUsers
