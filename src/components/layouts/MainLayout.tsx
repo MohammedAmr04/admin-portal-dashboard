@@ -1,9 +1,9 @@
 import { Grid, Layout } from 'antd'
 import { Outlet } from 'react-router'
-import LayoutDrawer from '../shared/LayoutDrawer'
-import LayoutProductsSider from '../shared/LayoutProductsSider'
-import LayoutHeader from '../shared/LayoutHeader'
-import LayoutRoutesSider from '../shared/LayoutRoutesSider'
+import LayoutDrawer from '../mainLayout/Drawer/LayoutDrawer'
+import LayoutProductsSider from '../mainLayout/Siders/LayoutProductsSider'
+import LayoutHeader from '../mainLayout/Header/LayoutHeader'
+import LayoutRoutesSider from '../mainLayout/Siders/LayoutRoutesSider'
 
 const { Content } = Layout
 const { useBreakpoint } = Grid

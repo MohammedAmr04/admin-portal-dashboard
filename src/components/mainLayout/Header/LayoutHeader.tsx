@@ -8,9 +8,9 @@ import {
   HamburgerMenu,
   SearchNormal1,
 } from 'iconsax-reactjs'
-import LayoutProductDropdown from './LayoutProductDropdown'
-import LayoutThemeToggle from './LayoutThemeToggle'
-import LayoutLangToggle from './LayoutLangToggle'
+import LayoutProductDropdown from '../shared/LayoutProductDropdown'
+import LayoutThemeToggle from '../shared/LayoutThemeToggle'
+import LayoutLangToggle from '../shared/LayoutLangToggle'
 import { SettingOutlined, UserOutlined } from '@ant-design/icons'
 
 const headerButtonsStyle = {
@@ -86,7 +86,7 @@ const LayoutHeader = () => {
           <LayoutLangToggle />
         </div>
         <Button style={headerButtonsStyle}>
-          <img src="./icons/support.svg" width="24"></img>
+          <img src="/icons/support.svg" width="24"></img>
         </Button>
         <Dropdown menu={{ items }} overlayClassName="header-select-dropdown">
           <Button

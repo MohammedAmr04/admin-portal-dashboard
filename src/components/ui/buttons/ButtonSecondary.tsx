@@ -12,7 +12,6 @@ const ButtonSecondary = ({
   children,
   leftIcon,
   rightIcon,
-  onClick,
   className,
   ...rest
 }: PropsButtonSecondary) => {

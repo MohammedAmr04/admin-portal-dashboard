@@ -1,10 +1,10 @@
 import { useDrawerSider } from '@/services/context/DrawerSiderContext'
 import { Button, Drawer } from 'antd'
-import LayoutMenu from './LayoutMenu'
-import LayoutProductSelect from './LayoutProductSelect'
-import LayoutLangToggle from './LayoutLangToggle'
-import LayoutThemeToggle from './LayoutThemeToggle'
-import LayoutProductDropdown from './LayoutProductDropdown'
+import LayoutMenu from '../shared/LayoutMenu'
+import LayoutProductSelect from '../shared/LayoutProductSelect'
+import LayoutLangToggle from '../shared/LayoutLangToggle'
+import LayoutThemeToggle from '../shared/LayoutThemeToggle'
+import LayoutProductDropdown from '../shared/LayoutProductDropdown'
 
 const LayoutDrawer = () => {
   const { drawer, toggleDrawer } = useDrawerSider()
@@ -24,7 +24,7 @@ const LayoutDrawer = () => {
             className="ant-menu-item w-full"
             style={{ backgroundColor: 'transparent' }}
           >
-            <img src="./icons/support.svg" width="24"></img> Support
+            <img src="/icons/support.svg" width="24"></img> Support
           </Button>
           <div className="flex justify-center w-full space-x-2">
             <LayoutProductSelect version="drawer" />
