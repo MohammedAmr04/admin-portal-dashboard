@@ -19,14 +19,13 @@ const LayoutMenu = () => {
   const navigate = useNavigate()
 
   const path = location.pathname
-  const selected =
-    path === '/' || path.startsWith('/dashboard')
-      ? ['/dashboard']
-      : path.startsWith('/users')
-        ? ['/users']
-        : path.startsWith('/organizations')
-          ? ['/organizations']
-          : []
+  const selected = [
+    path.startsWith('/dashboard/organizations')
+      ? '/dashboard/organizations'
+      : path.startsWith('/dashboard/users')
+        ? '/dashboard/users'
+        : '/dashboard'
+  ]
 
   return (
     <Menu

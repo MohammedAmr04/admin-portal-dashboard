@@ -101,7 +101,7 @@ export default function NewUserDrawer({
             ]}
             className="flex-1"
           >
-            <Input />
+            <Input size="large" />
           </Form.Item>
 
           <Form.Item<FieldType>
@@ -112,7 +112,7 @@ export default function NewUserDrawer({
             ]}
             className="flex-1"
           >
-            <Input />
+            <Input size="large" />
           </Form.Item>
         </div>
 
@@ -125,20 +125,35 @@ export default function NewUserDrawer({
           ]}
           className="flex-1"
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
 
-        <Form.Item label="Role">
-          <Select suffixIcon={<ArrowDown2></ArrowDown2>}>
+        <Form.Item
+          label="Role"
+          name="role"
+          rules={[
+            { required: true, message: "Please select the user's role!" },
+          ]}
+        >
+          <Select suffixIcon={<ArrowDown2></ArrowDown2>} size="large">
             <Select.Option value="admin">Admin</Select.Option>
             <Select.Option value="manager">Manager</Select.Option>
           </Select>
         </Form.Item>
 
-        <Form.Item label="Organization">
-          <Select suffixIcon={<ArrowDown2></ArrowDown2>}>
-            <Select.Option value="admin">Microsoft</Select.Option>
-            <Select.Option value="manager">IBM</Select.Option>
+        <Form.Item
+          label="Organization"
+          name="organization"
+          rules={[
+            {
+              required: true,
+              message: "Please select the user's organization!",
+            },
+          ]}
+        >
+          <Select suffixIcon={<ArrowDown2></ArrowDown2>} size="large">
+            <Select.Option value="microsoft">Microsoft</Select.Option>
+            <Select.Option value="ibm">IBM</Select.Option>
           </Select>
         </Form.Item>
 

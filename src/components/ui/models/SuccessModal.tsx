@@ -20,7 +20,7 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
       onCancel={onClose}
       footer={null}
       centered
-      closable={false}
+      closable={true}
       width={450}
       classNames={{
         content: '!bg-background-dark',

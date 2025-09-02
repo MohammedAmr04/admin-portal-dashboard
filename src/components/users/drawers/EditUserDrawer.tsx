@@ -16,11 +16,16 @@ import {
   ArrowDown2,
   ArrowRight,
   CloseCircle,
+  CloseSquare,
   Export,
+  TickCircle,
+  TickSquare,
   Trash,
 } from 'iconsax-reactjs'
 import { useEffect, useState, type CSSProperties } from 'react'
 import { UserOutlined } from '@ant-design/icons'
+import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
+import SuccessModal from '@/components/ui/models/SuccessModal'
 
 interface PropsCreateOrganiationDrawer {
   open: boolean
@@ -51,12 +56,25 @@ export default function EditUserDrawer({
   }, [userID])
   const [data, setData] = useState(user)
 
+  // Sync AntD form fields when `data` changes so inputs show current user values
+  useEffect(() => {
+    if (data) {
+      form.setFieldsValue({
+        email: data.email,
+        phone: data.phone,
+        role: data.role,
+        organization: data.organization,
+      })
+    }
+  }, [data, form])
+
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [roleModalVisible, setRoleModalVisible] = useState(false)
-  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
-  const [deleteSuccessModalVisible, setDeleteSuccessModalVisible] =
-    useState(false)
-  const [selectedRole, setSelectedRole] = useState<string>()
+  const [roleModal, setRoleModal] = useState(false)
+  const [deleteModal, setDeleteModal] = useState(false)
+  const [confirmedDelete, setConfirmedDelete] = useState(false)
+  const [statusModal, setStatusModal] = useState<undefined | string>(undefined)
+  const [confirmedStatus, setConfirmedStatus] = useState(false)
+
   const { token } = theme.useToken()
 
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
@@ -123,13 +141,17 @@ export default function EditUserDrawer({
         layout="vertical"
         requiredMark={false}
         style={{ maxWidth: 600 }}
+        form={form}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item>
-          <div className={`${inputLikeDivStyle} flex justify-between`}>
+          <div
+            style={inputLikeDivStyle}
+            className="flex justify-between !py-12"
+          >
             <div className="flex gap-2">
               <Avatar size={40} icon={<UserOutlined />} />
               <div>
@@ -145,16 +167,17 @@ export default function EditUserDrawer({
             <div className="space-y-2 flex flex-col items-end">
               <Trash
                 className="cursor-pointer"
-                onClick={() => setDeleteModalVisible(true)}
+                onClick={() => setDeleteModal(true)}
               />
               <div className="flex gap-2 items-center">
                 <Switch
                   checked={data?.status === 'Active'}
-                  onChange={(checked) => {
+                  onChange={(next) => {
                     setData((prev) => ({
                       ...prev!,
-                      status: checked ? 'Active' : 'Inactive',
+                      status: next ? 'Active' : 'Inactive',
                     }))
+                    setStatusModal(next ? 'activate' : 'suspend')
                   }}
                 />
                 <span
@@ -176,10 +199,9 @@ export default function EditUserDrawer({
             { type: 'email', message: 'Please input a valid email!' },
             { required: true, message: "Please input the user's email!" },
           ]}
-          initialValue={data?.email}
           className="flex-1"
         >
-          <Input className={inputStyle} />
+          <Input className={inputStyle} size="large" />
         </Form.Item>
 
         <Form.Item<FieldType>
@@ -195,7 +217,6 @@ export default function EditUserDrawer({
               message: "Please input the user's phone number!",
             },
           ]}
-          initialValue={data?.phone}
           className="flex-1"
         >
           <Input className={inputStyle} />
@@ -206,9 +227,8 @@ export default function EditUserDrawer({
             size="large"
             suffixIcon={<ArrowDown2 />}
             value={data?.role}
-            onChange={(value) => {
-              setSelectedRole(value)
-              setRoleModalVisible(true)
+            onChange={() => {
+              setRoleModal(true)
             }}
           >
             <Select.Option value="Admin">Admin</Select.Option>
@@ -216,83 +236,49 @@ export default function EditUserDrawer({
           </Select>
         </Form.Item>
 
-        <Modal
-          open={roleModalVisible}
-          onOk={() => {
-            if (selectedRole && data) {
-              setData({ ...data, role: selectedRole as 'Admin' | 'Manager' })
-            }
-            setRoleModalVisible(false)
+        <SuccessModal
+          visible={roleModal}
+          title="Role updated successfully!"
+          icon={
+            <TickCircle size={36} variant="Bulk" className="!text-success" />
+          }
+          onClose={() => {
+            setRoleModal(false)
           }}
-          onCancel={() => setRoleModalVisible(false)}
-          okText="Confirm"
-          cancelText="Cancel"
-          footer={null}
-        >
-          <div className="p-8 space-y-6 flex flex-col items-center">
-            <p className="text-2xl font-semibold">Role updated successfully!</p>
-            <p>Thanks for your update.</p>
-          </div>
-        </Modal>
+        />
 
-        <Modal
-          open={deleteModalVisible}
-          onOk={() => {
-            // Handle delete logic here
-            console.log('Deleting user:', data?.id)
-            setDeleteModalVisible(false)
-            onClose()
+        <ConfirmationModal
+          visible={deleteModal}
+          title="Are you sure that you want to delete this user?"
+          icon={<Trash size={36} variant="Bulk" className="!text-danger" />}
+          onCancel={() => setDeleteModal(false)}
+          onConfirm={() => {
+            setDeleteModal(false)
+            setConfirmedDelete(true)
           }}
-          onCancel={() => setDeleteModalVisible(false)}
-          footer={null}
-        >
-          <div className="p-6 space-y-6">
-            <p className="text-text text-center">
-              Are you sure you want to delete this user?
-            </p>
-            <div className="flex justify-center gap-4 mt-8">
-              <Button onClick={() => setDeleteModalVisible(false)}>
-                Cancel
-              </Button>
-              <Button
-                type="primary"
-                onClick={() => {
-                  console.log('Deleting user:', data?.id)
-                  setDeleteModalVisible(false)
-                  setDeleteSuccessModalVisible(true)
-                  // Add your actual delete API call here
-                  // onDeleteUser(data?.id)
-                }}
-                className="px-6"
-              >
-                Yes
-              </Button>
-            </div>
-          </div>
-        </Modal>
+        />
 
-        <Modal
-          open={deleteSuccessModalVisible}
-          onCancel={() => {
-            setDeleteSuccessModalVisible(false)
-            onClose()
+        <SuccessModal
+          visible={confirmedDelete}
+          title="User deleted successfully!"
+          icon={
+            <TickCircle size={36} variant="Bulk" className="!text-success" />
+          }
+          onClose={() => {
+            setConfirmedDelete(false)
           }}
-          footer={null}
-          centered
-          closable={true}
-        >
-          <div className="p-8 space-y-6 flex flex-col items-center">
-            <p className="text-2xl font-semibold">User deleted successfully</p>
-            <p>Thank you for the update</p>
-          </div>
-        </Modal>
+        />
 
         <Form.Item
           label={<span className={formLabelStyles}>Organization</span>}
         >
-          <Select size="large" suffixIcon={<ArrowDown2></ArrowDown2>}>
-            <Select.Option value="admin">Microsoft</Select.Option>
-            <Select.Option value="manager">IBM</Select.Option>
+          <Select
+            size="large"
+            value={data?.organization}
+            suffixIcon={<ArrowDown2></ArrowDown2>}
+          >
+            <Select.Option value="Microsoft">Microsoft</Select.Option>
+            <Select.Option value="IBM">IBM</Select.Option>
           </Select>
         </Form.Item>
 
@@ -331,6 +317,39 @@ export default function EditUserDrawer({
           </Form.Item>
         </div>
       </Form>
+
+      <ConfirmationModal
+        visible={!!statusModal}
+        title={
+          statusModal === 'suspend'
+            ? 'Are you sure you want to suspend this user?'
+            : 'Are you sure you want to activate this user?'
+        }
+        icon={
+          statusModal === 'suspend' ? (
+            <CloseSquare size={36} variant="Bulk" className="!text-danger" />
+          ) : (
+            <TickSquare size={36} variant="Bulk" className="!text-success" />
+          )
+        }
+        onCancel={() => setStatusModal(undefined)}
+        onConfirm={() => {
+          setConfirmedStatus(true)
+        }}
+      />
+      <SuccessModal
+        visible={confirmedStatus}
+        title={
+          statusModal === 'suspend'
+            ? 'User suspended successfully!'
+            : 'User activated successfully!'
+        }
+        icon={<TickCircle size={36} variant="Bulk" className="!text-success" />}
+        onClose={() => {
+          setStatusModal(undefined)
+          setConfirmedStatus(false)
+        }}
+      />
     </Drawer>
   )
 }

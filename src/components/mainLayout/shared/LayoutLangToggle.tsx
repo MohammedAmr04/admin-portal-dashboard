@@ -6,11 +6,11 @@ const LayoutLangToggle = () => {
       options={[
         {
           value: 'en',
-          label: <img className="rounded-full w-5" src="./us-flag.png" />,
+          label: <img className="rounded-full w-5" src="/us-flag.png" />,
         },
         {
           value: 'ar',
-          label: <img className="rounded-full w-5" src="./sa-flag.png" />,
+          label: <img className="rounded-full w-5" src="/sa-flag.png" />,
         },
       ]}
       defaultValue="en"

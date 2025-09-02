@@ -1,5 +1,5 @@
 import Sider from 'antd/es/layout/Sider'
-import LayoutMenu from './LayoutMenu'
+import LayoutMenu from '../shared/LayoutMenu'
 import { useDrawerSider } from '@/services/context/DrawerSiderContext'
 
 const LayoutRoutesSider = () => {
