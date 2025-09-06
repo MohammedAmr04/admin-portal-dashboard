@@ -17,13 +17,16 @@ const MainLayout = () => {
       <Layout style={{ minHeight: '100vh' }}>
         {!isLg ? <LayoutDrawer /> : null}
         {isLg ? <LayoutProductsSider /> : null}
-        {/* Main column: header fixed at top, inner area hidden overflow so only Content scrolls */}
         <Layout style={{ height: '100vh', overflow: 'hidden' }}>
           <LayoutHeader />
-          {/* Row layout: sider (if any) fixed width, content flexes and scrolls */}
-          <Layout className="px-4 py-6" style={{ height: '100%', overflow: 'hidden', minHeight: 0 }}>
+          <Layout
+            className="px-4 py-6"
+            style={{ height: '100%', overflow: 'hidden', minHeight: 0 }}
+          >
             {isLg ? <LayoutRoutesSider /> : null}
-            <Content style={{ padding: 16, flex: 1, overflow: 'auto', minHeight: 0 }}>
+            <Content
+              style={{ padding: 16, flex: 1, overflow: 'auto', minHeight: 0 }}
+            >
               <Outlet />
             </Content>
           </Layout>

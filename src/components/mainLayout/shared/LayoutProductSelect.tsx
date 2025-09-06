@@ -11,7 +11,7 @@ const LayoutProductSelect = ({ version }: { version?: string }) => {
         version === 'drawer' ? 'flex gap-2' : 'flex flex-col gap-4 mt-4'
       }
     >
-      {products.map((p, i) => (
+      {products.map((p) => (
         <div
           className="text-text rounded-full w-10 h-10 flex items-center justify-center font-semibold text-xs cursor-pointer"
           style={{
@@ -22,7 +22,7 @@ const LayoutProductSelect = ({ version }: { version?: string }) => {
             border: '1px solid var(--c-border)',
           }}
           onClick={() => changeTab(p)}
-          key={i}
+          key={p}
         >
           {p}
         </div>

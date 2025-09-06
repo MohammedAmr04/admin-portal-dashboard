@@ -49,8 +49,8 @@ const HeaderUsers = ({
             onClick={() => handleDrawer('newUser')}
             icon={<AddSquare size="24" variant="Bulk" />}
           >
-            <span className="hidden lg:inline">Create</span>New
-            <span className="hidden lg:inline">User</span>
+            <span className="hidden lg:inline">Create New User</span>
+            <span className="lg:hidden">New User</span>
           </Button>
         </div>
       </div>
