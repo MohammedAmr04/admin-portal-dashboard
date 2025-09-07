@@ -1,5 +1,5 @@
 import { Menu, type MenuProps } from 'antd'
-import { Building, Home, Profile2User } from 'iconsax-reactjs'
+import { Building, Global, Home, Profile2User } from 'iconsax-reactjs'
 import { useLocation, useNavigate } from 'react-router'
 
 type MenuItem = Required<MenuProps>['items'][number]
@@ -11,6 +11,11 @@ const siderItems: MenuItem[] = [
     key: '/dashboard/organizations',
     label: 'Organizations',
     icon: <Building />,
+  },
+  {
+    key: '/dashboard/support',
+    label: 'Support Tickets',
+    icon: <Global />,
   },
 ]
 
@@ -24,7 +29,9 @@ const LayoutMenu = () => {
       ? '/dashboard/organizations'
       : path.startsWith('/dashboard/users')
         ? '/dashboard/users'
-        : '/dashboard',
+        : path.startsWith('/dashboard/support')
+          ? '/dashboard/support'
+          : '/dashboard',
   ]
 
   return (
