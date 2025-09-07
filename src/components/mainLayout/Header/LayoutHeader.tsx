@@ -7,11 +7,13 @@ import {
   ArrowSquareRight,
   HamburgerMenu,
   SearchNormal1,
+  UserSquare,
 } from 'iconsax-reactjs'
 import LayoutProductDropdown from '../shared/LayoutProductDropdown'
 import LayoutThemeToggle from '../shared/LayoutThemeToggle'
 import LayoutLangToggle from '../shared/LayoutLangToggle'
 import { SettingOutlined, UserOutlined } from '@ant-design/icons'
+import { useDarkLightContext } from '@/services/context'
 
 const headerButtonsStyle = {
   padding: 8,
@@ -90,12 +92,12 @@ const LayoutHeader = () => {
         </Button>
         <Dropdown menu={{ items }} overlayClassName="header-select-dropdown">
           <Button
-            className="header-select gap-1 lg:gap-2"
-            style={{ height: 40, gap: '2px', paddingInline: '4px' }}
+            className="header-select flex items-center"
+            style={{ height: 40, gap: '4px', paddingInline: '4px' }}
           >
-            <Avatar shape="square" size={28} icon={<UserOutlined />} />{' '}
+            <img src="/avatar.png" width="36" height="36"></img>
             <span className="hidden lg:block">Ahmed</span>
-            <ArrowDown2 />
+            <ArrowDown2 size="16" />
           </Button>
         </Dropdown>
       </div>

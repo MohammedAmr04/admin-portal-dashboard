@@ -24,7 +24,7 @@ const LayoutMenu = () => {
       ? '/dashboard/organizations'
       : path.startsWith('/dashboard/users')
         ? '/dashboard/users'
-        : '/dashboard'
+        : '/dashboard',
   ]
 
   return (
@@ -32,7 +32,6 @@ const LayoutMenu = () => {
       theme="dark"
       style={{ backgroundColor: 'transparent' }}
       items={siderItems}
-      
       selectedKeys={selected}
       onClick={({ key }) => navigate(key as string)}
     />
