@@ -1,10 +1,11 @@
-import { Table, Input, Dropdown, Button } from 'antd'
+import { Table, Dropdown, Button } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
-import { Edit, Refresh, SearchNormal, Trash } from 'iconsax-reactjs'
+import { Edit, Refresh, Trash } from 'iconsax-reactjs'
 import { useEffect, useState } from 'react'
-import { DownOutlined, SlidersOutlined, MoreOutlined } from '@ant-design/icons'
+import { MoreOutlined } from '@ant-design/icons'
 import StatusTag from '../tags/StatusTag'
 import ProductTag from '../tags/ProductTag'
+import HeaderTableOrganizations from './HeaderTableOrganizations'
 
 type OrgRow = {
   key: number
@@ -135,33 +136,7 @@ export default function TableOrganization({ setData, onFinish }: Props) {
       <Table<OrgRow>
         rowSelection={rowSelection}
         columns={columns}
-        title={() => (
-          <div className="flex px-5 gap-3">
-            <Input
-              placeholder="Search"
-              size="large"
-              prefix={<SearchNormal size={24} variant="Linear" />}
-              className="mb-4 !bg-background-card !text-text "
-            />
-            <Dropdown
-              menu={{
-                items: [
-                  { key: '1', label: 'Filter by Status' },
-                  { key: '2', label: 'Filter by Date' },
-                ],
-              }}
-              trigger={['click']}
-            >
-              <Button className="!bg-background-card flex gap-7" size="large">
-                <div className="flex gap-2">
-                  <SlidersOutlined size={24} />
-                  <span className="text-base">Add filter</span>
-                </div>
-                <DownOutlined />
-              </Button>
-            </Dropdown>
-          </div>
-        )}
+        title={() => <HeaderTableOrganizations />}
         dataSource={data}
         pagination={{ position: ['bottomCenter'], pageSize: 5 }}
         className="table-organization !bg-transparent overflow-x-scroll lg:overflow-x-auto"

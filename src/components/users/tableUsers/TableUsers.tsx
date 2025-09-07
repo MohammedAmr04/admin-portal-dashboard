@@ -9,10 +9,11 @@ import {
   Trash,
 } from 'iconsax-reactjs'
 import { useState } from 'react'
-import { DownOutlined, SlidersOutlined, MoreOutlined } from '@ant-design/icons'
+import { MoreOutlined } from '@ant-design/icons'
 import { usersData, type UserRow } from '../../../services/mockData/users'
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import SuccessModal from '@/components/ui/models/SuccessModal'
+import ButtonFilter from '@/components/ui/buttons/ButtonFilter'
 
 type TableUsersProps = {
   handleDrawer: (drawer: string) => void
@@ -158,13 +159,7 @@ export default function TableUsers({
                 }}
                 trigger={['click']}
               >
-                <Button className="!bg-background-card flex gap-7" size="large">
-                  <div className="flex gap-2">
-                    <SlidersOutlined size={24} />
-                    <span className="text-base">Add filter</span>
-                  </div>
-                  <DownOutlined />
-                </Button>
+                <ButtonFilter />
               </Dropdown>
             </div>
           )}
