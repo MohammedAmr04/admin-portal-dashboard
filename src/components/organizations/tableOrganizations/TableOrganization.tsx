@@ -6,6 +6,7 @@ import { MoreOutlined } from '@ant-design/icons'
 import StatusTag from '../tags/StatusTag'
 import ProductTag from '../tags/ProductTag'
 import HeaderTableOrganizations from './HeaderTableOrganizations'
+import { Link } from 'react-router'
 
 type OrgRow = {
   key: number
@@ -47,6 +48,7 @@ const columns: ColumnsType<OrgRow> = [
     title: 'Organization',
     dataIndex: 'org',
     sorter: (a, b) => a.org.localeCompare(b.org),
+    render: (org: string) => <Link to={`${org}`}>{org}</Link>,
   },
   {
     title: 'Owner',
