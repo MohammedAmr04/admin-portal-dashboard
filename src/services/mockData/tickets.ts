@@ -6,6 +6,8 @@ export type TicketRow = {
   status: 'pending' | 'closed'
   createdAt: string
   updatedAt: string
+  organization: 'Paymob' | 'Fawry'
+  notes: string
 }
 
 export const ticketsData: TicketRow[] = [
@@ -18,6 +20,8 @@ export const ticketsData: TicketRow[] = [
     status: 'pending',
     createdAt: '2025-08-20',
     updatedAt: '2025-08-21',
+    organization: 'Paymob',
+    notes: 'Reproduced on Safari 16.5. Possibly related to click handler being blocked by overlay.',
   },
   {
     id: 2,
@@ -27,6 +31,8 @@ export const ticketsData: TicketRow[] = [
     status: 'closed',
     createdAt: '2025-08-18',
     updatedAt: '2025-08-19',
+    organization: 'Fawry',
+    notes: 'Fixed in CMS. Verified by content team.',
   },
   {
     id: 3,
@@ -37,6 +43,8 @@ export const ticketsData: TicketRow[] = [
     status: 'pending',
     createdAt: '2025-08-22',
     updatedAt: '2025-08-23',
+    organization: 'Paymob',
+    notes: 'Added logging around DB queries. Suspect N+1 issue in reports widget.',
   },
   {
     id: 4,
@@ -47,6 +55,8 @@ export const ticketsData: TicketRow[] = [
     status: 'pending',
     createdAt: '2025-08-24',
     updatedAt: '2025-08-24',
+    organization: 'Fawry',
+    notes: 'Likely caching issue. Invalidate on mark-as-read not firing.',
   },
   {
     id: 5,
@@ -57,6 +67,8 @@ export const ticketsData: TicketRow[] = [
     status: 'pending',
     createdAt: '2025-08-25',
     updatedAt: '2025-08-26',
+    organization: 'Paymob',
+    notes: 'Memory spike observed. Consider streaming export or pagination.',
   },
   {
     id: 6,
@@ -66,6 +78,8 @@ export const ticketsData: TicketRow[] = [
     status: 'closed',
     createdAt: '2025-08-17',
     updatedAt: '2025-08-20',
+    organization: 'Fawry',
+    notes: 'Handled EXIF orientation during upload. Deployed fix on 20 Aug.',
   },
   {
     id: 7,
@@ -76,6 +90,8 @@ export const ticketsData: TicketRow[] = [
     status: 'pending',
     createdAt: '2025-08-27',
     updatedAt: '2025-08-27',
+    organization: 'Paymob',
+    notes: 'Mail provider rate limiting suspected. Monitoring added.',
   },
   {
     id: 8,
@@ -86,6 +102,8 @@ export const ticketsData: TicketRow[] = [
     status: 'pending',
     createdAt: '2025-08-28',
     updatedAt: '2025-08-28',
+    organization: 'Fawry',
+    notes: 'Null-check missing for payment method. Patch in review.',
   },
   {
     id: 9,
@@ -96,6 +114,8 @@ export const ticketsData: TicketRow[] = [
     status: 'closed',
     createdAt: '2025-08-14',
     updatedAt: '2025-08-16',
+    organization: 'Paymob',
+    notes: 'Adjusted offset calculation. Added unit test coverage.',
   },
   {
     id: 10,
@@ -106,5 +126,7 @@ export const ticketsData: TicketRow[] = [
     status: 'pending',
     createdAt: '2025-08-29',
     updatedAt: '2025-08-30',
+    organization: 'Fawry',
+    notes: 'Updated token values to meet WCAG AA contrast ratios.',
   },
 ]

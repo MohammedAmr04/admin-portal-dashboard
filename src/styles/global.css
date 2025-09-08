@@ -30,6 +30,8 @@
   --color-info: var(--c-info);
   --color-elevated: var(--c-elevated);
   --color-overlay: var(--c-overlay);
+  --color-text-drawer: var(--c-text-drawer);
+  --color-active-switch: var(--c-active-switch);
 }
 
 /* ========== Ant Design Overrides ========== */
@@ -375,7 +377,7 @@ a:hover {
 }
 
 .ant-switch-checked {
-  background-color: var(--color-success) !important;
+  background-color: var(--color-active-switch) !important;
 }
 
 .ant-segmented-item-selected {
@@ -389,6 +391,14 @@ a:hover {
 }
 .ant-avatar-icon {
 } */
+
+.ant-breadcrumb > ol {
+  align-items: center;
+}
+
+.ant-tabs-top > .ant-tabs-nav::before {
+  border-color: rgb(255, 255, 255, 0.05);
+}
 
 .priority-high .ant-select-selector {
   background-color: color-mix(
@@ -448,4 +458,20 @@ a:hover {
 
 .status .ant-select-arrow {
   color: var(--color-primary) !important;
+}
+
+.ticket-drawer .ant-drawer-body {
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+
+.input-like-div {
+  background: var(--color-background-dark);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 16px;
+  color: var(--color-text-drawer);
+  display: flex;
+  align-items: center;
+  line-height: 150%;
 }
