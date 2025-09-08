@@ -1,7 +1,13 @@
 /* ========== Tailwind Base ========== */
 @import 'tailwindcss';
 
+:root {
+  --ticket-select-width: 100px;
+}
 
+* {
+  line-height: 1rem;
+}
 
 /* ========== Theme Colors ========== */
 @theme {
@@ -385,4 +391,64 @@ a:hover {
 
 .ant-tabs-top>.ant-tabs-nav::before {
   border-color: rgb(255, 255, 255, 0.05);
+}
+
+.priority-high .ant-select-selector {
+  background-color: color-mix(
+    in srgb,
+    var(--color-danger) 25%,
+    black
+  ) !important;
+  color: var(--color-danger) !important;
+  border-color: var(--color-danger) !important;
+  width: var(--ticket-select-width) !important;
+}
+
+.priority-high .ant-select-arrow {
+  color: var(--color-danger) !important;
+}
+
+.priority-medium .ant-select-selector {
+  background-color: color-mix(
+    in srgb,
+    var(--color-warning) 25%,
+    black
+  ) !important;
+  color: var(--color-warning) !important;
+  border-color: var(--color-warning) !important;
+  width: var(--ticket-select-width) !important;
+}
+
+.priority-medium .ant-select-arrow {
+  color: var(--color-warning) !important;
+}
+
+.priority-low .ant-select-selector {
+  background-color: color-mix(
+    in srgb,
+    var(--color-success) 25%,
+    black
+  ) !important;
+  color: var(--color-success) !important;
+  border-color: var(--color-success) !important;
+  width: var(--ticket-select-width) !important;
+}
+
+.priority-low .ant-select-arrow {
+  color: var(--color-success) !important;
+}
+
+.status .ant-select-selector {
+  background-color: color-mix(
+    in srgb,
+    var(--color-primary) 25%,
+    black
+  ) !important;
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  width: var(--ticket-select-width) !important;
+}
+
+.status .ant-select-arrow {
+  color: var(--color-primary) !important;
 }
