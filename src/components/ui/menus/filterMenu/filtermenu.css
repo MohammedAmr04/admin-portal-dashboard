@@ -1,0 +1,38 @@
+.filter-menu.ant-menu>li:not(:last-child) {
+    border-radius: 0px;
+    border-bottom: 1px solid rgba(255, 255, 255, .05);
+}
+
+.filter-menu.ant-menu>li>.ant-menu-submenu-title {
+    padding: 0 !important;
+}
+
+
+
+.filter-menu.ant-menu>li>div {
+    height: 40px !important;
+}
+
+.filter-menu.ant-menu .ant-menu-sub {
+    background-color: transparent !important;
+}
+
+.filter-menu.ant-menu .ant-menu-submenu li.ant-menu-item {
+    padding: 0 !important;
+    height: fit-content !important;
+    border-radius: 4px;
+}
+
+.filter-menu .ant-menu-item-selected {
+    background-color: transparent !important;
+}
+
+.filter-menu.ant-menu .ant-menu-submenu-title {
+    color: var(--color-text) !important;
+}
+
+.filter-menu.ant-menu .ant-checkbox-inner {}
+
+.filter-menu.ant-menu .ant-checkbox-inner::after {
+    border-color: var(--color-background-dark) !important;
+}

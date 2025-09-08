@@ -7,6 +7,7 @@ import StatusTag from '../tags/StatusTag'
 import ProductTag from '../tags/ProductTag'
 import HeaderTableOrganizations from './HeaderTableOrganizations'
 import { Link } from 'react-router'
+import FilterMenu from '@/components/ui/menus/filterMenu/FilterMenu'
 
 type OrgRow = {
   key: number
@@ -144,6 +145,11 @@ export default function TableOrganization({ setData, onFinish }: Props) {
         className="table-organization !bg-transparent overflow-x-scroll lg:overflow-x-auto"
         rowClassName={(_, index) => (index % 2 === 0 ? 'even-row' : 'odd-row')}
       />
+      <div>
+        <div className="mx-auto mt-5 w-fit">
+          <FilterMenu />
+        </div>
+      </div>
     </div>
   )
 }
