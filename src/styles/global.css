@@ -1,9 +1,7 @@
 /* ========== Tailwind Base ========== */
 @import 'tailwindcss';
 
-* {
-  line-height: 1rem;
-}
+
 
 /* ========== Theme Colors ========== */
 @theme {
@@ -219,7 +217,7 @@ a:hover {
   font-size: 24px !important;
 }
 
-.table-organization .ant-table-thead > tr > th {
+.table-organization .ant-table-thead>tr>th {
   background-color: transparent;
 }
 
@@ -235,28 +233,24 @@ a:hover {
   justify-content: start;
 }
 
-.table-organization
-  th:not([aria-label='Organization']):not([aria-label='Owner'])
-  .ant-table-column-sorters {
+.table-organization th:not([aria-label='Organization']):not([aria-label='Owner']) .ant-table-column-sorters {
   justify-content: center;
 }
 
-.table-organization .even-row > td {
+.table-organization .even-row>td {
   background-color: var(--c-background);
   padding: 16px 24px;
 }
 
-.table-organization .odd-row > td {
+.table-organization .odd-row>td {
   background-color: var(--c-card);
   padding: 16px 24px;
 }
 
 .table-organization .ant-table-row-selected {
-  background-color: color-mix(
-    in srgb,
-    var(--color-primary) 15%,
-    transparent
-  ) !important;
+  background-color: color-mix(in srgb,
+      var(--color-primary) 15%,
+      transparent) !important;
 }
 
 .table-organization .ant-checkbox-inner {
@@ -271,8 +265,7 @@ a:hover {
   padding-inline-start: 19px;
 }
 
-.table-organization
-  .ant-pagination.ant-table-pagination.ant-table-pagination-center {
+.table-organization .ant-pagination.ant-table-pagination.ant-table-pagination-center {
   align-items: center;
 }
 
@@ -293,7 +286,7 @@ a:hover {
   background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
 }
 
-.table-organization .ant-pagination.ant-table-pagination > li {
+.table-organization .ant-pagination.ant-table-pagination>li {
   min-width: 24px;
   width: 24px;
   height: 24px;
@@ -385,3 +378,11 @@ a:hover {
 }
 .ant-avatar-icon {
 } */
+
+.ant-breadcrumb>ol {
+  align-items: center;
+}
+
+.ant-tabs-top>.ant-tabs-nav::before {
+  border-color: rgb(255, 255, 255, 0.05);
+}
