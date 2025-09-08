@@ -22,6 +22,7 @@ type TableUsersProps = {
     selectedKeys: React.Key[],
     selectedUsers: UserRow[]
   ) => void
+  isOrg?: boolean
   onUserSelect: (userID: number) => void
 }
 
@@ -29,6 +30,7 @@ export default function TableUsers({
   handleDrawer,
   handleUser,
   onSelectionChange,
+  isOrg = false,
   onUserSelect,
 }: TableUsersProps) {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
@@ -143,7 +145,7 @@ export default function TableUsers({
           rowSelection={rowSelection}
           columns={columns}
           title={() => (
-            <div className="flex px-5 gap-3">
+            <div className={`flex ${!isOrg && 'px-5'} gap-3`}>
               <Input
                 placeholder="Search"
                 size="large"
