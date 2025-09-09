@@ -8,6 +8,7 @@ import ProductTag from '../tags/ProductTag'
 import HeaderTableOrganizations from './HeaderTableOrganizations'
 import { Link } from 'react-router'
 import FilterMenu from '@/components/ui/menus/filterMenu/FilterMenu'
+import SingleInputRangePicker from '@/components/ui/inputs/SingleInputRangePicker'
 
 type OrgRow = {
   key: number
@@ -148,6 +149,7 @@ export default function TableOrganization({ setData, onFinish }: Props) {
       <div>
         <div className="mx-auto mt-5 w-fit">
           <FilterMenu />
+          <SingleInputRangePicker />
         </div>
       </div>
     </div>

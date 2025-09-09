@@ -14,11 +14,6 @@ type MenuItem = Required<MenuProps>['items'][number]
 
 const items: MenuItem[] = [
   {
-    key: 'filters',
-    label: 'Filters',
-    children: [],
-  },
-  {
     key: 'status',
     label: 'Status',
 
