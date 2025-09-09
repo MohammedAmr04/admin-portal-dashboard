@@ -15,6 +15,9 @@ import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import SuccessModal from '@/components/ui/models/SuccessModal'
 import ButtonFilter from '@/components/ui/buttons/ButtonFilter'
 import type { IUser } from '@/services/types/user'
+import CustomTable from '@/components/ui/table/CustomTable'
+import { getUsersColumns } from '@/components/ui/table/usersColumns'
+import { set } from 'date-fns'
 
 type TableUsersProps = {
   handleDrawer: (drawer: string) => void
@@ -37,7 +40,9 @@ export default function TableUsers({
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
   const [deleteModal, setDeleteModal] = useState(false)
   const [confirmedDelete, setConfirmedDelete] = useState(false)
-  const [statusModal, setStatusModal] = useState<undefined | string>(undefined)
+  const [statusModal, setStatusModal] = useState<
+    'activate' | 'suspend' | undefined
+  >(undefined)
   const [confirmedStatus, setConfirmedStatus] = useState(false)
 
   const rowSelection = {
@@ -142,7 +147,7 @@ export default function TableUsers({
   return (
     <>
       <div className="bg-background-dark py-4 rounded-lg">
-        <Table<IUser>
+        {/* <Table<IUser>
           rowSelection={rowSelection}
           columns={columns}
           title={() => (
@@ -177,6 +182,18 @@ export default function TableUsers({
           rowClassName={(_, index) =>
             index % 2 === 0 ? 'even-row' : 'odd-row'
           }
+        /> */}
+        <CustomTable<IUser>
+          columns={getUsersColumns(
+            setData,
+            setStatusModal,
+            handleDrawer,
+            handleUser,
+            handleDelete
+          )}
+          onFinish={false}
+          setData={setData}
+          data={data}
         />
       </div>
       <ConfirmationModal
