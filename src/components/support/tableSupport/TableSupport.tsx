@@ -23,7 +23,11 @@ import { ticketsData, type TicketRow } from '@/services/mockData/tickets'
 //   onUserSelect: (userID: number) => void
 // }
 
-export default function TableSupport() {
+export default function TableSupport({
+  onOpenTicket,
+}: {
+  onOpenTicket: (ticketID: number) => void
+}) {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
   const [deleteModal, setDeleteModal] = useState(false)
   const [confirmedDelete, setConfirmedDelete] = useState(false)
@@ -64,11 +68,22 @@ export default function TableSupport() {
       title: 'Title',
       dataIndex: 'title',
       sorter: (a, b) => a.title.localeCompare(b.title),
+      render: (_: TicketRow['title'], record: TicketRow) => (
+        <p
+          className="line-clamp-1 cursor-pointer"
+          onClick={() => onOpenTicket(record.id)}
+        >
+          {record.title}
+        </p>
+      ),
     },
     {
       title: 'Description',
       dataIndex: 'description',
       sorter: (a, b) => a.description.localeCompare(b.description),
+      render: (_: TicketRow['description'], record: TicketRow) => (
+        <p className="line-clamp-1">{record.description}</p>
+      ),
     },
     {
       title: 'Priority',
@@ -132,27 +147,26 @@ export default function TableSupport() {
   return (
     <>
       <div className="bg-background-dark py-4 rounded-lg">
+        <div>
+          <div className="flex px-5 gap-2">
+            <Input
+              placeholder="Search"
+              size="large"
+              prefix={<SearchNormal size={24} variant="Linear" />}
+              className="mb-4 !bg-background-card !text-text "
+            />
+            <ButtonFilter />
+          </div>
+          <div className="px-5">
+            <Button className="!bg-background-card !p-2">
+              <img src="/supportPage/card-view.png" />
+            </Button>
+          </div>
+        </div>
         <Table<TicketRow>
           rowSelection={rowSelection}
           columns={columns}
-          title={() => (
-            <div>
-              <div className="flex px-5 gap-3">
-                <Input
-                  placeholder="Search"
-                  size="large"
-                  prefix={<SearchNormal size={24} variant="Linear" />}
-                  className="mb-4 !bg-background-card !text-text "
-                />
-                <ButtonFilter />
-              </div>
-              <div className="px-5">
-                <Button className="!bg-background-card !p-2">
-                  <img src="/supportPage/card-view.png" />
-                </Button>
-              </div>
-            </div>
-          )}
+          title={() => undefined}
           dataSource={data}
           rowKey="id"
           pagination={{

@@ -51,7 +51,7 @@ export default function TableUsers({
 
   const [data, setData] = useState<UserRow[]>(usersData)
 
-  const handleDelete = (userID: number) => {
+  const handleDelete = () => {
     setDeleteModal(true)
   }
 
@@ -97,7 +97,7 @@ export default function TableUsers({
                 setStatusModal(next ? 'activate' : 'suspend')
               }}
             />
-            <span className={checked ? 'text-success' : 'text-text'}>
+            <span className={checked ? 'text-active-switch' : 'text-text'}>
               {checked ? 'Active' : 'Inactive'}
             </span>
           </div>
@@ -125,7 +125,7 @@ export default function TableUsers({
                   key: '1',
                   label: 'Delete',
                   icon: <Trash size={24} />,
-                  onClick: () => handleDelete(record.id),
+                  onClick: () => handleDelete(),
                 },
               ],
             }}
