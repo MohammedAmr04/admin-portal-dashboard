@@ -1,6 +1,7 @@
 import { Table, Input, Button, Select } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import {
+  ArrowDown2,
   CloseSquare,
   SearchNormal,
   TickCircle,
@@ -25,8 +26,12 @@ import { ticketsData, type TicketRow } from '@/services/mockData/tickets'
 
 export default function TableSupport({
   onOpenTicket,
+  onToggleView,
+  view,
 }: {
   onOpenTicket: (ticketID: number) => void
+  onToggleView: () => void
+  view: boolean
 }) {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
   const [deleteModal, setDeleteModal] = useState(false)
@@ -97,6 +102,7 @@ export default function TableSupport({
             onChange={(val) =>
               handlePriorityChange(record.id, val as TicketRow['priority'])
             }
+            suffixIcon={<ArrowDown2 size={16} />}
             options={[
               { value: 'high', label: 'High' },
               {
@@ -121,6 +127,7 @@ export default function TableSupport({
             onChange={(val) =>
               handleStatusChange(record.id, val as TicketRow['status'])
             }
+            suffixIcon={<ArrowDown2 size={16} />}
             options={[
               { value: 'pending', label: 'Pending' },
               {
@@ -146,20 +153,27 @@ export default function TableSupport({
 
   return (
     <>
-      <div className="bg-background-dark py-4 rounded-lg">
-        <div>
-          <div className="flex px-5 gap-2">
+      <div className="bg-none py-4 rounded-lg space-y-4">
+        <div className="space-y-4">
+          <div className="flex gap-2">
             <Input
               placeholder="Search"
               size="large"
               prefix={<SearchNormal size={24} variant="Linear" />}
-              className="mb-4 !bg-background-card !text-text "
+              className="!bg-background-card !text-text "
             />
             <ButtonFilter />
           </div>
-          <div className="px-5">
-            <Button className="!bg-background-card !p-2">
-              <img src="/supportPage/card-view.png" />
+          <div className="">
+            <Button
+              className="!bg-background-card !p-2 !border-[#FFFFFF66] !border-2"
+              onClick={onToggleView}
+            >
+              {view ? (
+                <img src="/supportPage/table-view.png" className="w-4 h-4" />
+              ) : (
+                <img src="/supportPage/card-view.png" className="w-4 h-4" />
+              )}
             </Button>
           </div>
         </div>

@@ -8,6 +8,7 @@ const SupportPage = () => {
   const [selectedTicket, setSelectedTicket] = useState<number | undefined>(
     undefined
   )
+  const [view, setView] = useState<boolean>(false) // false for Table, true for Card
 
   const handleOpenTicket = (ticketID: number) => {
     setSelectedTicket(ticketID)
@@ -19,6 +20,10 @@ const SupportPage = () => {
     setDrawer(false)
   }
 
+  const handleViewChange = () => {
+    setView((prev) => !prev)
+  }
+
   useEffect(() => {
     console.log(drawer)
     console.log(selectedTicket)
@@ -27,7 +32,11 @@ const SupportPage = () => {
   return (
     <>
       <HeaderSupport />
-      <TableSupport onOpenTicket={handleOpenTicket} />
+      <TableSupport
+        onOpenTicket={handleOpenTicket}
+        onToggleView={handleViewChange}
+        view={view}
+      />
       {drawer && selectedTicket && (
         <TicketDrawer ticketID={selectedTicket} onClose={handleClose} />
       )}
