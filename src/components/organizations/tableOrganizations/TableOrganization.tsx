@@ -1,24 +1,9 @@
-import { Table, Dropdown, Button } from 'antd'
-import type { ColumnsType } from 'antd/es/table'
-import { Edit, Refresh, Trash } from 'iconsax-reactjs'
-import { useEffect, useState } from 'react'
-import { MoreOutlined } from '@ant-design/icons'
-import StatusTag from '../tags/StatusTag'
-import ProductTag from '../tags/ProductTag'
-import HeaderTableOrganizations from './HeaderTableOrganizations'
-import { Link } from 'react-router'
+import type { IOrganization } from '@/services/types/organization'
+import CustomTable from '@/components/ui/table/CustomTable'
+import { getOrganizationColumns } from '@/components/ui/table/organizationsColumns'
 
-type OrgRow = {
-  key: number
-  org: string
-  owner: string
-  products: string[]
-  status: 'Blocked' | 'Approved' | 'Pending'
-  date: string
-}
-
-const data: OrgRow[] = Array.from({ length: 100 }, (_, i) => ({
-  key: i + 1,
+const data: IOrganization[] = Array.from({ length: 100 }, (_, i) => ({
+  id: i + 1,
   org: ['CBRE', 'Google', 'Amazon', 'Microsoft', 'Tesla'][i % 5],
   owner: [
     'Morgan Bianchi',
@@ -28,110 +13,22 @@ const data: OrgRow[] = Array.from({ length: 100 }, (_, i) => ({
     'Emma Watson',
   ][i % 5],
   products: [['DWM'], ['CTI'], ['DRP'], ['DWM', 'CTI'], ['CTI', 'DRP']][i % 5],
-  status: ['Blocked', 'Approved', 'Pending'][i % 3] as OrgRow['status'],
+  status: ['Blocked', 'Approved', 'Pending'][i % 3] as IOrganization['status'],
   date: `Jan ${10 + i}, 2020`,
 }))
 
-const columns: ColumnsType<OrgRow> = [
-  {
-    title: 'Organization',
-    dataIndex: 'org',
-    sorter: (a, b) => a.org.localeCompare(b.org),
-    render: (org: string) => <Link to={`${org}`}>{org}</Link>,
-  },
-  {
-    title: 'Owner',
-    dataIndex: 'owner',
-    sorter: (a, b) => a.owner.localeCompare(b.owner),
-  },
-  {
-    title: 'Products',
-    dataIndex: 'products',
-    sorter: (a, b) => a.products.length - b.products.length,
-    render: (products: string[]) => (
-      <div className="flex justify-center gap-1">
-        {products.map((p) => (
-          <ProductTag key={p} product={p} />
-        ))}
-      </div>
-    ),
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    sorter: (a, b) => a.status.localeCompare(b.status),
-    render: (status: OrgRow['status']) => {
-      return <StatusTag status={status} />
-    },
-  },
-  {
-    title: 'Creation Date',
-    dataIndex: 'date',
-    sorter: (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-    render: (date: string) => (
-      <div className="flex justify-center gap-1">{date}</div>
-    ),
-  },
-  {
-    fixed: 'right',
-
-    title: (
-      <div className="flex justify-center ">
-        <Refresh size="32" className="!text-primary" />
-      </div>
-    ),
-    key: 'actions',
-    render: () => (
-      <div className="flex items-center justify-center gap-2">
-        <Button type="text" icon={<Edit variant="Linear" size="20" />} />
-        <Dropdown
-          menu={{
-            items: [
-              {
-                key: '1',
-                label: 'Impersonate',
-                icon: <img src="/organizations/view_icon.svg" alt="view" />,
-              },
-              { key: '2', label: 'Delete', icon: <Trash size={24} /> },
-            ],
-          }}
-          trigger={['click']}
-        >
-          <Button type="text" icon={<MoreOutlined size={20} />} />
-        </Dropdown>
-      </div>
-    ),
-  },
-]
 type Props = {
-  setData: React.Dispatch<React.SetStateAction<React.Key[]>>
+  setData: React.Dispatch<React.SetStateAction<IOrganization[]>>
   onFinish: boolean
 }
 export default function TableOrganization({ setData, onFinish }: Props) {
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: (keys: React.Key[]) => {
-      setData(keys)
-      setSelectedRowKeys(keys)
-    },
-  }
-  useEffect(() => {
-    if (onFinish) {
-      setSelectedRowKeys([])
-    }
-  }, [onFinish])
   return (
     <div className="bg-background-dark py-4 rounded-lg">
-      <Table<OrgRow>
-        rowSelection={rowSelection}
-        columns={columns}
-        title={() => <HeaderTableOrganizations />}
-        dataSource={data}
-        pagination={{ position: ['bottomCenter'], pageSize: 5 }}
-        className="table-organization !bg-transparent overflow-x-scroll lg:overflow-x-auto"
-        rowClassName={(_, index) => (index % 2 === 0 ? 'even-row' : 'odd-row')}
+      <CustomTable<IOrganization>
+        data={data}
+        columns={getOrganizationColumns()}
+        setData={setData}
+        onFinish={onFinish}
       />
     </div>
   )
