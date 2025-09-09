@@ -13,7 +13,11 @@ const OrganizationProfile = () => {
   const [drawer, setDrawer] = useState('')
   const [userID, setUserID] = useState<number | undefined>(undefined)
   const [_, setSelectedUsers] = useState<number[]>([])
+  const [activeKey, setActiveKey] = useState('general info')
 
+  const handleTabChange = (key: string) => {
+    setActiveKey(key)
+  }
   const handleDrawer = (drawer: string) => {
     setDrawer(drawer)
   }
@@ -41,7 +45,6 @@ const OrganizationProfile = () => {
       ),
       children: (
         <>
-          {' '}
           <TableUsers
             isOrg={true}
             handleDrawer={handleDrawer}
@@ -73,12 +76,16 @@ const OrganizationProfile = () => {
 
   return (
     <>
-      <HeaderOrganizationProfile title={name || ''} />
+      <HeaderOrganizationProfile
+        title={name || ''}
+        open={activeKey === 'users'}
+      />
       <section className="p-4 rounded-xl border border-text/5 bg-background-dark">
         <Tabs
           defaultActiveKey="general info"
           className="border-none"
           items={items}
+          onChange={handleTabChange}
         />
       </section>
     </>
