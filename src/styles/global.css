@@ -239,9 +239,6 @@ a:hover {
   justify-content: start;
 }
 
-.table-organization th:not([aria-label='Organization']):not([aria-label='Owner']) .ant-table-column-sorters {
-  justify-content: center;
-}
 
 .table-organization .even-row>td {
   background-color: var(--c-background);
@@ -394,11 +391,9 @@ a:hover {
 }
 
 .priority-high .ant-select-selector {
-  background-color: color-mix(
-    in srgb,
-    var(--color-danger) 25%,
-    black
-  ) !important;
+  background-color: color-mix(in srgb,
+      var(--color-danger) 25%,
+      black) !important;
   color: var(--color-danger) !important;
   border-color: var(--color-danger) !important;
   width: var(--ticket-select-width) !important;
@@ -409,11 +404,9 @@ a:hover {
 }
 
 .priority-medium .ant-select-selector {
-  background-color: color-mix(
-    in srgb,
-    var(--color-warning) 25%,
-    black
-  ) !important;
+  background-color: color-mix(in srgb,
+      var(--color-warning) 25%,
+      black) !important;
   color: var(--color-warning) !important;
   border-color: var(--color-warning) !important;
   width: var(--ticket-select-width) !important;
@@ -424,11 +417,9 @@ a:hover {
 }
 
 .priority-low .ant-select-selector {
-  background-color: color-mix(
-    in srgb,
-    var(--color-success) 25%,
-    black
-  ) !important;
+  background-color: color-mix(in srgb,
+      var(--color-success) 25%,
+      black) !important;
   color: var(--color-success) !important;
   border-color: var(--color-success) !important;
   width: var(--ticket-select-width) !important;
@@ -439,11 +430,9 @@ a:hover {
 }
 
 .status .ant-select-selector {
-  background-color: color-mix(
-    in srgb,
-    var(--color-primary) 25%,
-    black
-  ) !important;
+  background-color: color-mix(in srgb,
+      var(--color-primary) 25%,
+      black) !important;
   color: var(--color-primary) !important;
   border-color: var(--color-primary) !important;
   width: var(--ticket-select-width) !important;

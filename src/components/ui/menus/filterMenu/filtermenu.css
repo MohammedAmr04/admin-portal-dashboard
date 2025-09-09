@@ -7,6 +7,10 @@
     padding: 0 !important;
 }
 
+.filter-menu.ant-menu>li>.ant-menu-submenu-title:hover {
+    background-color: transparent;
+}
+
 
 
 .filter-menu.ant-menu>li>div {
@@ -31,8 +35,13 @@
     color: var(--color-text) !important;
 }
 
-.filter-menu.ant-menu .ant-checkbox-inner {}
+/* .filter-menu.ant-menu .ant-checkbox-inner {} */
 
 .filter-menu.ant-menu .ant-checkbox-inner::after {
     border-color: var(--color-background-dark) !important;
+}
+
+.custom-input::placeholder {
+    color: #fff;
+    opacity: 1;
 }

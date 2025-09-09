@@ -7,20 +7,13 @@ import StatusTag from '../tags/StatusTag'
 import ProductTag from '../tags/ProductTag'
 import HeaderTableOrganizations from './HeaderTableOrganizations'
 import { Link } from 'react-router'
-import FilterMenu from '@/components/ui/menus/filterMenu/FilterMenu'
-import SingleInputRangePicker from '@/components/ui/inputs/SingleInputRangePicker'
 
 type OrgRow = {
   key: number
   org: string
   owner: string
   products: string[]
-  status:
-    | 'Rejected'
-    | 'In Negotiation'
-    | 'Under Review'
-    | 'Accepted'
-    | 'Prospective'
+  status: 'Blocked' | 'Approved' | 'Pending'
   date: string
 }
 
@@ -35,13 +28,7 @@ const data: OrgRow[] = Array.from({ length: 100 }, (_, i) => ({
     'Emma Watson',
   ][i % 5],
   products: [['DWM'], ['CTI'], ['DRP'], ['DWM', 'CTI'], ['CTI', 'DRP']][i % 5],
-  status: [
-    'Rejected',
-    'Accepted',
-    'Under Review',
-    'In Negotiation',
-    'Prospective',
-  ][i % 5] as OrgRow['status'],
+  status: ['Blocked', 'Approved', 'Pending'][i % 3] as OrgRow['status'],
   date: `Jan ${10 + i}, 2020`,
 }))
 
@@ -146,12 +133,6 @@ export default function TableOrganization({ setData, onFinish }: Props) {
         className="table-organization !bg-transparent overflow-x-scroll lg:overflow-x-auto"
         rowClassName={(_, index) => (index % 2 === 0 ? 'even-row' : 'odd-row')}
       />
-      <div>
-        <div className="mx-auto mt-5 w-fit">
-          <FilterMenu />
-          <SingleInputRangePicker />
-        </div>
-      </div>
     </div>
   )
 }

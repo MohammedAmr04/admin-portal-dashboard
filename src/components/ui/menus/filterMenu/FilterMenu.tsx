@@ -1,15 +1,8 @@
-import { Button, Checkbox, Menu } from 'antd'
+import { Checkbox, Input, Menu } from 'antd'
 import type { MenuProps } from 'antd'
 import { useState } from 'react'
 import './filtermenu.css'
-import {
-  ArrowDown,
-  ArrowDown2,
-  ArrowUp,
-  ArrowUp2,
-  Home,
-  Setting,
-} from 'iconsax-reactjs'
+import { ArrowDown2, ArrowUp2 } from 'iconsax-reactjs'
 type MenuItem = Required<MenuProps>['items'][number]
 
 const items: MenuItem[] = [
@@ -105,17 +98,21 @@ const items: MenuItem[] = [
       {
         key: 'users-1',
         label: (
-          <div className=" px-2 py-1 text-text bg-background-dark text-center">
-            From
-          </div>
+          <Input
+            type="text"
+            placeholder="From"
+            className=" !px-2 custom-input !py-1 !h-fit !border-none !rounded-sm !text-xs text-text bg-background-dark text-center"
+          />
         ),
       },
       {
         key: 'users-2',
         label: (
-          <div className=" px-2 py-1 text-text bg-background-dark text-center">
-            To
-          </div>
+          <Input
+            type="text"
+            placeholder="To"
+            className=" !px-2 custom-input !py-1 !h-fit !border-none !rounded-sm !text-xs text-text bg-background-dark text-center"
+          />
         ),
       },
       {
@@ -141,7 +138,7 @@ const FilterMenu = () => {
     <Menu
       mode="inline"
       expandIcon={({ isOpen }) =>
-        isOpen ? <ArrowDown2 size="24" /> : <ArrowUp2 size="24" />
+        !isOpen ? <ArrowDown2 size="24" /> : <ArrowUp2 size="24" />
       }
       openKeys={openKeys}
       onOpenChange={onOpenChange}
