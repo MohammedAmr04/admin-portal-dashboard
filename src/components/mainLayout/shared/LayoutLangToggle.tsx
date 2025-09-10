@@ -1,4 +1,5 @@
 import { Select } from 'antd'
+import { ArrowDown2 } from 'iconsax-reactjs'
 
 const LayoutLangToggle = () => {
   return (
@@ -15,12 +16,15 @@ const LayoutLangToggle = () => {
       ]}
       defaultValue="en"
       classNames={{
-        root: 'header-select',
+        root: 'header-select flex !gap-2',
         popup: { root: 'header-select-dropdown' },
       }}
       style={{
         height: 40,
+        display: 'flex',
+        gap: '8px',
       }}
+      suffixIcon={<ArrowDown2 size={16} />}
     />
   )
 }

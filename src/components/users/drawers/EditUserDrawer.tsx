@@ -8,7 +8,6 @@ import {
   Input,
   Select,
   Switch,
-  theme,
   type FormProps,
 } from 'antd'
 import {
@@ -21,7 +20,7 @@ import {
   TickSquare,
   Trash,
 } from 'iconsax-reactjs'
-import { useEffect, useState, type CSSProperties } from 'react'
+import { useEffect, useState } from 'react'
 import { UserOutlined } from '@ant-design/icons'
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import SuccessModal from '@/components/ui/models/SuccessModal'
@@ -66,18 +65,15 @@ export default function EditUserDrawer({
     }
   }, [data, form])
 
-  const [isModalOpen, setIsModalOpen] = useState(false)
   const [roleModal, setRoleModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
   const [confirmedDelete, setConfirmedDelete] = useState(false)
   const [statusModal, setStatusModal] = useState<undefined | string>(undefined)
   const [confirmedStatus, setConfirmedStatus] = useState(false)
 
-  const { token } = theme.useToken()
-
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
     console.log('Success:', values)
-    setIsModalOpen(true)
+    // TODO: Connect to Backend
   }
 
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (
@@ -88,17 +84,6 @@ export default function EditUserDrawer({
 
   const formLabelStyles = 'text-text-dark text-sm font-semibold'
   const inputStyle = '!p-4 !text-text-dark'
-  const inputLikeDivStyle: CSSProperties = {
-    background: token.colorBgContainer,
-    border: `${token.lineWidth}px solid ${token.colorBorder}`,
-    borderRadius: token.borderRadius,
-    paddingInline: 16,
-    paddingBlock: 24,
-    height: token.controlHeight,
-    color: token.colorText,
-    display: 'flex',
-    alignItems: 'center',
-  }
 
   console.log(data)
 
@@ -123,16 +108,11 @@ export default function EditUserDrawer({
       closeIcon={false}
       open={open}
       styles={{
-        content: { paddingInline: '16px' },
+        content: { paddingInline: '16px', backgroundColor: '#12121f' },
         header: { border: 'none', paddingInline: '0px' },
-        body: {
-          borderRadius: '12px',
-          backgroundColor: '#12121f',
-          border: 'none',
-        },
       }}
       width={543}
-      className="!bg-background-dark drawer"
+      className="new-drawer"
     >
       <Form
         name="basic"
@@ -146,10 +126,7 @@ export default function EditUserDrawer({
         autoComplete="off"
       >
         <Form.Item>
-          <div
-            style={inputLikeDivStyle}
-            className="flex justify-between !py-12"
-          >
+          <div className="flex justify-between input-like-div">
             <div className="flex gap-2">
               <Avatar size={40} icon={<UserOutlined />} />
               <div>
@@ -217,13 +194,13 @@ export default function EditUserDrawer({
           ]}
           className="flex-1"
         >
-          <Input className={inputStyle} />
+          <Input className={inputStyle} size="large" />
         </Form.Item>
 
         <Form.Item label={<span className={formLabelStyles}>Role</span>}>
           <Select
             size="large"
-            suffixIcon={<ArrowDown2 />}
+            suffixIcon={<ArrowDown2 size={16} />}
             value={data?.role}
             onChange={() => {
               setRoleModal(true)
@@ -273,7 +250,7 @@ export default function EditUserDrawer({
           <Select
             size="large"
             value={data?.organization}
-            suffixIcon={<ArrowDown2></ArrowDown2>}
+            suffixIcon={<ArrowDown2 size={16} />}
           >
             <Select.Option value="Microsoft">Microsoft</Select.Option>
             <Select.Option value="IBM">IBM</Select.Option>
@@ -287,13 +264,13 @@ export default function EditUserDrawer({
         <Form.Item
           label={<span className={formLabelStyles}>Organization Details</span>}
         >
-          <div style={inputLikeDivStyle}>Hello</div>
+          <div className="input-like-div">Hello</div>
         </Form.Item>
 
         <Form.Item
           label={<span className={formLabelStyles}>Last Login Details</span>}
         >
-          <div style={inputLikeDivStyle}>Last Login: 31st Aug, 2025</div>
+          <div className="input-like-div">Last Login: 31st Aug, 2025</div>
         </Form.Item>
 
         <div className="flex justify-end gap-2">

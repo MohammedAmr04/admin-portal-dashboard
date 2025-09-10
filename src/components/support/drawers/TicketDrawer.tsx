@@ -1,6 +1,6 @@
 import { ticketsData, type TicketRow } from '@/services/mockData/tickets'
 import { Drawer, Select } from 'antd'
-import { CloseCircle, Export } from 'iconsax-reactjs'
+import { ArrowDown2, CloseCircle, Export } from 'iconsax-reactjs'
 import { useState } from 'react'
 
 export default function TicketDrawer({
@@ -44,11 +44,10 @@ export default function TicketDrawer({
       open={true}
       styles={{
         content: { paddingInline: '16px', backgroundColor: '#12121f' },
-        // Implement in User Drawer too.
         header: { border: 'none', paddingInline: '0px' },
       }}
       width={543}
-      className="ticket-drawer"
+      className="new-drawer"
     >
       <div className="space-y-4">
         <div className="flex gap-8">
@@ -68,6 +67,7 @@ export default function TicketDrawer({
                 },
                 { value: 'low', label: 'Low' },
               ]}
+              suffixIcon={<ArrowDown2 size={16} />}
             />
           </div>
           <div className="flex items-center gap-2">
@@ -83,13 +83,13 @@ export default function TicketDrawer({
                   label: 'Closed',
                 },
               ]}
+              suffixIcon={<ArrowDown2 size={16} />}
             />
           </div>
         </div>
         <div className="space-y-3">
           <p className="font-semibold">Description</p>
           <p className="input-like-div">{ticket?.description}</p>
-          {/* Implement in User Drawer too. */}
         </div>
         <div className="space-y-3">
           <p className="font-semibold">Organization</p>
