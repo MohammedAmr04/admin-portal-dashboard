@@ -61,7 +61,7 @@ export default function TableSupport({
       title: 'Title',
       dataIndex: 'title',
       sorter: (a, b) => a.title.localeCompare(b.title),
-      render: (_: TicketRow['title'], record: TicketRow) => (
+      render: (_: ITicket['title'], record: ITicket) => (
         <p
           className="line-clamp-1 cursor-pointer"
           onClick={() => onOpenTicket(record.id)}
@@ -74,7 +74,7 @@ export default function TableSupport({
       title: 'Description',
       dataIndex: 'description',
       sorter: (a, b) => a.description.localeCompare(b.description),
-      render: (_: TicketRow['description'], record: TicketRow) => (
+      render: (_: ITicket['description'], record: ITicket) => (
         <p className="line-clamp-1">{record.description}</p>
       ),
     },
@@ -142,97 +142,102 @@ export default function TableSupport({
   return (
     <>
       <div className="bg-background-dark py-4 rounded-lg">
-      <div className="bg-none py-4 rounded-lg space-y-4">
-        <div className="space-y-4">
-          <div className="flex gap-2">
-            <Input
-              placeholder="Search"
-              size="large"
-              prefix={<SearchNormal size={24} variant="Linear" />}
-              className="!bg-background-card !text-text "
-            />
-            <ButtonFilter />
+        <div className="bg-none py-4 rounded-lg space-y-4">
+          <div className="space-y-4">
+            <div className="flex gap-2">
+              <Input
+                placeholder="Search"
+                size="large"
+                prefix={<SearchNormal size={24} variant="Linear" />}
+                className="!bg-background-card !text-text "
+              />
+              <ButtonFilter />
+            </div>
+            <div className="">
+              <Button
+                className="!bg-background-card !p-2 !border-[#FFFFFF66] !border-2"
+                onClick={onToggleView}
+              >
+                {view ? (
+                  <img src="/supportPage/table-view.png" className="w-4 h-4" />
+                ) : (
+                  <img src="/supportPage/card-view.png" className="w-4 h-4" />
+                )}
+              </Button>
+            </div>
           </div>
-          <div className="">
-            <Button
-              className="!bg-background-card !p-2 !border-[#FFFFFF66] !border-2"
-              onClick={onToggleView}
-            >
-              {view ? (
-                <img src="/supportPage/table-view.png" className="w-4 h-4" />
-              ) : (
-                <img src="/supportPage/card-view.png" className="w-4 h-4" />
-              )}
-            </Button>
-          </div>
+          <Table<ITicket>
+            rowSelection={rowSelection}
+            columns={columns}
+            title={() => undefined}
+            dataSource={data}
+            rowKey="id"
+            pagination={{
+              position: ['bottomCenter'],
+              pageSize: 5,
+              className: 'table-user-pagination',
+            }}
+            className="table-organization !bg-transparent overflow-x-scroll lg:overflow-x-auto"
+            rowClassName={(_, index) =>
+              index % 2 === 0 ? 'even-row' : 'odd-row'
+            }
+          />
         </div>
-        <Table<ITicket>
-          rowSelection={rowSelection}
-          columns={columns}
-          title={() => undefined}
-          dataSource={data}
-          rowKey="id"
-          pagination={{
-            position: ['bottomCenter'],
-            pageSize: 5,
-            className: 'table-user-pagination',
+        <ConfirmationModal
+          visible={deleteModal}
+          title="Are you sure that you want to delete this user?"
+          icon={<Trash size={36} variant="Bulk" className="!text-danger" />}
+          onCancel={() => setDeleteModal(false)}
+          onConfirm={() => {
+            setDeleteModal(false)
+            setConfirmedDelete(true)
           }}
-          className="table-organization !bg-transparent overflow-x-scroll lg:overflow-x-auto"
-          rowClassName={(_, index) =>
-            index % 2 === 0 ? 'even-row' : 'odd-row'
+        />
+        <SuccessModal
+          visible={confirmedDelete}
+          title="User deleted successfully!"
+          icon={
+            <TickCircle size={36} variant="Bulk" className="!text-success" />
           }
+          onClose={() => {
+            setConfirmedDelete(false)
+          }}
+        />
+        <ConfirmationModal
+          visible={!!statusModal}
+          title={
+            statusModal === 'suspend'
+              ? 'Are you sure you want to suspend this user?'
+              : 'Are you sure you want to activate this user?'
+          }
+          icon={
+            statusModal === 'suspend' ? (
+              <CloseSquare size={36} variant="Bulk" className="!text-danger" />
+            ) : (
+              <TickSquare size={36} variant="Bulk" className="!text-success" />
+            )
+          }
+          onCancel={() => setStatusModal(undefined)}
+          onConfirm={() => {
+            setConfirmedStatus(true)
+          }}
+        />
+        <SuccessModal
+          visible={confirmedStatus}
+          title={
+            statusModal === 'suspend'
+              ? 'User suspended successfully!'
+              : 'User activated successfully!'
+          }
+          icon={
+            <TickCircle size={36} variant="Bulk" className="!text-success" />
+          }
+          onClose={() => {
+            setStatusModal(undefined)
+            setConfirmedStatus(false)
+          }}
         />
       </div>
-      <ConfirmationModal
-        visible={deleteModal}
-        title="Are you sure that you want to delete this user?"
-        icon={<Trash size={36} variant="Bulk" className="!text-danger" />}
-        onCancel={() => setDeleteModal(false)}
-        onConfirm={() => {
-          setDeleteModal(false)
-          setConfirmedDelete(true)
-        }}
-      />
-      <SuccessModal
-        visible={confirmedDelete}
-        title="User deleted successfully!"
-        icon={<TickCircle size={36} variant="Bulk" className="!text-success" />}
-        onClose={() => {
-          setConfirmedDelete(false)
-        }}
-      />
-      <ConfirmationModal
-        visible={!!statusModal}
-        title={
-          statusModal === 'suspend'
-            ? 'Are you sure you want to suspend this user?'
-            : 'Are you sure you want to activate this user?'
-        }
-        icon={
-          statusModal === 'suspend' ? (
-            <CloseSquare size={36} variant="Bulk" className="!text-danger" />
-          ) : (
-            <TickSquare size={36} variant="Bulk" className="!text-success" />
-          )
-        }
-        onCancel={() => setStatusModal(undefined)}
-        onConfirm={() => {
-          setConfirmedStatus(true)
-        }}
-      />
-      <SuccessModal
-        visible={confirmedStatus}
-        title={
-          statusModal === 'suspend'
-            ? 'User suspended successfully!'
-            : 'User activated successfully!'
-        }
-        icon={<TickCircle size={36} variant="Bulk" className="!text-success" />}
-        onClose={() => {
-          setStatusModal(undefined)
-          setConfirmedStatus(false)
-        }}
-      />
     </>
   )
 }
