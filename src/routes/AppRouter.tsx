@@ -8,7 +8,7 @@ import SignUpPage from '@/pages/auth/SignUpPage'
 import ForgetPasswordPage from '@/pages/auth/ForgetPasswordPage'
 import { createBrowserRouter } from 'react-router'
 import OrganizationProfile from '@/pages/dashboard/organizations/organization-profile/OrganizationProfile'
-import SupportPage from '@/pages/support/SupportPage'
+import SupportPage from '@/pages/dashboard/support/SupportPage'
 import TestPage from '@/pages/TestPage'
 
 export const router = createBrowserRouter([

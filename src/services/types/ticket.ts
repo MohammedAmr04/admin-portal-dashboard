@@ -6,4 +6,6 @@ export interface ITicket {
   status: 'pending' | 'closed'
   createdAt: string
   updatedAt: string
+  organization: string
+  notes: string
 }
