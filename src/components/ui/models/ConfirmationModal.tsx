@@ -5,6 +5,7 @@ interface ConfirmationModalProps {
   visible: boolean
   title: string
   icon: ReactNode
+  titleDetails?: string
   onCancel: () => void
   onConfirm: () => void
 }
@@ -15,6 +16,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   title,
   icon,
   onConfirm,
+  titleDetails,
 }) => {
   return (
     <Modal
@@ -50,7 +52,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         <div className="bg-success/10 rounded-xl p-3 w-15 h-15 flex items-center justify-center mb-4">
           {icon}
         </div>
-        <p className="text-text text-center">{title} </p>
+        <p className={`text-text text-center ${titleDetails} `}>{title} </p>
       </div>
     </Modal>
   )

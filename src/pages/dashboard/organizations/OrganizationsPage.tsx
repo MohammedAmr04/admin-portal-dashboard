@@ -1,4 +1,4 @@
-import { useState, type Key } from 'react'
+import { useState } from 'react'
 import TableOrganization from '@/components/organizations/tableOrganizations/TableOrganization'
 import { AddSquare, DocumentText, Export, TickCircle } from 'iconsax-reactjs'
 import { Button } from 'antd'
@@ -8,9 +8,10 @@ import SuccessModal from '@/components/ui/models/SuccessModal'
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import ButtonSecondary from '@/components/ui/buttons/ButtonSecondary'
 import DynamicBreadcrumb from '@/components/ui/tabs/DynamicBreadcrumb'
+import type { IOrganization } from '@/services/types/organization'
 
 const OrganizationsPage = () => {
-  const [rowsExported, setRowsExported] = useState<Key[]>([])
+  const [rowsExported, setRowsExported] = useState<IOrganization[]>([])
   const [finishExport, setFinishExport] = useState<boolean>(false)
   const [modals, setModals] = useState({
     invite: false,
