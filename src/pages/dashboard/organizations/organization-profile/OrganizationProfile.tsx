@@ -53,6 +53,7 @@ const OrganizationProfile = () => {
           />
           <NewUserDrawer
             open={drawer === 'newUser'}
+            title="Add New User"
             onClose={() => setDrawer('')}
           />
           <EditUserDrawer
@@ -78,6 +79,7 @@ const OrganizationProfile = () => {
     <>
       <HeaderOrganizationProfile
         title={name || ''}
+        handleDrawer={handleDrawer}
         open={activeKey === 'users'}
       />
       <section className="p-4 rounded-xl border border-text/5 bg-background-dark">

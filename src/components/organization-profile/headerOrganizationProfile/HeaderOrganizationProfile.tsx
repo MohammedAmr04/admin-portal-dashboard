@@ -4,9 +4,11 @@ import { Button } from 'antd'
 import { AddSquare, Export } from 'iconsax-reactjs'
 
 const HeaderOrganizationProfile = ({
+  handleDrawer,
   title,
   open,
 }: {
+  handleDrawer: (drawer: string) => void
   title: string
   open: boolean
 }) => {
@@ -26,7 +28,7 @@ const HeaderOrganizationProfile = ({
             <Button
               type="primary"
               size="large"
-              onClick={() => console.log('test')}
+              onClick={() => handleDrawer('newUser')}
               icon={<AddSquare size="24" variant="Bulk" />}
             >
               <span className="hidden lg:inline">Add New Users</span>
