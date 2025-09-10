@@ -1,3 +1,4 @@
+import ProductCheckBox from '@/components/ui/checkboxs/ProductCheckBox'
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import SuccessModal from '@/components/ui/models/SuccessModal'
 import { Drawer, Button, Form, Input, Select, Checkbox } from 'antd'
@@ -8,7 +9,13 @@ interface PropsInviteOwnerDrawer {
   open: boolean
   onClose: () => void
 }
-
+const checkboxes = [
+  'Product A',
+  'Product B',
+  'Product C',
+  'Product D',
+  'Product E',
+]
 const { Option } = Select
 
 export default function InviteOwnerDrawer({
@@ -23,7 +30,7 @@ export default function InviteOwnerDrawer({
   const handleSubmit = async () => {
     try {
       await form.validateFields()
-      setStatus('confirm') // بعد الفاليديشن افتح الـ Confirmation
+      setStatus('confirm')
     } catch (error) {
       console.log('Validation Failed:', error)
     }
@@ -141,11 +148,13 @@ export default function InviteOwnerDrawer({
             ]}
           >
             <Checkbox.Group className="flex flex-col gap-2 text-text">
-              <Checkbox value="productA">Product A</Checkbox>
-              <Checkbox value="productB">Product B</Checkbox>
-              <Checkbox value="productC">Product C</Checkbox>
-              <Checkbox value="productD">Product D</Checkbox>
-              <Checkbox value="productE">Product E</Checkbox>
+              {checkboxes.map((c) => (
+                <ProductCheckBox
+                  key={c}
+                  value={c.split(' ').join()}
+                  label={c}
+                />
+              ))}
             </Checkbox.Group>
           </Form.Item>
 

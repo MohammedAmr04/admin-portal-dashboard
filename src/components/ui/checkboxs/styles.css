@@ -1,0 +1,17 @@
+.product-checkbox .ant-checkbox .ant-checkbox-inner {
+  background-color: transparent;
+  border-width: 2px;
+  border-color: color-mix(in srgb, white 15%, transparent);
+  border-radius: 4px;
+}
+.product-checkbox .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  border-color: var(--color-primary);
+}
+.product-checkbox:hover .ant-checkbox-checked .ant-checkbox-inner::after {
+  border-color: var(--color-white);
+}
+.product-checkbox .ant-checkbox-checked .ant-checkbox-inner::after {
+  border-color: var(--color-primary);
+  border-radius: 1px;
+}
