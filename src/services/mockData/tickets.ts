@@ -1,16 +1,6 @@
-export type TicketRow = {
-  id: number
-  title: string
-  description: string
-  priority: 'high' | 'medium' | 'low'
-  status: 'pending' | 'closed'
-  createdAt: string
-  updatedAt: string
-  organization: 'Paymob' | 'Fawry'
-  notes: string
-}
+import type { ITicket } from '../types/ticket'
 
-export const ticketsData: TicketRow[] = [
+export const ticketsData: ITicket[] = [
   {
     id: 1,
     title: 'Login button not responding',

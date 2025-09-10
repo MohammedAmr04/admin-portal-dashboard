@@ -12,10 +12,12 @@ import { useState } from 'react'
 
 interface PropsCreateOrganiationDrawer {
   open: boolean
+  title?: string
   onClose: () => void
 }
 export default function NewUserDrawer({
   open,
+  title = 'Create New User',
   onClose,
 }: PropsCreateOrganiationDrawer) {
   const [form] = Form.useForm()
@@ -53,7 +55,7 @@ export default function NewUserDrawer({
       closable={false}
       title={
         <div className="flex items-center border-b border-text/5 py-3.5 justify-between w-full">
-          <span className="text-text text-lg font-medium">Create New User</span>
+          <span className="text-text text-lg font-medium">{title}</span>
           <div className="flex gap-1">
             <Export size={24} variant="Linear" />
             <CloseCircle
@@ -156,16 +158,18 @@ export default function NewUserDrawer({
           <Form.Item label={null}>
             <Button
               type="default"
+              className="!bg-text  !text-[#1C122E]"
               onClick={() => {
                 form.resetFields()
                 onClose()
               }}
+              size="large"
             >
               Cancel
             </Button>
           </Form.Item>
           <Form.Item label={null}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" size="large" htmlType="submit">
               Confirm
             </Button>
           </Form.Item>

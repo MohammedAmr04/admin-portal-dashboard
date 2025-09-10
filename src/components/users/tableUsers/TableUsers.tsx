@@ -10,17 +10,21 @@ import {
 } from 'iconsax-reactjs'
 import { useState } from 'react'
 import { MoreOutlined } from '@ant-design/icons'
-import { usersData, type UserRow } from '../../../services/mockData/users'
+import { usersData } from '../../../services/mockData/users'
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import SuccessModal from '@/components/ui/models/SuccessModal'
 import ButtonFilter from '@/components/ui/buttons/ButtonFilter'
+import type { IUser } from '@/services/types/user'
+import CustomTable from '@/components/ui/table/CustomTable'
+import { getUsersColumns } from '@/components/ui/table/usersColumns'
+import { set } from 'date-fns'
 
 type TableUsersProps = {
   handleDrawer: (drawer: string) => void
   handleUser: (userID: number) => void
   onSelectionChange?: (
     selectedKeys: React.Key[],
-    selectedUsers: UserRow[]
+    selectedUsers: IUser[]
   ) => void
   isOrg?: boolean
   onUserSelect: (userID: number) => void
@@ -36,7 +40,9 @@ export default function TableUsers({
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
   const [deleteModal, setDeleteModal] = useState(false)
   const [confirmedDelete, setConfirmedDelete] = useState(false)
-  const [statusModal, setStatusModal] = useState<undefined | string>(undefined)
+  const [statusModal, setStatusModal] = useState<
+    'activate' | 'suspend' | undefined
+  >(undefined)
   const [confirmedStatus, setConfirmedStatus] = useState(false)
 
   const rowSelection = {
@@ -49,13 +55,13 @@ export default function TableUsers({
     },
   }
 
-  const [data, setData] = useState<UserRow[]>(usersData)
+  const [data, setData] = useState<IUser[]>(usersData)
 
   const handleDelete = () => {
     setDeleteModal(true)
   }
 
-  const columns: ColumnsType<UserRow> = [
+  const columns: ColumnsType<IUser> = [
     {
       title: 'ID',
       dataIndex: 'id',
@@ -80,7 +86,7 @@ export default function TableUsers({
       title: 'Status',
       dataIndex: 'status',
       sorter: (a, b) => a.status.localeCompare(b.status),
-      render: (_: UserRow['status'], record) => {
+      render: (_: IUser['status'], record) => {
         const checked = record.status === 'Active'
         return (
           <div className="flex items-center gap-2">
@@ -108,7 +114,7 @@ export default function TableUsers({
       title: 'Actions',
       key: 'actions',
       fixed: 'right',
-      render: (_: unknown, record: UserRow) => (
+      render: (_: unknown, record: IUser) => (
         <div className="flex items-center justify-center gap-2">
           <Button
             type="text"
@@ -141,7 +147,7 @@ export default function TableUsers({
   return (
     <>
       <div className="bg-background-dark py-4 rounded-lg">
-        <Table<UserRow>
+        {/* <Table<IUser>
           rowSelection={rowSelection}
           columns={columns}
           title={() => (
@@ -176,6 +182,18 @@ export default function TableUsers({
           rowClassName={(_, index) =>
             index % 2 === 0 ? 'even-row' : 'odd-row'
           }
+        /> */}
+        <CustomTable<IUser>
+          columns={getUsersColumns(
+            setData,
+            setStatusModal,
+            handleDrawer,
+            handleUser,
+            handleDelete
+          )}
+          onFinish={false}
+          setData={setData}
+          data={data}
         />
       </div>
       <ConfirmationModal

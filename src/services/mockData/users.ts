@@ -1,14 +1,6 @@
-export type UserRow = {
-  id: number
-  name: string
-  email: string
-  phone: string
-  role: 'Admin' | 'Manager'
-  organization: 'Microsoft' | 'IBM'
-  status: 'Active' | 'Inactive'
-}
+import type { IUser } from '../types/user'
 
-export const usersData: UserRow[] = [
+export const usersData: IUser[] = [
   {
     id: 1,
     name: 'Olivia Martin',

@@ -1,8 +1,9 @@
 import ButtonSecondary from '@/components/ui/buttons/ButtonSecondary'
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import SuccessModal from '@/components/ui/models/SuccessModal'
-import { Breadcrumb, Button, message } from 'antd'
-import { AddSquare, ArrowRight2, Export, TickCircle } from 'iconsax-reactjs'
+import DynamicBreadcrumb from '@/components/ui/tabs/DynamicBreadcrumb'
+import { Button, message } from 'antd'
+import { AddSquare, Export, TickCircle } from 'iconsax-reactjs'
 import { useState } from 'react'
 
 const HeaderUsers = ({
@@ -17,17 +18,7 @@ const HeaderUsers = ({
 
   return (
     <>
-      <Breadcrumb
-        items={[
-          {
-            title: <a href="./dashboard">Dashboard</a>,
-          },
-          {
-            title: 'Users',
-          },
-        ]}
-        separator={<ArrowRight2 size={16} />}
-      />
+      <DynamicBreadcrumb />
       <div className="flex justify-between items-center">
         <h1 className="text-text text-xl font-medium">Users</h1>
         <div className="flex my-6 justify-end gap-2.5 items-center">

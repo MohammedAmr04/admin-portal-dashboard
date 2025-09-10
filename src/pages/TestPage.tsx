@@ -1,8 +1,8 @@
-import type { IOrganization } from '@/services/types/organization'
 import CustomTable from '@/components/ui/table/CustomTable'
 import { getOrganizationColumns } from '@/components/ui/table/organizationsColumns'
-
-const data: IOrganization[] = Array.from({ length: 100 }, (_, i) => ({
+import type { IOrganization } from '@/services/types/organization'
+import { useState } from 'react'
+const dataO: IOrganization[] = Array.from({ length: 100 }, (_, i) => ({
   id: i + 1,
   org: ['CBRE', 'Google', 'Amazon', 'Microsoft', 'Tesla'][i % 5],
   owner: [
@@ -17,19 +17,20 @@ const data: IOrganization[] = Array.from({ length: 100 }, (_, i) => ({
   date: `Jan ${10 + i}, 2020`,
 }))
 
-type Props = {
-  setData: React.Dispatch<React.SetStateAction<IOrganization[]>>
-  onFinish: boolean
-}
-export default function TableOrganization({ setData, onFinish }: Props) {
+const TestPage = () => {
+  const [data, setData] = useState<IOrganization[]>([])
+  console.log(data)
   return (
-    <div className="bg-background-dark py-4 rounded-lg">
+    <>
+      <h1>TestPage</h1>
       <CustomTable<IOrganization>
-        data={data}
+        data={dataO}
         columns={getOrganizationColumns()}
+        onFinish={false}
         setData={setData}
-        onFinish={onFinish}
       />
-    </div>
+    </>
   )
 }
+
+export default TestPage

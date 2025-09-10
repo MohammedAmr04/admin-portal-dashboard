@@ -1,38 +1,49 @@
-const getStatusColor = (status: string) => {
+type Status = 'Blocked' | 'Pending' | 'Approved'
+
+type StatusStyle = {
+  color: string
+  backgroundColor: string
+  borderColor: string
+}
+
+const getStatusColor = (status: Status): StatusStyle => {
+  let clr: string
+
   switch (status) {
-    case 'Rejected':
-      return 'var(--c-danger)'
-    case 'In Negotiation':
-      return 'var(--c-warning)'
-    case 'Under Review':
-      return 'var(--c-info)'
-    case 'Accepted':
-      return 'var(--c-success)'
-    case 'Prospective':
-      return 'var(--c-prospective)'
+    case 'Blocked':
+      clr = 'var(--c-danger)'
+      return {
+        color: clr,
+        backgroundColor: `color-mix(in srgb, ${clr} 20%, transparent)`,
+        borderColor: `color-mix(in srgb, ${clr} 20%, transparent)`,
+      }
+
+    case 'Pending':
+      clr = 'var(--c-prospective)'
+      return {
+        color: clr,
+        backgroundColor: `color-mix(in srgb, ${clr} 26%, transparent)`,
+        borderColor: `color-mix(in srgb, ${clr} 26%, transparent)`,
+      }
+
+    case 'Approved':
+      clr = 'var(--c-success)'
+      return {
+        color: clr,
+        backgroundColor: `color-mix(in srgb, ${clr} 20%, transparent)`,
+        borderColor: `#3FA36C`,
+      }
   }
 }
 
-function StatusTag({
-  status,
-}: {
-  status:
-    | 'Rejected'
-    | 'In Negotiation'
-    | 'Under Review'
-    | 'Accepted'
-    | 'Prospective'
-}) {
-  const clr = getStatusColor(status)
+function StatusTag({ status }: { status: Status }) {
+  const styleTag = getStatusColor(status)
+
   return (
     <div className="flex justify-center w-full items-center">
       <div
-        className="py-1 px-3 rounded-lg border w-full leading-[1.4] flex justify-center items-center"
-        style={{
-          color: `${clr}`,
-          backgroundColor: `color-mix(in srgb, ${clr} 20%, transparent)`,
-          borderColor: `color-mix(in srgb, ${clr} 60%, transparent)`,
-        }}
+        className="py-1.5 px-3 rounded-lg border w-full max-w-[122px] leading-[1.4] flex justify-center items-center"
+        style={styleTag}
       >
         {status}
       </div>

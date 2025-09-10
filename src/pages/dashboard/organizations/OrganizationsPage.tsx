@@ -1,13 +1,13 @@
 import { useState, type Key } from 'react'
 import TableOrganization from '@/components/organizations/tableOrganizations/TableOrganization'
-import { AddSquare, ArrowRight2, DocumentText, Export, TickCircle } from 'iconsax-reactjs'
-import { Breadcrumb, Button } from 'antd'
+import { AddSquare, DocumentText, Export, TickCircle } from 'iconsax-reactjs'
+import { Button } from 'antd'
 import CreateOrganizationDrawer from '@/components/organizations/drawers/createNewOrganization/CreateOrganizationDrawer'
 import InviteOwnerDrawer from '@/components/organizations/drawers/inviteOwner/InviteOwnerDrawer'
 import SuccessModal from '@/components/ui/models/SuccessModal'
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import ButtonSecondary from '@/components/ui/buttons/ButtonSecondary'
-import { Link } from 'react-router'
+import DynamicBreadcrumb from '@/components/ui/tabs/DynamicBreadcrumb'
 
 const OrganizationsPage = () => {
   const [rowsExported, setRowsExported] = useState<Key[]>([])
@@ -34,17 +34,7 @@ const OrganizationsPage = () => {
 
   return (
     <main className="org">
-          <Breadcrumb
-        items={[
-          {
-            title: <Link to="/">Dashboard</Link>,
-          },
-          {
-            title: 'Organizations',
-          },
-        ]}
-        separator={<ArrowRight2 size={16} />}
-      />
+      <DynamicBreadcrumb />
       <header className="flex flex-col  md:flex-row pt-9 mb-6 md:items-center md:justify-between gap-2.5 ">
         <h1 className="text-text text-xl flex-1 mb-3">Organizations</h1>
         <div className="flex flex-wrap gap-2.5 items-center">

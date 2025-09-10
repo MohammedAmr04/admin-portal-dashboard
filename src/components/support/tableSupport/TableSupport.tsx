@@ -12,17 +12,8 @@ import { useState } from 'react'
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import SuccessModal from '@/components/ui/models/SuccessModal'
 import ButtonFilter from '@/components/ui/buttons/ButtonFilter'
-import { ticketsData, type TicketRow } from '@/services/mockData/tickets'
-
-// type TableUsersProps = {
-//   handleDrawer: (drawer: string) => void
-//   handleUser: (userID: number) => void
-//   onSelectionChange?: (
-//     selectedKeys: React.Key[],
-//     selectedUsers: UserRow[]
-//   ) => void
-//   onUserSelect: (userID: number) => void
-// }
+import { ticketsData } from '@/services/mockData/tickets'
+import type { ITicket } from '@/services/types/ticket'
 
 export default function TableSupport({
   onOpenTicket,
@@ -43,17 +34,14 @@ export default function TableSupport({
     selectedRowKeys,
     onChange: (keys: React.Key[]) => {
       setSelectedRowKeys(keys)
-      // const selectedTickets = data.filter((ticket) => keys.includes(ticket.id))
-      // onSelectionChange?.(keys, selectedTickets)
-      // keys.forEach((key) => onUserSelect(Number(key)))
     },
   }
 
-  const [data, setData] = useState<TicketRow[]>(ticketsData)
+  const [data, setData] = useState<ITicket[]>(ticketsData)
 
   const handlePriorityChange = (
     ticketID: number,
-    value: TicketRow['priority']
+    value: ITicket['priority']
   ) => {
     setData((prev) =>
       prev.map((row) =>
@@ -62,13 +50,13 @@ export default function TableSupport({
     )
   }
 
-  const handleStatusChange = (ticketID: number, value: TicketRow['status']) => {
+  const handleStatusChange = (ticketID: number, value: ITicket['status']) => {
     setData((prev) =>
       prev.map((row) => (row.id === ticketID ? { ...row, status: value } : row))
     )
   }
 
-  const columns: ColumnsType<TicketRow> = [
+  const columns: ColumnsType<ITicket> = [
     {
       title: 'Title',
       dataIndex: 'title',
@@ -94,13 +82,13 @@ export default function TableSupport({
       title: 'Priority',
       dataIndex: 'priority',
       sorter: (a, b) => a.priority.localeCompare(b.priority),
-      render: (_: TicketRow['priority'], record: TicketRow) => {
+      render: (_: ITicket['priority'], record: ITicket) => {
         return (
           <Select
             value={record.priority}
             className={`priority-${record.priority}`}
             onChange={(val) =>
-              handlePriorityChange(record.id, val as TicketRow['priority'])
+              handlePriorityChange(record.id, val as ITicket['priority'])
             }
             suffixIcon={<ArrowDown2 size={16} />}
             options={[
@@ -119,13 +107,13 @@ export default function TableSupport({
       title: 'Status',
       dataIndex: 'status',
       sorter: (a, b) => a.status.localeCompare(b.status),
-      render: (_: TicketRow['status'], record: TicketRow) => {
+      render: (_: ITicket['status'], record: ITicket) => {
         return (
           <Select
             value={record.status}
             className="status"
             onChange={(val) =>
-              handleStatusChange(record.id, val as TicketRow['status'])
+              handleStatusChange(record.id, val as ITicket['status'])
             }
             suffixIcon={<ArrowDown2 size={16} />}
             options={[
@@ -153,6 +141,7 @@ export default function TableSupport({
 
   return (
     <>
+      <div className="bg-background-dark py-4 rounded-lg">
       <div className="bg-none py-4 rounded-lg space-y-4">
         <div className="space-y-4">
           <div className="flex gap-2">
@@ -177,7 +166,7 @@ export default function TableSupport({
             </Button>
           </div>
         </div>
-        <Table<TicketRow>
+        <Table<ITicket>
           rowSelection={rowSelection}
           columns={columns}
           title={() => undefined}

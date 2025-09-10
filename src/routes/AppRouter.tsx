@@ -9,6 +9,7 @@ import ForgetPasswordPage from '@/pages/auth/ForgetPasswordPage'
 import { createBrowserRouter } from 'react-router'
 import OrganizationProfile from '@/pages/dashboard/organizations/organization-profile/OrganizationProfile'
 import SupportPage from '@/pages/support/SupportPage'
+import TestPage from '@/pages/TestPage'
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ export const router = createBrowserRouter([
         element: <OrganizationProfile />,
       },
       { path: 'dashboard/support', element: <SupportPage /> },
+      { path: 'test', element: <TestPage /> },
     ],
   },
   {
