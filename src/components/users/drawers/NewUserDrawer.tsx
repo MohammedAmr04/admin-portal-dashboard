@@ -70,16 +70,11 @@ export default function NewUserDrawer({
       closeIcon={false}
       open={open}
       styles={{
-        content: { paddingInline: '16px' },
+        content: { paddingInline: '16px', backgroundColor: '#12121f' },
         header: { border: 'none', paddingInline: '0px' },
-        body: {
-          borderRadius: '12px',
-          backgroundColor: '#12121f',
-          border: 'none',
-        },
       }}
       width={543}
-      className="!bg-background-dark drawer"
+      className="new-drawer"
     >
       <Form
         name="basic"
@@ -137,7 +132,7 @@ export default function NewUserDrawer({
             { required: true, message: "Please select the user's role!" },
           ]}
         >
-          <Select suffixIcon={<ArrowDown2></ArrowDown2>} size="large">
+          <Select suffixIcon={<ArrowDown2 size={16} />} size="large">
             <Select.Option value="admin">Admin</Select.Option>
             <Select.Option value="manager">Manager</Select.Option>
           </Select>
@@ -153,7 +148,7 @@ export default function NewUserDrawer({
             },
           ]}
         >
-          <Select suffixIcon={<ArrowDown2></ArrowDown2>} size="large">
+          <Select suffixIcon={<ArrowDown2 size={16} />} size="large">
             <Select.Option value="microsoft">Microsoft</Select.Option>
             <Select.Option value="ibm">IBM</Select.Option>
           </Select>

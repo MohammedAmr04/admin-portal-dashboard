@@ -1,6 +1,7 @@
 import { Table, Input, Button, Select } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import {
+  ArrowDown2,
   CloseSquare,
   SearchNormal,
   TickCircle,
@@ -14,7 +15,15 @@ import ButtonFilter from '@/components/ui/buttons/ButtonFilter'
 import { ticketsData } from '@/services/mockData/tickets'
 import type { ITicket } from '@/services/types/ticket'
 
-export default function TableSupport() {
+export default function TableSupport({
+  onOpenTicket,
+  onToggleView,
+  view,
+}: {
+  onOpenTicket: (ticketID: number) => void
+  onToggleView: () => void
+  view: boolean
+}) {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
   const [deleteModal, setDeleteModal] = useState(false)
   const [confirmedDelete, setConfirmedDelete] = useState(false)
@@ -52,11 +61,22 @@ export default function TableSupport() {
       title: 'Title',
       dataIndex: 'title',
       sorter: (a, b) => a.title.localeCompare(b.title),
+      render: (_: TicketRow['title'], record: TicketRow) => (
+        <p
+          className="line-clamp-1 cursor-pointer"
+          onClick={() => onOpenTicket(record.id)}
+        >
+          {record.title}
+        </p>
+      ),
     },
     {
       title: 'Description',
       dataIndex: 'description',
       sorter: (a, b) => a.description.localeCompare(b.description),
+      render: (_: TicketRow['description'], record: TicketRow) => (
+        <p className="line-clamp-1">{record.description}</p>
+      ),
     },
     {
       title: 'Priority',
@@ -70,6 +90,7 @@ export default function TableSupport() {
             onChange={(val) =>
               handlePriorityChange(record.id, val as ITicket['priority'])
             }
+            suffixIcon={<ArrowDown2 size={16} />}
             options={[
               { value: 'high', label: 'High' },
               {
@@ -94,6 +115,7 @@ export default function TableSupport() {
             onChange={(val) =>
               handleStatusChange(record.id, val as ITicket['status'])
             }
+            suffixIcon={<ArrowDown2 size={16} />}
             options={[
               { value: 'pending', label: 'Pending' },
               {
@@ -120,27 +142,34 @@ export default function TableSupport() {
   return (
     <>
       <div className="bg-background-dark py-4 rounded-lg">
+      <div className="bg-none py-4 rounded-lg space-y-4">
+        <div className="space-y-4">
+          <div className="flex gap-2">
+            <Input
+              placeholder="Search"
+              size="large"
+              prefix={<SearchNormal size={24} variant="Linear" />}
+              className="!bg-background-card !text-text "
+            />
+            <ButtonFilter />
+          </div>
+          <div className="">
+            <Button
+              className="!bg-background-card !p-2 !border-[#FFFFFF66] !border-2"
+              onClick={onToggleView}
+            >
+              {view ? (
+                <img src="/supportPage/table-view.png" className="w-4 h-4" />
+              ) : (
+                <img src="/supportPage/card-view.png" className="w-4 h-4" />
+              )}
+            </Button>
+          </div>
+        </div>
         <Table<ITicket>
           rowSelection={rowSelection}
           columns={columns}
-          title={() => (
-            <div>
-              <div className="flex px-5 gap-3">
-                <Input
-                  placeholder="Search"
-                  size="large"
-                  prefix={<SearchNormal size={24} variant="Linear" />}
-                  className="mb-4 !bg-background-card !text-text "
-                />
-                <ButtonFilter />
-              </div>
-              <div className="px-5">
-                <Button className="!bg-background-card !p-2">
-                  <img src="/supportPage/card-view.png" />
-                </Button>
-              </div>
-            </div>
-          )}
+          title={() => undefined}
           dataSource={data}
           rowKey="id"
           pagination={{

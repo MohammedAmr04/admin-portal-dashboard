@@ -9,7 +9,6 @@ export const MAIN_COLORS = {
     card: '#ffffff',
     'card-dark': '#ffffff',
     'background-card': '#231c3c',
-
     border: '#E8E8E9',
     input: '#FFFFFF',
     danger: '#B81428',
@@ -18,6 +17,8 @@ export const MAIN_COLORS = {
     info: '#05B2DC',
     elevated: '#DFC4F7',
     overlay: '#010101a5',
+    'text-drawer': '#8b8b93',
+    'active-switch': '#6AD18E',
   },
   dark: {
     primary: '#8A2BE2',
@@ -39,5 +40,7 @@ export const MAIN_COLORS = {
     info: '#05B2DC',
     elevated: '#291A43',
     overlay: '#010101a5',
+    'text-drawer': '#8b8b93',
+    'active-switch': '#6AD18E',
   },
 }
