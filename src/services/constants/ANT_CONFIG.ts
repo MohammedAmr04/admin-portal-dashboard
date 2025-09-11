@@ -8,7 +8,8 @@ const MAIN_THEME_TOKEN: ThemeConfig['token'] = {
   fontFamily: 'Poppins, sans-serif',
   fontSize: 14,
   fontSizeXL: 16,
-  controlHeight: 34,
+  controlHeight: 48,
+  controlHeightSM: 34,
   controlHeightLG: 56,
 }
 

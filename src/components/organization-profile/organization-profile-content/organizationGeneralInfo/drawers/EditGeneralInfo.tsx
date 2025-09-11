@@ -200,7 +200,7 @@ export default function EditGeneralInfo({
 
         {/* Footer buttons */}
         <div className="flex justify-end gap-2 mt-4">
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" className="!rounded-xl" htmlType="submit">
             Save Changes
           </Button>
         </div>
