@@ -5,8 +5,19 @@ interface SuccessModalProps {
   visible: boolean
   title: string
   icon: ReactNode
+  type?: 'PRIMARY' | 'WARNING'
   description?: string
   onClose?: () => void
+}
+
+function getColor(type: 'PRIMARY' | 'WARNING') {
+  switch (type) {
+    case 'PRIMARY':
+      return 'bg-[#9147FF]/10'
+
+    case 'WARNING':
+      return 'bg-warning/20'
+  }
 }
 
 const SuccessModal: React.FC<SuccessModalProps> = ({
@@ -14,8 +25,10 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
   title,
   icon,
   description,
+  type = 'PRIMARY',
   onClose,
 }) => {
+  let color = getColor(type)
   return (
     <Modal
       open={visible}
@@ -25,12 +38,14 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
       closable={true}
       width={450}
       classNames={{
-        content: '!bg-background-dark !p-9',
+        content: '!bg-background-dark ',
       }}
       className=" rounded-lg"
     >
       <div className="flex flex-col items-center justify-center  ">
-        <div className="bg-[#9147FF]/10 rounded-xl p-4 w-15 h-15 flex items-center justify-center mb-6">
+        <div
+          className={`${color} rounded-xl p-4 w-15 h-15 flex items-center justify-center mb-6`}
+        >
           {icon}
         </div>
         <p className="text-text    w-full !leading-[160%] text-2xl align-middle font-semibold  text-center">

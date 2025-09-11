@@ -9,7 +9,7 @@ const MAIN_THEME_TOKEN: ThemeConfig['token'] = {
   fontSize: 14,
   fontSizeXL: 16,
   controlHeight: 34,
-  controlHeightLG: 48,
+  controlHeightLG: 56,
 }
 
 export const ANTD_THEME: ThemeConfig = {

@@ -1,5 +1,7 @@
 import { Card } from 'antd'
 import { Edit } from 'iconsax-reactjs'
+import { useState } from 'react'
+import EditGeneralInfo from '../drawers/EditGeneralInfo'
 
 interface InfoItem {
   label: string
@@ -12,7 +14,19 @@ interface PropsCardInfo {
   onEdit?: () => void
 }
 
-const CardInfo = ({ title, info, onEdit }: PropsCardInfo) => {
+const CardInfo = ({ title, info }: PropsCardInfo) => {
+  const [editDrawer, setEditDrawer] = useState<boolean>(false)
+  function handleDrawer(action: 'OPEN' | 'CLOSE') {
+    switch (action) {
+      case 'OPEN':
+        setEditDrawer(true)
+        break
+
+      case 'CLOSE':
+        setEditDrawer(false)
+        break
+    }
+  }
   return (
     <section key={title} className="mb-4">
       <h2 className="text-text text-sm font-medium mb-4">{title}</h2>
@@ -28,16 +42,26 @@ const CardInfo = ({ title, info, onEdit }: PropsCardInfo) => {
               </li>
             ))}
           </ul>
-          {onEdit && (
-            <Edit
-              onClick={onEdit}
-              className="!bg-primary/15 cursor-pointer rounded-md p-1 justify-self-end border border-text/5"
-              size={28}
-              role="button"
-            />
-          )}
+          <Edit
+            onClick={() => handleDrawer('OPEN')}
+            className="!bg-primary/15 cursor-pointer rounded-md p-1 justify-self-end border border-text/5"
+            size={28}
+            role="button"
+          />
         </div>
       </Card>
+      <EditGeneralInfo
+        open={editDrawer}
+        onClose={() => handleDrawer('CLOSE')}
+        info={{
+          name: 'cbre',
+          domain: 'ex.domain.com',
+          phone: '01101352017',
+          email: 'brazily@gmail.com',
+          employeeSize: 60,
+          industry: 'N/A',
+        }}
+      />
     </section>
   )
 }

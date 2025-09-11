@@ -12,7 +12,6 @@ const OrganizationGeneralInfo = () => {
           { label: 'Employees Size', value: 63384 },
           { label: 'Creation Date', value: '11 / 30 / 2024' },
         ]}
-        onEdit={() => console.log('Edit Organization Info')}
       />
       <CardInfo
         title="Owner Info"
@@ -23,7 +22,6 @@ const OrganizationGeneralInfo = () => {
           { label: 'Creation Date', value: '11 / 30 / 2024' },
           { label: 'Last Login', value: '09 / 07 / 2025' },
         ]}
-        onEdit={() => console.log('Edit Owner Info')}
       />
     </div>
   )
