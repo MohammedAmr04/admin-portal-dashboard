@@ -13,8 +13,8 @@ import ProductTag from '@/components/organizations/tags/ProductTag'
  * Generates Organization table columns with actions
  */
 export const getOrganizationColumns = (
-  handleDrawer: (action: 'OPEN' | 'CLOSE') => void,
-  handleOrganization?: (id: number) => void,
+  handleDrawer?: (action: 'OPEN' | 'CLOSE') => void,
+  handleSetOrganization?: (Organization: IOrganization) => void,
   handleDelete?: (id: number) => void
 ): ColumnsType<IOrganization> => [
   {
@@ -62,14 +62,14 @@ export const getOrganizationColumns = (
       </div>
     ),
     key: 'actions',
-    render: (_: unknown, record: IOrganization) => (
+    render: (record: IOrganization) => (
       <div className="flex items-center justify-center gap-2">
         <Button
           type="text"
           icon={<Edit variant="Linear" size="20" />}
           onClick={() => {
-            handleDrawer && handleDrawer('editOrganization')
-            handleOrganization && handleOrganization(record.id)
+            handleDrawer?.('OPEN')
+            handleSetOrganization?.(record)
           }}
         />
         <Dropdown
@@ -79,7 +79,7 @@ export const getOrganizationColumns = (
                 key: '2',
                 label: 'Delete',
                 icon: <Trash size={24} />,
-                onClick: () => handleDelete && handleDelete(record.id),
+                onClick: () => handleDelete?.(record.id),
               },
             ],
           }}

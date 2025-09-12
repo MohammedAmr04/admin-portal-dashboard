@@ -1,4 +1,3 @@
-import { usersData } from '@/services/mockData/users'
 import {
   Avatar,
   Button,
@@ -20,24 +19,20 @@ import {
   TickSquare,
   Trash,
 } from 'iconsax-reactjs'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { UserOutlined } from '@ant-design/icons'
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import SuccessModal from '@/components/ui/models/SuccessModal'
+import type { IUser } from '@/services/types/user'
 
 interface PropsCreateOrganiationDrawer {
   open: boolean
   onClose: () => void
-  userID: number | undefined
+  user: IUser | null
 }
 
-export default function EditUserDrawer({
-  open,
-  onClose,
-  userID,
-}: PropsCreateOrganiationDrawer) {
+function EditUserDrawer({ open, onClose, user }: PropsCreateOrganiationDrawer) {
   const [form] = Form.useForm()
-  const user = usersData.find((u) => u.id === userID)
 
   type FieldType = {
     firstName?: string
@@ -47,11 +42,10 @@ export default function EditUserDrawer({
   }
 
   useEffect(() => {
-    const user = usersData.find((u) => u.id === userID)
     if (user) {
       setData(user)
     }
-  }, [userID])
+  }, [user])
   const [data, setData] = useState(user)
 
   useEffect(() => {
@@ -328,3 +322,4 @@ export default function EditUserDrawer({
     </Drawer>
   )
 }
+export default React.memo(EditUserDrawer)

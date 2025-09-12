@@ -2,37 +2,52 @@ import EditUserDrawer from '@/components/users/drawers/EditUserDrawer'
 import NewUserDrawer from '@/components/users/drawers/NewUserDrawer'
 import HeaderUsers from '@/components/users/header/HeaderUsers'
 import TableUsers from '@/components/users/tableUsers/TableUsers'
-import { useState } from 'react'
+import type { IUser } from '@/services/types/user'
+import { useState, useCallback } from 'react'
 
 const UsersPage = () => {
-  const [drawer, setDrawer] = useState('')
-  const [userID, setUserID] = useState<number | undefined>(undefined)
-  const [selectedUsers, setSelectedUsers] = useState<number[]>([])
+  const [drawer, setDrawer] = useState<{ editUser: boolean; newUser: boolean }>(
+    { editUser: false, newUser: false }
+  )
+  const [user, setUser] = useState<IUser | null>(null)
+  const [exportedUsers, setExportedUsers] = useState<React.Key[]>([])
 
-  const handleDrawer = (drawer: string) => {
-    setDrawer(drawer)
-  }
+  const handleDrawer = useCallback(
+    (type: 'EDIT' | 'NEW', action: 'OPEN' | 'CLOSE') => {
+      setDrawer((prev) => {
+        switch (type) {
+          case 'EDIT':
+            return { ...prev, editUser: action === 'OPEN' }
+          case 'NEW':
+            return { ...prev, newUser: action === 'OPEN' }
+          default:
+            return prev
+        }
+      })
+    },
+    []
+  )
 
-  const handleUser = (userID: number) => {
-    setUserID(userID)
-  }
+  const handleUser = useCallback((user: IUser) => {
+    setUser(user)
+  }, [])
 
   return (
     <>
-      <HeaderUsers handleDrawer={handleDrawer} selectedUsers={selectedUsers} />
+      <HeaderUsers handleDrawer={handleDrawer} exportedUsers={exportedUsers} />
       <TableUsers
         handleDrawer={handleDrawer}
         handleUser={handleUser}
-        onUserSelect={(id) => setSelectedUsers(prev => [...prev, id])}
+        setExportedData={setExportedUsers}
       />
       <NewUserDrawer
-        open={drawer === 'newUser'}
-        onClose={() => setDrawer('')}
+        open={drawer.newUser}
+        onClose={() => handleDrawer('NEW', 'CLOSE')}
       />
       <EditUserDrawer
-        open={drawer === 'editUser'}
-        onClose={() => setDrawer('')}
-        userID={userID}
+        open={drawer.editUser}
+        onClose={() => handleDrawer('EDIT', 'CLOSE')}
+        user={user}
       />
     </>
   )

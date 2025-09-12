@@ -18,16 +18,17 @@ const data: IOrganization[] = Array.from({ length: 100 }, (_, i) => ({
 }))
 
 type Props = {
-  setData: React.Dispatch<React.SetStateAction<IOrganization[]>>
+  setData: React.Dispatch<React.SetStateAction<React.Key[]>>
   onFinish: boolean
 }
 export default function TableOrganization({ setData, onFinish }: Props) {
   return (
-    <div className="bg-background-dark py-4 rounded-lg">
+    <div className="bg-background-dark  rounded-lg">
       <CustomTable<IOrganization>
-        data={data}
+        key={'id'}
+        dataSource={data}
         columns={getOrganizationColumns()}
-        setData={setData}
+        setExportedData={setData}
         onFinish={onFinish}
       />
     </div>
