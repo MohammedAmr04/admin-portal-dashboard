@@ -13,7 +13,7 @@ import ProductTag from '@/components/organizations/tags/ProductTag'
  * Generates Organization table columns with actions
  */
 export const getOrganizationColumns = (
-  handleDrawer?: (drawer: 'editOrganization') => void,
+  handleDrawer: (action: 'OPEN' | 'CLOSE') => void,
   handleOrganization?: (id: number) => void,
   handleDelete?: (id: number) => void
 ): ColumnsType<IOrganization> => [
