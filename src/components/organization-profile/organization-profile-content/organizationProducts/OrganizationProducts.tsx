@@ -1,5 +1,6 @@
 import { Edit } from 'iconsax-reactjs'
-import React from 'react'
+import React, { useState } from 'react'
+import DrawerEditPackages from './drawer/DrawerEditPackages'
 
 const Card = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -9,6 +10,18 @@ const Card = ({ children }: { children: React.ReactNode }) => {
   )
 }
 const OrganizationProducts = () => {
+  const [editDrawer, setEditDrawer] = useState<boolean>(false)
+  function handleEditDrawer(action: 'open' | 'close') {
+    switch (action) {
+      case 'open':
+        setEditDrawer(true)
+        break
+
+      case 'close':
+        setEditDrawer(false)
+        break
+    }
+  }
   return (
     <>
       <Card>
@@ -18,6 +31,7 @@ const OrganizationProducts = () => {
             className="!bg-primary/15 cursor-pointer rounded-md p-1  border border-text/5"
             size={28}
             role="button"
+            onClick={() => handleEditDrawer('open')}
           />
         </header>{' '}
         <p>
@@ -39,6 +53,7 @@ const OrganizationProducts = () => {
             className="!bg-primary/15 cursor-pointer rounded-md p-1  border border-text/5"
             size={28}
             role="button"
+            onClick={() => handleEditDrawer('open')}
           />
         </header>
         <ul>
@@ -60,6 +75,10 @@ const OrganizationProducts = () => {
           </li>
         </ul>
       </Card>
+      <DrawerEditPackages
+        open={editDrawer}
+        onClose={() => handleEditDrawer('close')}
+      />
     </>
   )
 }

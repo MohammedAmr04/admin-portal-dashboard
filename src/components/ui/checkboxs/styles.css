@@ -1,0 +1,21 @@
+.ant-checkbox .ant-checkbox-inner {
+  background-color: transparent;
+  border-width: 2px;
+  border-color: color-mix(in srgb, white 30%, transparent);
+  border-radius: 4px;
+  width: 15px;
+  height: 15px;
+}
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  border-color: var(--color-primary);
+}
+.ant-checkbox-wrapper:hover .ant-checkbox-checked .ant-checkbox-inner::after {
+  border-color: var(--color-white);
+}
+.ant-checkbox-checked .ant-checkbox-inner::after {
+  border-color: var(--color-primary);
+  border-radius: 1px;
+  width: 5.5px;
+  height: 9px;
+}

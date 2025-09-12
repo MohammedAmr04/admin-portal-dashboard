@@ -1,11 +1,11 @@
 import ProductCheckBox from '@/components/ui/checkboxs/ProductCheckBox'
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import SuccessModal from '@/components/ui/models/SuccessModal'
-import { Drawer, Button, Form, Input, Select, Checkbox } from 'antd'
+import { Drawer, Button, Form, Select, Checkbox } from 'antd'
 import { CloseCircle, Export, TickCircle, TickSquare } from 'iconsax-reactjs'
 import { useState } from 'react'
 
-interface PropsInviteOwnerDrawer {
+interface PropsDrawerEditPackages {
   open: boolean
   onClose: () => void
 }
@@ -18,10 +18,10 @@ const checkboxes = [
 ]
 const { Option } = Select
 
-export default function InviteOwnerDrawer({
+export default function DrawerEditPackages({
   open,
   onClose,
-}: PropsInviteOwnerDrawer) {
+}: PropsDrawerEditPackages) {
   const [form] = Form.useForm()
   const [status, setStatus] = useState<
     'idle' | 'confirm' | 'loading' | 'success'
@@ -45,7 +45,7 @@ export default function InviteOwnerDrawer({
       form.resetFields()
       setStatus('success')
 
-      // auto close after success
+      //   auto close after success
       setTimeout(() => {
         setStatus('idle')
         onClose()
@@ -96,36 +96,6 @@ export default function InviteOwnerDrawer({
         className="drawer drawer-invite"
       >
         <Form requiredMark={false} layout="vertical" form={form}>
-          {/* Email */}
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              { required: true, message: 'Please enter an email address' },
-              { type: 'email', message: 'Invalid email format' },
-            ]}
-          >
-            <Input size="large" placeholder="Ex.User@Domain.Com" />
-          </Form.Item>
-
-          {/* Number of Domains */}
-          <Form.Item
-            label="Number of Domains"
-            name="domains"
-            rules={[
-              { required: true, message: 'Please enter number of domains' },
-              { pattern: /^[0-9]+$/, message: 'Domains must be a number' },
-              {
-                validator: (_, value) =>
-                  value && value > 0
-                    ? Promise.resolve()
-                    : Promise.reject('Must be greater than 0'),
-              },
-            ]}
-          >
-            <Input type="number" size="large" placeholder="e.g. 22" />
-          </Form.Item>
-
           {/* Select Package */}
           <Form.Item
             label="Select Package"
@@ -161,13 +131,24 @@ export default function InviteOwnerDrawer({
           {/* Actions */}
           <div className="flex justify-end gap-2 pb-6 mt-6">
             <Button
+              type="default"
+              className="!bg-text  !text-[#1C122E]"
+              onClick={() => {
+                form.resetFields()
+                onClose()
+              }}
+              size="large"
+            >
+              Cancel
+            </Button>
+            <Button
               type="primary"
               size="large"
               loading={status === 'loading'}
               className="!bg-primary px-6"
               onClick={handleSubmit}
             >
-              Invite
+              Save Changes{' '}
             </Button>
           </div>
         </Form>
@@ -175,8 +156,9 @@ export default function InviteOwnerDrawer({
 
       {/* Confirmation */}
       <ConfirmationModal
-        title="Are you sure you want to invite this owner?"
+        title="Are you sure you want to apply these changes?"
         visible={status === 'confirm'}
+        titleDetails="text-base"
         icon={<TickSquare size={36} className="!text-success" variant="Bulk" />}
         onConfirm={handleConfirm}
         onCancel={() => setStatus('idle')}
@@ -184,8 +166,9 @@ export default function InviteOwnerDrawer({
 
       {/* Success */}
       <SuccessModal
-        title="Invitation sent successfully."
+        title="Changes applied successfully"
         visible={status === 'success'}
+        description="Thank you for the update"
         icon={
           <TickCircle size={32} variant="Bulk" className="!text-[#9147FF]" />
         }

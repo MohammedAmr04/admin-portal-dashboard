@@ -4,16 +4,16 @@ import type { TableRowSelection } from 'antd/es/table/interface'
 import { useEffect, useState } from 'react'
 
 type Props<T extends { id: React.Key }> = {
-  setData: React.Dispatch<React.SetStateAction<T[]>>
+  setExportedData: React.Dispatch<React.SetStateAction<T[]>>
   onFinish: boolean
-  data: T[]
+  dataSource: T[]
   columns: ColumnsType<T>
 }
 
 export default function CustomTable<T extends { id: React.Key }>({
-  setData,
+  setExportedData,
   onFinish,
-  data,
+  dataSource,
   columns,
 }: Props<T>) {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
@@ -22,14 +22,14 @@ export default function CustomTable<T extends { id: React.Key }>({
     selectedRowKeys,
     onChange: (keys: React.Key[], rows: T[]) => {
       setSelectedRowKeys(keys)
-      setData(rows)
+      setExportedData(rows)
     },
   }
 
   useEffect(() => {
     if (onFinish) {
       setSelectedRowKeys([])
-      setData([])
+      setExportedData([])
     }
   }, [onFinish])
 
@@ -40,7 +40,7 @@ export default function CustomTable<T extends { id: React.Key }>({
         rowSelection={rowSelection}
         columns={columns}
         scroll={{ x: true }}
-        dataSource={data}
+        dataSource={dataSource}
         pagination={{ position: ['bottomCenter'], pageSize: 5 }}
         className="table-organization !bg-transparent overflow-x-scroll lg:overflow-x-auto"
         rowClassName={(_, index) => (index % 2 === 0 ? 'even-row' : 'odd-row')}

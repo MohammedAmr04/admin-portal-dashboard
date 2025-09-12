@@ -1,12 +1,23 @@
 import React, { type ReactNode } from 'react'
 import { Modal, Button } from 'antd'
 
+function getColor(type: 'SUCCESS' | 'DELETE') {
+  switch (type) {
+    case 'SUCCESS':
+      return 'bg-success/10'
+
+    case 'DELETE':
+      return 'bg-danger/20'
+  }
+}
 interface ConfirmationModalProps {
   visible: boolean
   title: string
   icon: ReactNode
+  titleDetails?: string
   onCancel: () => void
   onConfirm: () => void
+  type?: 'SUCCESS' | 'DELETE'
 }
 
 const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
@@ -14,8 +25,11 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   onCancel,
   title,
   icon,
+  type = 'SUCCESS',
   onConfirm,
+  titleDetails,
 }) => {
+  let color = getColor(type)
   return (
     <Modal
       key={title}
@@ -47,10 +61,12 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
       width={450}
     >
       <div className="flex flex-col items-center justify-center p-6">
-        <div className="bg-success/10 rounded-xl p-3 w-15 h-15 flex items-center justify-center mb-4">
+        <div
+          className={`${color} rounded-xl p-3 w-15 h-15 flex items-center justify-center mb-4`}
+        >
           {icon}
         </div>
-        <p className="text-text text-center">{title} </p>
+        <p className={`text-text text-center ${titleDetails} `}>{title} </p>
       </div>
     </Modal>
   )
