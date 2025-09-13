@@ -4,14 +4,14 @@ import SuccessModal from '@/components/ui/models/SuccessModal'
 import DynamicBreadcrumb from '@/components/ui/tabs/DynamicBreadcrumb'
 import { Button, message } from 'antd'
 import { AddSquare, Export, TickCircle } from 'iconsax-reactjs'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 const HeaderUsers = ({
   handleDrawer,
-  selectedUsers,
+  exportedUsers,
 }: {
-  handleDrawer: (drawer: string) => void
-  selectedUsers: number[]
+  handleDrawer: (type: 'EDIT' | 'NEW', action: 'OPEN' | 'CLOSE') => void
+  exportedUsers: React.Key[]
 }) => {
   const [isExportModalOpen, setIsExportModalOpen] = useState(false)
   const [exportConfirmed, setExportConfirmed] = useState(false)
@@ -25,7 +25,7 @@ const HeaderUsers = ({
           <ButtonSecondary
             leftIcon={<Export size={24} variant="Bulk" />}
             onClick={() => {
-              if (selectedUsers.length > 0) {
+              if (exportedUsers.length > 0) {
                 setIsExportModalOpen(true)
               } else {
                 message.warning('No users were selected to be exported!')
@@ -37,7 +37,7 @@ const HeaderUsers = ({
           <Button
             type="primary"
             size="large"
-            onClick={() => handleDrawer('newUser')}
+            onClick={() => handleDrawer('NEW', 'OPEN')}
             icon={<AddSquare size="24" variant="Bulk" />}
           >
             <span className="hidden lg:inline">Create New User</span>
@@ -45,7 +45,7 @@ const HeaderUsers = ({
           </Button>
         </div>
       </div>
-      {selectedUsers.length > 0 && isExportModalOpen && (
+      {exportedUsers.length > 0 && isExportModalOpen && (
         <ConfirmationModal
           visible={isExportModalOpen}
           title="Are you sure that you want to export these users?"
@@ -71,4 +71,4 @@ const HeaderUsers = ({
   )
 }
 
-export default HeaderUsers
+export default React.memo(HeaderUsers)

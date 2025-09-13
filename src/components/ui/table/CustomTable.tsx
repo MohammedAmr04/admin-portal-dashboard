@@ -2,9 +2,9 @@ import { Table } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import type { TableRowSelection } from 'antd/es/table/interface'
 import { useEffect, useState } from 'react'
-
+import './styles.css'
 type Props<T extends { id: React.Key }> = {
-  setExportedData: React.Dispatch<React.SetStateAction<T[]>>
+  setExportedData: React.Dispatch<React.SetStateAction<React.Key[]>>
   onFinish: boolean
   dataSource: T[]
   columns: ColumnsType<T>
@@ -20,9 +20,9 @@ export default function CustomTable<T extends { id: React.Key }>({
 
   const rowSelection: TableRowSelection<T> = {
     selectedRowKeys,
-    onChange: (keys: React.Key[], rows: T[]) => {
+    onChange: (keys: React.Key[]) => {
       setSelectedRowKeys(keys)
-      setExportedData(rows)
+      setExportedData(keys)
     },
   }
 

@@ -8,10 +8,9 @@ import SuccessModal from '@/components/ui/models/SuccessModal'
 import ConfirmationModal from '@/components/ui/models/ConfirmationModal'
 import ButtonSecondary from '@/components/ui/buttons/ButtonSecondary'
 import DynamicBreadcrumb from '@/components/ui/tabs/DynamicBreadcrumb'
-import type { IOrganization } from '@/services/types/organization'
 
 const OrganizationsPage = () => {
-  const [rowsExported, setRowsExported] = useState<IOrganization[]>([])
+  const [rowsExported, setRowsExported] = useState<React.Key[]>([])
   const [finishExport, setFinishExport] = useState<boolean>(false)
   const [modals, setModals] = useState({
     invite: false,

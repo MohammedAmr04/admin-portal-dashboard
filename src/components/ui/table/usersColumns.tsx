@@ -9,16 +9,16 @@ import { MoreOutlined } from '@ant-design/icons'
  */
 export const getUsersColumns = (
   setData: React.Dispatch<React.SetStateAction<IUser[]>>,
-  setStatusModal: (value: 'activate' | 'suspend') => void,
-  handleDrawer: (drawer: 'editUser') => void,
-  handleUser: (id: number) => void,
+  setStatusModal: (value: 'activate' | 'suspend' | null) => void,
+  handleDrawer: (type: 'EDIT' | 'NEW', action: 'OPEN' | 'CLOSE') => void,
+  handleSetUser: (user: IUser) => void,
   handleDelete: (id: number) => void
 ): ColumnsType<IUser> => [
-  {
-    title: 'ID',
-    dataIndex: 'id',
-    sorter: (a, b) => a.id - b.id,
-  },
+  // {
+  //   title: 'ID',
+  //   dataIndex: 'id',
+  //   sorter: (a, b) => a.id - b.id,
+  // },
   {
     title: 'Name',
     dataIndex: 'name',
@@ -66,14 +66,14 @@ export const getUsersColumns = (
     title: 'Actions',
     key: 'actions',
     fixed: 'right',
-    render: (_: unknown, record: IUser) => (
+    render: (record: IUser) => (
       <div className="flex items-center justify-center gap-2">
         <Button
           type="text"
           icon={<Edit size="20" />}
           onClick={() => {
-            handleDrawer('editUser')
-            handleUser(record.id)
+            handleDrawer('EDIT', 'OPEN')
+            handleSetUser(record)
           }}
         />
         <Dropdown

@@ -8,14 +8,14 @@ import {
   Modal,
 } from 'antd'
 import { ArrowDown2, CloseCircle, Export, TickCircle } from 'iconsax-reactjs'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 interface PropsCreateOrganiationDrawer {
   open: boolean
   title?: string
   onClose: () => void
 }
-export default function NewUserDrawer({
+function NewUserDrawer({
   open,
   title = 'Create New User',
   onClose,
@@ -38,7 +38,7 @@ export default function NewUserDrawer({
   ) => {
     console.log('Failed:', errorInfo)
   }
-
+  console.log('new')
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleOk = () => {
@@ -191,3 +191,4 @@ export default function NewUserDrawer({
     </Drawer>
   )
 }
+export default React.memo(NewUserDrawer)
