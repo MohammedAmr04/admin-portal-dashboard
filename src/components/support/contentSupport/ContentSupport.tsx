@@ -4,11 +4,14 @@ import { SearchNormal } from 'iconsax-reactjs'
 import TableSupport from './TableSupport'
 import { useState } from 'react'
 import { CardSupport } from './CardSupport'
+import type { ITicket } from '@/services/types/ticket'
 
 export const ContentSupport = ({
   onOpenTicket,
+  onSelectExportTickets,
 }: {
   onOpenTicket: (ticketID: number) => void
+  onSelectExportTickets: (tickets: ITicket[]) => void
 }) => {
   const [view, setView] = useState<'table' | 'card'>('card')
 
@@ -30,7 +33,7 @@ export const ContentSupport = ({
         </div>
       </div>
       <Button
-        className="!bg-background-card !p-2 !border-[#FFFFFF66] !border-2"
+        className="!bg-background-card !p-3 !border-text/50 !border-2"
         onClick={handleToggleView}
       >
         {view === 'table' ? (
@@ -40,9 +43,12 @@ export const ContentSupport = ({
         )}
       </Button>
       {view === 'table' ? (
-        <TableSupport onOpenTicket={onOpenTicket} />
+        <TableSupport
+          onOpenTicket={onOpenTicket}
+          onSelectExportTickets={onSelectExportTickets}
+        />
       ) : (
-        <CardSupport />
+        <CardSupport onSelectExportTickets={onSelectExportTickets} />
       )}
     </div>
   )

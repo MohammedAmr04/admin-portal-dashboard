@@ -7,14 +7,20 @@ import type { ITicket } from '@/services/types/ticket'
 
 export default function TableSupport({
   onOpenTicket,
+  onSelectExportTickets,
 }: {
   onOpenTicket: (ticketID: number) => void
+  onSelectExportTickets: (tickets: ITicket[]) => void
 }) {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
   const rowSelection = {
     selectedRowKeys,
     onChange: (keys: React.Key[]) => {
       setSelectedRowKeys(keys)
+      const selectedTickets = data.filter((row) =>
+        keys.includes(row.id as unknown as React.Key)
+      )
+      onSelectExportTickets(selectedTickets)
     },
   }
 

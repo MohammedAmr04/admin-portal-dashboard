@@ -16,7 +16,11 @@ import {
 } from 'iconsax-reactjs'
 import { useState, type CSSProperties } from 'react'
 
-export const CardSupport = () => {
+export const CardSupport = ({
+  onSelectExportTickets,
+}: {
+  onSelectExportTickets: (tickets: ITicket[]) => void
+}) => {
   const [data, setData] = useState<ITicket[]>(ticketsData)
   const [selectedTickets, setSelectedTickets] = useState<React.Key[]>([])
   const [page, setPage] = useState<number>(1)
@@ -49,46 +53,50 @@ export const CardSupport = () => {
     .map((ticket) => ({
       key: String(ticket.id),
       extra: (
-        <div className="flex justify-between items-center w-full">
+        <div className="flex flex-col gap-4 lg:flex-row justify-between items-center w-full">
           <p className="font-semibold">{ticket.title}</p>
           <div
             onClick={(e) => e.stopPropagation()}
-            className="flex gap-4 items-center"
+            className="flex flex-col gap-2 lg:flex-row lg:gap-4 items-center"
           >
-            <Select
-              value={ticket.priority}
-              className={`priority-${ticket.priority}`}
-              suffixIcon={<ArrowDown2 size={16} />}
-              onChange={(val) =>
-                handlePriorityChange(ticket.id, val as ITicket['priority'])
-              }
-              options={[
-                { value: 'high', label: 'High' },
-                { value: 'medium', label: 'Medium' },
-                { value: 'low', label: 'Low' },
-              ]}
-              style={{ width: 100, textAlign: 'center' }}
-            />
-            <Select
-              value={ticket.status}
-              className="status"
-              suffixIcon={<ArrowDown2 size={16} />}
-              onChange={(val) =>
-                handleStatusChange(ticket.id, val as ITicket['status'])
-              }
-              options={[
-                { value: 'pending', label: 'Pending' },
-                { value: 'closed', label: 'Closed' },
-              ]}
-              style={{ width: 100, textAlign: 'center' }}
-            />
-            <div className="w-[100px]">
-              <p className="text-xs text-[#ADB7BE]">Created:</p>
-              <p className="text-sm">{ticket.createdAt}</p>
+            <div className="flex gap-2 lg:gap-4">
+              <Select
+                value={ticket.priority}
+                className={`priority-${ticket.priority}`}
+                suffixIcon={<ArrowDown2 size={16} />}
+                onChange={(val) =>
+                  handlePriorityChange(ticket.id, val as ITicket['priority'])
+                }
+                options={[
+                  { value: 'high', label: 'High' },
+                  { value: 'medium', label: 'Medium' },
+                  { value: 'low', label: 'Low' },
+                ]}
+                style={{ width: 100, textAlign: 'center' }}
+              />
+              <Select
+                value={ticket.status}
+                className="status"
+                suffixIcon={<ArrowDown2 size={16} />}
+                onChange={(val) =>
+                  handleStatusChange(ticket.id, val as ITicket['status'])
+                }
+                options={[
+                  { value: 'pending', label: 'Pending' },
+                  { value: 'closed', label: 'Closed' },
+                ]}
+                style={{ width: 100, textAlign: 'center' }}
+              />
             </div>
-            <div className="w-[100px]">
-              <p className="text-xs text-[#ADB7BE]">Updated:</p>
-              <p className="text-sm">{ticket.updatedAt}</p>
+            <div className="flex gap-2 lg:gap-4">
+              <div className="w-[100px]">
+                <p className="text-xs text-[#ADB7BE]">Created:</p>
+                <p className="text-sm">{ticket.createdAt}</p>
+              </div>
+              <div className="w-[100px]">
+                <p className="text-xs text-[#ADB7BE]">Updated:</p>
+                <p className="text-sm">{ticket.updatedAt}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -118,15 +126,20 @@ export const CardSupport = () => {
         <Collapse
           bordered={false}
           expandIcon={(panelProps: any) => {
-            const key = panelProps.panelKey as React.Key // AntD v5 provides panelKey
+            const key = panelProps.panelKey as React.Key
             const checked = selectedTickets.includes(key)
             const handleToggleSelect = (k: React.Key, next: boolean) => {
-              setSelectedTickets((prev) =>
-                next ? [...prev, k] : prev.filter((p) => p !== k)
+              const nextKeys = next
+                ? [...selectedTickets, k]
+                : selectedTickets.filter((p) => p !== k)
+              setSelectedTickets(nextKeys)
+              const selected = data.filter((t) =>
+                nextKeys.includes(String(t.id))
               )
+              onSelectExportTickets(selected)
             }
             return (
-              <span className="flex items-center gap-5 ms-8">
+              <span className="flex items-center gap-2 lg:gap-5 lg:ms-8">
                 <Checkbox
                   checked={checked}
                   onClick={(e) => e.stopPropagation()}
