@@ -17,7 +17,7 @@ interface PropsCreateOrganiationDrawer {
 }
 function NewUserDrawer({
   open,
-  title = 'Create New User',
+  title = 'Add New User',
   onClose,
 }: PropsCreateOrganiationDrawer) {
   const [form] = Form.useForm()
