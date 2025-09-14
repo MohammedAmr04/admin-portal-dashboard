@@ -105,10 +105,9 @@ export default function TableSupport({
             suffixIcon={<ArrowDown2 size={16} />}
             options={[
               { value: 'pending', label: 'Pending' },
-              {
-                value: 'closed',
-                label: 'Closed',
-              },
+              { value: 'in-progress', label: 'In Progress' },
+              { value: 'closed', label: 'Closed' },
+              { value: 'ignored', label: 'Ignored' },
             ]}
           />
         )
