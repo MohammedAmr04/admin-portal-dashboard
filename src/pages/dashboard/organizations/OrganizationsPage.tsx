@@ -65,6 +65,13 @@ const OrganizationsPage = () => {
           <ButtonSecondary onClick={() => setActiveModal('invite')}>
             Invite Owner
           </ButtonSecondary>
+          {rowsExported.length > 1 && (
+            <>
+              <ButtonSecondary onClick={() => setActiveModal('deleteOrg')}>
+                Delete
+              </ButtonSecondary>
+            </>
+          )}
           <Button
             type="primary"
             size="large"

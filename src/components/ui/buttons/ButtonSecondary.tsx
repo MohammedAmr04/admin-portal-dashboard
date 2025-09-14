@@ -18,7 +18,7 @@ const ButtonSecondary = ({
   return (
     <Button
       size="large"
-      className={`!bg-linear-to-r hover:!text-text from-[#281543] to-[#0E2248] ${className || ''}`}
+      className={`!bg-linear-to-r min-w-32 hover:!text-text from-[#281543] to-[#0E2248] ${className || ''}`}
       {...rest}
     >
       <div className="flex gap-1 !text-text items-center justify-center">
