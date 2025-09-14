@@ -309,6 +309,14 @@ a:hover {
   border-color: rgb(255, 255, 255, 0.05);
 }
 
+/* Tickets Priority and Status */
+.priority-high,
+.priority-medium,
+.priority-low,
+.status {
+  height: 36px !important;
+}
+
 .priority-high .ant-select-selector {
   background-color: color-mix(
     in srgb,
@@ -374,6 +382,7 @@ a:hover {
   padding: 0 !important;
 }
 
+/* div that looks like input */
 .input-like-div {
   background: var(--color-background-dark);
   border: 1px solid var(--color-border);
@@ -415,9 +424,20 @@ a:hover {
   border-color: #5c5c67;
 }
 
+.pagination {
+  display: flex !important;
+  align-items: center !important;
+}
+
 .pagination .ant-pagination-item {
   border-radius: 50%;
   border-color: transparent;
+  min-width: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pagination .ant-pagination-item:hover {
@@ -446,8 +466,10 @@ a:hover {
   justify-content: center;
   align-items: center;
   border-radius: 50% !important;
-
   padding: 0 !important;
+  min-width: 0;
+  width: 28px;
+  height: 28px;
 }
 
 .pagination .ant-pagination-prev:not(.ant-pagination-disabled),
