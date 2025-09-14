@@ -3,6 +3,7 @@ import type { ColumnsType } from 'antd/es/table'
 import type { TableRowSelection } from 'antd/es/table/interface'
 import { useEffect, useState } from 'react'
 import './styles.css'
+//extend table type
 type Props<T extends { id: React.Key }> = {
   setExportedData: React.Dispatch<React.SetStateAction<React.Key[]>>
   onFinish: boolean

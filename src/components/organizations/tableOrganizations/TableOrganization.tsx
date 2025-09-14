@@ -19,15 +19,25 @@ const data: IOrganization[] = Array.from({ length: 100 }, (_, i) => ({
 
 type Props = {
   setData: React.Dispatch<React.SetStateAction<React.Key[]>>
+  handleDelete?: (id: number) => void
+
   onFinish: boolean
 }
-export default function TableOrganization({ setData, onFinish }: Props) {
+export default function TableOrganization({
+  setData,
+  handleDelete,
+  onFinish,
+}: Props) {
   return (
     <div className="bg-background-dark  rounded-lg">
       <CustomTable<IOrganization>
         key={'id'}
         dataSource={data}
-        columns={getOrganizationColumns()}
+        columns={getOrganizationColumns(
+          () => {},
+          () => {},
+          handleDelete
+        )}
         setExportedData={setData}
         onFinish={onFinish}
       />

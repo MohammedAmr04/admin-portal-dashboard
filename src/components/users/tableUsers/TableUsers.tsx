@@ -21,7 +21,6 @@ interface TableUsersProps {
 function TableUsers({
   handleDrawer,
   handleUser,
-
   setExportedData,
 }: TableUsersProps) {
   const [deleteModal, setDeleteModal] = useState(false)
