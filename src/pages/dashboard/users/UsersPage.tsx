@@ -11,7 +11,7 @@ const UsersPage = () => {
   )
   const [user, setUser] = useState<IUser | null>(null)
   const [exportedUsers, setExportedUsers] = useState<React.Key[]>([])
-
+  const [onFinish, setOnFinsih] = useState<boolean>(false)
   const handleDrawer = useCallback(
     (type: 'EDIT' | 'NEW', action: 'OPEN' | 'CLOSE') => {
       setDrawer((prev) => {
@@ -34,10 +34,15 @@ const UsersPage = () => {
 
   return (
     <>
-      <HeaderUsers handleDrawer={handleDrawer} exportedUsers={exportedUsers} />
+      <HeaderUsers
+        setOnFinish={setOnFinsih}
+        handleDrawer={handleDrawer}
+        exportedUsers={exportedUsers}
+      />
       <TableUsers
         handleDrawer={handleDrawer}
         handleUser={handleUser}
+        onFinish={onFinish}
         setExportedData={setExportedUsers}
       />
       <NewUserDrawer

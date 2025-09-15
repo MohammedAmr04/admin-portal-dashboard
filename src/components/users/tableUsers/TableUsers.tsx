@@ -9,10 +9,7 @@ import { getUsersColumns } from '@/components/ui/table/usersColumns'
 interface TableUsersProps {
   handleDrawer: (type: 'EDIT' | 'NEW', action: 'OPEN' | 'CLOSE') => void
   handleUser: (user: IUser) => void
-  onSelectionChange?: (
-    selectedKeys: React.Key[],
-    selectedUsers: IUser[]
-  ) => void
+  onFinish: boolean
   isOrg?: boolean
   setUserSelected?: (userID: number) => void
   setExportedData: React.Dispatch<React.SetStateAction<React.Key[]>>
@@ -21,6 +18,7 @@ interface TableUsersProps {
 function TableUsers({
   handleDrawer,
   handleUser,
+  onFinish,
   setExportedData,
 }: TableUsersProps) {
   const [deleteModal, setDeleteModal] = useState(false)
@@ -48,7 +46,7 @@ function TableUsers({
             handleDelete
           )}
           key={'id'}
-          onFinish={false}
+          onFinish={onFinish}
           setExportedData={setExportedData}
           dataSource={data}
         />

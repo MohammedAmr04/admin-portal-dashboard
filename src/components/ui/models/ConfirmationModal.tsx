@@ -1,13 +1,32 @@
 import React, { type ReactNode } from 'react'
 import { Modal, Button } from 'antd'
+import { Export, Trash } from 'iconsax-reactjs'
 
-function getColor(type: 'SUCCESS' | 'DELETE') {
+function getColor(type: 'SUCCESS' | 'EXPORT' | 'DELETE'): {
+  color: string
+  icon: React.ReactNode
+} {
   switch (type) {
     case 'SUCCESS':
-      return 'bg-success/10'
-
+      return {
+        color: 'bg-success/10',
+        icon: <Export size={36} className="!text-success" variant="Linear" />,
+      }
+    case 'EXPORT':
+      return {
+        color: 'bg-primary/10',
+        icon: <Export size={36} className="!text-primary" variant="Linear" />,
+      }
     case 'DELETE':
-      return 'bg-danger/20'
+      return {
+        color: 'bg-danger/20',
+        icon: <Trash size={36} className="!text-danger" />,
+      }
+    default:
+      return {
+        color: '',
+        icon: null,
+      }
   }
 }
 interface ConfirmationModalProps {
@@ -24,12 +43,12 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   visible,
   onCancel,
   title,
-  icon,
   type = 'SUCCESS',
   onConfirm,
   titleDetails,
 }) => {
-  let color = getColor(type)
+  const { color, icon } = getColor(type)
+
   return (
     <Modal
       key={title}

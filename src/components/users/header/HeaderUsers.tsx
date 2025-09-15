@@ -9,9 +9,11 @@ import React, { useState } from 'react'
 const HeaderUsers = ({
   handleDrawer,
   exportedUsers,
+  setOnFinish,
 }: {
   handleDrawer: (type: 'EDIT' | 'NEW', action: 'OPEN' | 'CLOSE') => void
   exportedUsers: React.Key[]
+  setOnFinish: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   const [isExportModalOpen, setIsExportModalOpen] = useState(false)
   const [exportConfirmed, setExportConfirmed] = useState(false)
@@ -54,7 +56,10 @@ const HeaderUsers = ({
           }
           onCancel={() => setIsExportModalOpen(false)}
           onConfirm={() => {
+            setOnFinish(true)
+
             setIsExportModalOpen(false)
+
             setExportConfirmed(true)
           }}
         />
