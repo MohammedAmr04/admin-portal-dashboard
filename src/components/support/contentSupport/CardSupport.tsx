@@ -83,7 +83,9 @@ export const CardSupport = ({
                 }
                 options={[
                   { value: 'pending', label: 'Pending' },
+                  { value: 'in-progress', label: 'In Progress' },
                   { value: 'closed', label: 'Closed' },
+                  { value: 'ignored', label: 'Ignored' },
                 ]}
                 style={{ width: 100, textAlign: 'center' }}
               />

@@ -3,7 +3,7 @@ export interface ITicket {
   title: string
   description: string
   priority: 'high' | 'medium' | 'low'
-  status: 'pending' | 'closed'
+  status: 'pending' | 'in-progress' | 'closed' | 'ignored'
   createdAt: string
   updatedAt: string
   organization: string

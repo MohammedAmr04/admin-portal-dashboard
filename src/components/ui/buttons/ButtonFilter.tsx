@@ -1,13 +1,17 @@
 import { Button } from 'antd'
 import { Setting5 } from 'iconsax-reactjs'
 
-const ButtonFilter = () => {
+const ButtonFilter = ({ onOpenFilters }: { onOpenFilters: () => void }) => {
   return (
-    <Button className="!bg-background-card flex gap-7" size="large">
-      <div className="flex gap-2">
+    <div className="relative">
+      <Button
+        className="!bg-background-card !rounded-xl"
+        size="large"
+        onClick={onOpenFilters}
+      >
         <Setting5 size="24" />
-      </div>
-    </Button>
+      </Button>
+    </div>
   )
 }
 

@@ -482,3 +482,18 @@ a:hover {
   background-color: #191b24 !important;
   color: #292d32 !important;
 }
+
+/* Content Header (Search and Filters Toggle) */
+
+.content-header .ant-input::placeholder {
+  padding-inline-start: 4px;
+}
+
+/* Filters */
+
+.filters
+  :where(.css-dev-only-do-not-override-tfe4ls).ant-btn-variant-outlined:not(
+    :disabled
+  ):not(.ant-btn-disabled):hover {
+  color: white;
+}

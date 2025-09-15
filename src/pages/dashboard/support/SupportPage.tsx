@@ -1,8 +1,8 @@
 import TicketDrawer from '@/components/support/drawers/TicketDrawer'
-import HeaderSupport from '@/components/support/header/HeaderSupport'
 import { useState } from 'react'
 import { ContentSupport } from '@/components/support/contentSupport/ContentSupport'
 import type { ITicket } from '@/services/types/ticket'
+import HeaderSupport from '@/components/support/header/HeaderSupport'
 
 const SupportPage = () => {
   const [drawer, setDrawer] = useState(false)
